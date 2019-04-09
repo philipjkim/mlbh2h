@@ -1,0 +1,7 @@
+[package]
+name = "mlb_h2h"
+version = "0.1.0"
+authors = ["Soo Philip Jason Kim <philipjkim@gmail.com>"]
+edition = "2018"
+
+[dependencies]
