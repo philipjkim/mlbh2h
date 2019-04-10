@@ -4,6 +4,7 @@ use clap::{App, Arg, SubCommand};
 use std::error::Error;
 
 mod scoring_rule;
+mod version;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let app = get_app();
@@ -23,8 +24,10 @@ fn main() -> Result<(), Box<dyn Error>> {
 }
 
 fn get_app<'a, 'b>() -> App<'a, 'b> {
+    let version = version::get();
+
     App::new("mlbh2h")
-        .version("0.1.2")
+        .version(version)
         .author("Soo Philip Jason Kim <philipjkim@gmail.com>")
         .about(
             "This app Shows Yahoo! Baseball Head-to-Head fantasy points by your scoring settings.",
