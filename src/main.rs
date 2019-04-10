@@ -6,8 +6,25 @@ use std::error::Error;
 mod scoring_rule;
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let app = App::new("mlbh2h")
-        .version("0.1.1")
+    let app = get_app();
+
+    if let Some(m) = app.get_matches().subcommand_matches("add-rule") {
+        let rule = scoring_rule::add(m.value_of("name").unwrap());
+        match rule {
+            Ok(r) => {
+                println!("Saved the rule: {:#?}", r);
+                return Ok(());
+            }
+            Err(e) => return Err(e),
+        }
+    }
+
+    Ok(())
+}
+
+fn get_app<'a, 'b>() -> App<'a, 'b> {
+    App::new("mlbh2h")
+        .version("0.1.2")
         .author("Soo Philip Jason Kim <philipjkim@gmail.com>")
         .about(
             "This app Shows Yahoo! Baseball Head-to-Head fantasy points by your scoring settings.",
@@ -22,17 +39,5 @@ fn main() -> Result<(), Box<dyn Error>> {
                         .takes_value(true)
                         .required(true),
                 ),
-        );
-
-    if let Some(m) = app.get_matches().subcommand_matches("add-rule") {
-        let rule = scoring_rule::add(m.value_of("name").unwrap());
-        match rule {
-            Ok(r) => {
-                println!("Saved the rule: {:#?}", r);
-                return Ok(());
-            }
-            Err(e) => return Err(e),
-        }
-    }
-    Ok(())
+        )
 }
