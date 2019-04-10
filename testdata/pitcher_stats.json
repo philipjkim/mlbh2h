@@ -1,0 +1,194 @@
+{
+    "preferred_name": "Trevor",
+    "first_name": "Trevor",
+    "last_name": "Cahill",
+    "jersey_number": "53",
+    "id": "d41234eb-9f4c-4393-ab86-44ca0b5bc1f5",
+    "status": "A",
+    "position": "P",
+    "primary_position": "SP",
+    "statistics": {
+        "pitching": {
+            "overall": {
+                "oba": 0.227,
+                "lob": 8,
+                "era": 3.0,
+                "k9": 11.997,
+                "whip": 1.0,
+                "kbb": 8.0,
+                "pitch_count": 90,
+                "wp": 0,
+                "bk": 0,
+                "ip_1": 18,
+                "ip_2": 6.0,
+                "bf": 24,
+                "gofo": 0.5,
+                "onbase": {
+                    "s": 4,
+                    "d": 0,
+                    "t": 0,
+                    "hr": 1,
+                    "tb": 8,
+                    "bb": 1,
+                    "ibb": 0,
+                    "hbp": 1,
+                    "fc": 0,
+                    "roe": 0,
+                    "h": 5
+                },
+                "runs": {
+                    "total": 2,
+                    "unearned": 0,
+                    "earned": 2
+                },
+                "outcome": {
+                    "klook": 16,
+                    "kswing": 9,
+                    "ktotal": 25,
+                    "ball": 29,
+                    "iball": 0,
+                    "dirtball": 1,
+                    "foul": 20
+                },
+                "outs": {
+                    "po": 1,
+                    "fo": 5,
+                    "fidp": 0,
+                    "lo": 0,
+                    "lidp": 0,
+                    "go": 3,
+                    "gidp": 1,
+                    "klook": 3,
+                    "kswing": 5,
+                    "ktotal": 8,
+                    "sacfly": 0,
+                    "sachit": 0
+                },
+                "steal": {
+                    "caught": 0,
+                    "stolen": 1,
+                    "pickoff": 0
+                },
+                "games": {
+                    "start": 1,
+                    "play": 1,
+                    "finish": 0,
+                    "svo": 0,
+                    "qstart": 1,
+                    "shutout": 0,
+                    "complete": 0,
+                    "win": 1,
+                    "loss": 0,
+                    "save": 0,
+                    "hold": 0,
+                    "blown_save": 0,
+                    "team_win": 1,
+                    "team_loss": 0
+                }
+            },
+            "starters": {
+                "oba": 0.227,
+                "lob": 8,
+                "era": 3.0,
+                "k9": 11.997,
+                "whip": 1.0,
+                "kbb": 8.0,
+                "pitch_count": 90,
+                "wp": 0,
+                "bk": 0,
+                "ip_1": 18,
+                "ip_2": 6.0,
+                "bf": 24,
+                "gofo": 0.5,
+                "onbase": {
+                    "s": 4,
+                    "d": 0,
+                    "t": 0,
+                    "hr": 1,
+                    "tb": 8,
+                    "bb": 1,
+                    "ibb": 0,
+                    "hbp": 1,
+                    "fc": 0,
+                    "roe": 0,
+                    "h": 5
+                },
+                "runs": {
+                    "total": 2,
+                    "unearned": 0,
+                    "earned": 2
+                },
+                "outcome": {
+                    "klook": 16,
+                    "kswing": 9,
+                    "ktotal": 25,
+                    "ball": 29,
+                    "iball": 0,
+                    "dirtball": 1,
+                    "foul": 20
+                },
+                "outs": {
+                    "po": 1,
+                    "fo": 5,
+                    "fidp": 0,
+                    "lo": 0,
+                    "lidp": 0,
+                    "go": 3,
+                    "gidp": 1,
+                    "klook": 3,
+                    "kswing": 5,
+                    "ktotal": 8,
+                    "sacfly": 0,
+                    "sachit": 0
+                },
+                "steal": {
+                    "caught": 0,
+                    "stolen": 1,
+                    "pickoff": 0
+                },
+                "games": {
+                    "start": 1,
+                    "play": 1,
+                    "finish": 0,
+                    "svo": 0,
+                    "qstart": 1,
+                    "shutout": 0,
+                    "complete": 0,
+                    "win": 1,
+                    "loss": 0,
+                    "save": 0,
+                    "hold": 0,
+                    "blown_save": 0,
+                    "team_win": 1,
+                    "team_loss": 0
+                }
+            }
+        },
+        "fielding": {
+            "overall": {
+                "po": 0,
+                "a": 0,
+                "dp": 0,
+                "tp": 0,
+                "error": 0,
+                "tc": 0,
+                "fpct": 0.0,
+                "c_wp": 0,
+                "pb": 0,
+                "rf": 0.0,
+                "errors": {
+                    "throwing": 0,
+                    "fielding": 0,
+                    "interference": 0,
+                    "total": 0
+                },
+                "games": {
+                    "start": 1,
+                    "play": 1,
+                    "finish": 0,
+                    "complete": 0
+                }
+            }
+        }
+    }
+}

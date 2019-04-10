@@ -1,0 +1,401 @@
+{
+    "league": {
+        "alias": "MLB",
+        "name": "Major League Baseball",
+        "id": "2fa448bc-fc17-4d3d-be03-e60e080fdc26"
+    },
+    "date": "2019-04-08",
+    "games": [
+        {
+            "id": "07d2922e-3f38-4dbe-a9ea-c96644b7dc10",
+            "status": "closed",
+            "coverage": "full",
+            "game_number": 1,
+            "day_night": "N",
+            "scheduled": "2019-04-09T02:07:00+00:00",
+            "home_team": "4f735188-37c8-473d-ae32-1f7e34ccf892",
+            "away_team": "dcfd5266-00ce-442c-bc09-264cd20cf455",
+            "attendance": 28571,
+            "duration": "2:40",
+            "venue": {
+                "name": "Angel Stadium of Anaheim",
+                "market": "Los Angeles",
+                "capacity": 45050,
+                "surface": "grass",
+                "address": "2000 Gene Autry Way",
+                "city": "Anaheim",
+                "state": "CA",
+                "zip": "92806",
+                "country": "USA",
+                "id": "60732da9-ad03-4feb-9a36-aee3e98c7a2b"
+            },
+            "home": {
+                "name": "Angels",
+                "market": "Los Angeles",
+                "abbr": "LAA",
+                "id": "4f735188-37c8-473d-ae32-1f7e34ccf892"
+            },
+            "away": {
+                "name": "Brewers",
+                "market": "Milwaukee",
+                "abbr": "MIL",
+                "id": "dcfd5266-00ce-442c-bc09-264cd20cf455"
+            },
+            "broadcast": {
+                "network": "MLB Network"
+            }
+        },
+        {
+            "id": "6876188b-138c-40ec-8cb4-cc1cac342633",
+            "status": "closed",
+            "coverage": "full",
+            "game_number": 1,
+            "day_night": "N",
+            "scheduled": "2019-04-09T00:15:00+00:00",
+            "home_team": "833a51a9-0d84-410f-bd77-da08c3e5e26e",
+            "away_team": "43a39081-52b4-4f93-ad29-da7f329ea960",
+            "attendance": 10259,
+            "duration": "3:17",
+            "venue": {
+                "name": "Kauffman Stadium",
+                "market": "Kansas City",
+                "capacity": 37903,
+                "surface": "grass",
+                "address": "One Royal Way",
+                "city": "Kansas City",
+                "state": "MO",
+                "zip": "64129",
+                "country": "USA",
+                "id": "6fca95c9-7f2c-4acb-a9f3-02ef96340d2a"
+            },
+            "home": {
+                "name": "Royals",
+                "market": "Kansas City",
+                "abbr": "KC",
+                "id": "833a51a9-0d84-410f-bd77-da08c3e5e26e"
+            },
+            "away": {
+                "name": "Mariners",
+                "market": "Seattle",
+                "abbr": "SEA",
+                "id": "43a39081-52b4-4f93-ad29-da7f329ea960"
+            },
+            "broadcast": {
+                "network": "FS-KC"
+            }
+        },
+        {
+            "id": "55951bac-1c70-4321-9dd8-43ddf72062c5",
+            "status": "closed",
+            "coverage": "full",
+            "game_number": 1,
+            "day_night": "D",
+            "scheduled": "2019-04-08T18:10:00+00:00",
+            "home_team": "47f490cd-2f58-4ef7-9dfd-2ad6ba6c1ae8",
+            "away_team": "bdc11650-6f74-49c4-875e-778aeb7632d9",
+            "attendance": 11734,
+            "duration": "3:25",
+            "venue": {
+                "name": "Guaranteed Rate Field",
+                "market": "Chicago",
+                "capacity": 40615,
+                "surface": "grass",
+                "address": "333 West 35th Street",
+                "city": "Chicago",
+                "state": "IL",
+                "zip": "60616",
+                "country": "USA",
+                "id": "4a550fc1-c03d-4294-b63a-30ff197bedc4"
+            },
+            "home": {
+                "name": "White Sox",
+                "market": "Chicago",
+                "abbr": "CWS",
+                "id": "47f490cd-2f58-4ef7-9dfd-2ad6ba6c1ae8"
+            },
+            "away": {
+                "name": "Rays",
+                "market": "Tampa Bay",
+                "abbr": "TB",
+                "id": "bdc11650-6f74-49c4-875e-778aeb7632d9"
+            },
+            "broadcast": {
+                "network": "WGN"
+            }
+        },
+        {
+            "id": "4f44d06d-fc53-4480-b2e8-a0ecdb36f917",
+            "status": "closed",
+            "coverage": "full",
+            "game_number": 1,
+            "day_night": "N",
+            "scheduled": "2019-04-08T23:10:00+00:00",
+            "home_team": "eb21dadd-8f10-4095-8bf3-dfb3b779f107",
+            "away_team": "a09ec676-f887-43dc-bbb3-cf4bbaee9a18",
+            "attendance": 27631,
+            "duration": "2:59",
+            "venue": {
+                "name": "Minute Maid Park",
+                "market": "Houston",
+                "capacity": 41168,
+                "surface": "grass",
+                "address": "501 Crawford Street",
+                "city": "Houston",
+                "state": "TX",
+                "zip": "77002",
+                "country": "USA",
+                "id": "f0600f04-1386-4c61-a412-804960c46cb1"
+            },
+            "home": {
+                "name": "Astros",
+                "market": "Houston",
+                "abbr": "HOU",
+                "id": "eb21dadd-8f10-4095-8bf3-dfb3b779f107"
+            },
+            "away": {
+                "name": "Yankees",
+                "market": "New York",
+                "abbr": "NYY",
+                "id": "a09ec676-f887-43dc-bbb3-cf4bbaee9a18"
+            },
+            "broadcast": {
+                "network": "ESPN"
+            }
+        },
+        {
+            "id": "1882658b-f2c6-4c56-aa54-7049235fc8dc",
+            "status": "closed",
+            "coverage": "full",
+            "game_number": 1,
+            "day_night": "N",
+            "scheduled": "2019-04-08T23:45:00+00:00",
+            "home_team": "44671792-dc02-4fdd-a5ad-f5f17edaa9d7",
+            "away_team": "ef64da7f-cfaf-4300-87b0-9313386b977c",
+            "attendance": 35858,
+            "duration": "2:41",
+            "venue": {
+                "name": "Busch Stadium",
+                "market": "St. Louis",
+                "capacity": 45538,
+                "surface": "grass",
+                "address": "700 Clark Street",
+                "city": "St. Louis",
+                "state": "MO",
+                "zip": "63102",
+                "country": "USA",
+                "id": "83cc591a-1096-4383-a6ca-e2bd6f8db629"
+            },
+            "home": {
+                "name": "Cardinals",
+                "market": "St. Louis",
+                "abbr": "STL",
+                "id": "44671792-dc02-4fdd-a5ad-f5f17edaa9d7"
+            },
+            "away": {
+                "name": "Dodgers",
+                "market": "Los Angeles",
+                "abbr": "LAD",
+                "id": "ef64da7f-cfaf-4300-87b0-9313386b977c"
+            },
+            "broadcast": {
+                "network": "FS-MW"
+            }
+        },
+        {
+            "id": "9c9e9301-e6b3-4853-a2df-8541cb592f33",
+            "status": "closed",
+            "coverage": "full",
+            "game_number": 1,
+            "day_night": "N",
+            "scheduled": "2019-04-08T23:05:00+00:00",
+            "home_team": "75729d34-bca7-4a0f-b3df-6f26c6ad3719",
+            "away_team": "27a59d3b-ff7c-48ea-b016-4798f560f5e1",
+            "attendance": 6585,
+            "duration": "3:07",
+            "venue": {
+                "name": "Oriole Park at Camden Yards",
+                "market": "Baltimore",
+                "capacity": 45971,
+                "surface": "grass",
+                "address": "333 West Camden Street",
+                "city": "Baltimore",
+                "state": "MD",
+                "zip": "21201",
+                "country": "USA",
+                "id": "434aa63c-1049-4a54-a6bc-3790c7772ee1"
+            },
+            "home": {
+                "name": "Orioles",
+                "market": "Baltimore",
+                "abbr": "BAL",
+                "id": "75729d34-bca7-4a0f-b3df-6f26c6ad3719"
+            },
+            "away": {
+                "name": "Athletics",
+                "market": "Oakland",
+                "abbr": "OAK",
+                "id": "27a59d3b-ff7c-48ea-b016-4798f560f5e1"
+            },
+            "broadcast": {
+                "network": "MASN2"
+            }
+        },
+        {
+            "id": "4299f55f-8df7-45c0-bb5f-89baeccce95b",
+            "status": "closed",
+            "coverage": "full",
+            "game_number": 1,
+            "day_night": "N",
+            "scheduled": "2019-04-09T01:45:00+00:00",
+            "home_team": "a7723160-10b7-4277-a309-d8dd95a8ae65",
+            "away_team": "d52d5339-cbdd-43f3-9dfa-a42fd588b9a3",
+            "attendance": 28625,
+            "duration": "2:55",
+            "venue": {
+                "name": "Oracle Park",
+                "market": "San Francisco",
+                "capacity": 41915,
+                "surface": "grass",
+                "address": "24 Willie Mays Plaza",
+                "city": "San Francisco",
+                "state": "CA",
+                "zip": "94107",
+                "country": "USA",
+                "id": "2d7542f5-7b80-49f7-9b24-c53ffdc75af6"
+            },
+            "home": {
+                "name": "Giants",
+                "market": "San Francisco",
+                "abbr": "SF",
+                "id": "a7723160-10b7-4277-a309-d8dd95a8ae65"
+            },
+            "away": {
+                "name": "Padres",
+                "market": "San Diego",
+                "abbr": "SD",
+                "id": "d52d5339-cbdd-43f3-9dfa-a42fd588b9a3"
+            },
+            "broadcast": {
+                "network": "NBCS-BA"
+            }
+        },
+        {
+            "id": "79abbfbe-ba1b-4bee-ae96-52883bf5152a",
+            "status": "closed",
+            "coverage": "full",
+            "game_number": 1,
+            "day_night": "N",
+            "scheduled": "2019-04-09T00:40:00+00:00",
+            "home_team": "29dd9a87-5bcc-4774-80c3-7f50d985068b",
+            "away_team": "12079497-e414-450a-8bf2-29f91de646bf",
+            "attendance": 25199,
+            "duration": "2:59",
+            "venue": {
+                "name": "Coors Field",
+                "market": "Colorado",
+                "capacity": 50398,
+                "surface": "grass",
+                "address": "2001 Blake Street",
+                "city": "Denver",
+                "state": "CO",
+                "zip": "80205",
+                "country": "USA",
+                "id": "85dd5cd6-7324-4b52-a1cc-68f816d0cdce"
+            },
+            "home": {
+                "name": "Rockies",
+                "market": "Colorado",
+                "abbr": "COL",
+                "id": "29dd9a87-5bcc-4774-80c3-7f50d985068b"
+            },
+            "away": {
+                "name": "Braves",
+                "market": "Atlanta",
+                "abbr": "ATL",
+                "id": "12079497-e414-450a-8bf2-29f91de646bf"
+            },
+            "broadcast": {
+                "network": "SportsNet RM"
+            }
+        },
+        {
+            "id": "6758d274-8fe3-44ad-bb1b-34820e7ce07b",
+            "status": "closed",
+            "coverage": "full",
+            "game_number": 1,
+            "day_night": "D",
+            "scheduled": "2019-04-08T18:20:00+00:00",
+            "home_team": "55714da8-fcaf-4574-8443-59bfb511a524",
+            "away_team": "481dfe7e-5dab-46ab-a49f-9dcc2b6e2cfd",
+            "attendance": 40692,
+            "duration": "3:12",
+            "venue": {
+                "name": "Wrigley Field",
+                "market": "Chicago",
+                "capacity": 41649,
+                "surface": "grass",
+                "address": "1060 West Addison Street",
+                "city": "Chicago",
+                "state": "IL",
+                "zip": "60613",
+                "country": "USA",
+                "id": "53f8eb0d-a361-4a7a-930b-2f8735ea0698"
+            },
+            "home": {
+                "name": "Cubs",
+                "market": "Chicago",
+                "abbr": "CHC",
+                "id": "55714da8-fcaf-4574-8443-59bfb511a524"
+            },
+            "away": {
+                "name": "Pirates",
+                "market": "Pittsburgh",
+                "abbr": "PIT",
+                "id": "481dfe7e-5dab-46ab-a49f-9dcc2b6e2cfd"
+            },
+            "broadcast": {
+                "network": "MLB Network"
+            }
+        },
+        {
+            "id": "99253366-df7f-4fe9-a9d9-2e63a15ec0fd",
+            "status": "closed",
+            "coverage": "full",
+            "game_number": 1,
+            "day_night": "N",
+            "scheduled": "2019-04-08T23:05:00+00:00",
+            "home_team": "2142e1ba-3b40-445c-b8bb-f1f8b1054220",
+            "away_team": "d89bed32-3aee-4407-99e3-4103641b999a",
+            "attendance": 28212,
+            "duration": "2:32",
+            "venue": {
+                "name": "Citizens Bank Park",
+                "market": "Philadelphia",
+                "capacity": 43647,
+                "surface": "grass",
+                "address": "One Citizens Bank Way",
+                "city": "Philadelphia",
+                "state": "PA",
+                "zip": "19148",
+                "country": "USA",
+                "id": "b4186004-b6d0-42e7-8dc1-82ef0d946ecc"
+            },
+            "home": {
+                "name": "Phillies",
+                "market": "Philadelphia",
+                "abbr": "PHI",
+                "id": "2142e1ba-3b40-445c-b8bb-f1f8b1054220"
+            },
+            "away": {
+                "name": "Nationals",
+                "market": "Washington",
+                "abbr": "WSH",
+                "id": "d89bed32-3aee-4407-99e3-4103641b999a"
+            },
+            "broadcast": {
+                "network": "NBCS-PH"
+            }
+        }
+    ],
+    "_comment": "Generation started @ 2019-04-09 09:38:01 UTC ended @ 2019-04-09 09:38:01 UTC"
+}

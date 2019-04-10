@@ -1,0 +1,122 @@
+{
+    "preferred_name": "Mike",
+    "first_name": "Michael",
+    "last_name": "Trout",
+    "jersey_number": "27",
+    "id": "7f518632-2d5d-48c8-b994-2d4d43a1ef3b",
+    "status": "A",
+    "position": "OF",
+    "primary_position": "CF",
+    "statistics": {
+        "hitting": {
+            "overall": {
+                "ab": 2,
+                "lob": 1,
+                "rbi": 0,
+                "abhr": 0,
+                "abk": 2.0,
+                "bip": 1,
+                "babip": 0.0,
+                "bbk": 2.0,
+                "bbpa": 0.5,
+                "iso": 0.0,
+                "obp": 0.5,
+                "ops": 0.5,
+                "seca": 1.0,
+                "slg": 0.0,
+                "xbh": 0,
+                "pitch_count": 19,
+                "lob_risp_2out": 0,
+                "team_lob": 0,
+                "ab_risp": 0,
+                "hit_risp": 0,
+                "rbi_2out": 0,
+                "linedrive": 1,
+                "groundball": 0,
+                "popup": 0,
+                "flyball": 0,
+                "ap": 4,
+                "avg": ".000",
+                "gofo": 0.0,
+                "onbase": {
+                    "s": 0,
+                    "d": 0,
+                    "t": 0,
+                    "hr": 0,
+                    "tb": 0,
+                    "bb": 2,
+                    "ibb": 0,
+                    "hbp": 0,
+                    "fc": 0,
+                    "roe": 0,
+                    "h": 0,
+                    "cycle": 0
+                },
+                "runs": {
+                    "total": 1
+                },
+                "outcome": {
+                    "klook": 5,
+                    "kswing": 1,
+                    "ktotal": 6,
+                    "ball": 10,
+                    "iball": 0,
+                    "dirtball": 1,
+                    "foul": 1
+                },
+                "outs": {
+                    "po": 0,
+                    "fo": 0,
+                    "fidp": 0,
+                    "lo": 1,
+                    "lidp": 0,
+                    "go": 0,
+                    "gidp": 0,
+                    "klook": 0,
+                    "kswing": 1,
+                    "ktotal": 1,
+                    "sacfly": 0,
+                    "sachit": 0
+                },
+                "steal": {
+                    "caught": 0,
+                    "stolen": 0,
+                    "pct": 0,
+                    "pickoff": 0
+                },
+                "games": {
+                    "start": 1,
+                    "play": 1,
+                    "finish": 0,
+                    "complete": 1
+                }
+            }
+        },
+        "fielding": {
+            "overall": {
+                "po": 5,
+                "a": 0,
+                "dp": 0,
+                "tp": 0,
+                "error": 0,
+                "tc": 5,
+                "fpct": 1.0,
+                "c_wp": 0,
+                "pb": 0,
+                "rf": 5.0,
+                "errors": {
+                    "throwing": 0,
+                    "fielding": 0,
+                    "interference": 0,
+                    "total": 0
+                },
+                "games": {
+                    "start": 1,
+                    "play": 1,
+                    "finish": 0,
+                    "complete": 0
+                }
+            }
+        }
+    }
+}

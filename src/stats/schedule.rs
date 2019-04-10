@@ -59,7 +59,7 @@ mod test {
     #[test]
     fn get_games_ids_from_string_should_return_schedule() {
         use std::fs;
-        let json = fs::read_to_string("temp/schedule.json").unwrap();
+        let json = fs::read_to_string("testdata/schedule.json").unwrap();
         let ids = get_games_ids_from_string(json).unwrap();
         assert_eq!(10, ids.len());
         assert_eq!("07d2922e-3f38-4dbe-a9ea-c96644b7dc10", ids.first().unwrap())
