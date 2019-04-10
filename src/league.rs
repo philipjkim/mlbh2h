@@ -8,8 +8,8 @@ mod roster;
 mod scoring;
 
 #[derive(Debug, Clone)]
-pub struct LeagueNameConflictError(pub String);
-impl fmt::Display for LeagueNameConflictError {
+pub struct LeagueNameConflict(pub String);
+impl fmt::Display for LeagueNameConflict {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         write!(
             f,
@@ -18,14 +18,27 @@ impl fmt::Display for LeagueNameConflictError {
         )
     }
 }
-impl Error for LeagueNameConflictError {}
+impl Error for LeagueNameConflict {}
+
+#[derive(Debug, Clone)]
+pub struct InvalidLeagueName;
+impl fmt::Display for InvalidLeagueName {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "league name should not start with _")
+    }
+}
+impl Error for InvalidLeagueName {}
 
 pub fn add_new_league(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
     let league_name = matches.value_of("name").unwrap();
+    if league_name.starts_with("_") {
+        return Err(Box::new(InvalidLeagueName));
+    }
+
     let league_dir = &format!("data/{}", league_name);
     if Path::new(league_dir).exists() {
         match matches.occurrences_of("force") {
-            0 => return Err(Box::new(LeagueNameConflictError(league_name.to_string()))),
+            0 => return Err(Box::new(LeagueNameConflict(league_name.to_string()))),
             _ => fs::remove_dir_all(league_dir)?,
         }
     }
