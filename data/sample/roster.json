@@ -1,0 +1,104 @@
+{
+    "players": [
+        {
+            "player_name": "Cody Bellinger",
+            "role": "Batter",
+            "team": "Avengers"
+        },
+        {
+            "player_name": "Mike Trout",
+            "role": "Batter",
+            "team": "Avengers"
+        },
+        {
+            "player_name": "Domingo Santana",
+            "role": "Batter",
+            "team": "Avengers"
+        },
+        {
+            "player_name": "Justin Verlander",
+            "role": "Pitcher",
+            "team": "Avengers"
+        },
+        {
+            "player_name": "Chris Sale",
+            "role": "Pitcher",
+            "team": "Avengers"
+        },
+        {
+            "player_name": "Tim Beckham",
+            "role": "Batter",
+            "team": "The Rockers"
+        },
+        {
+            "player_name": "Trey Mancini",
+            "role": "Batter",
+            "team": "The Rockers"
+        },
+        {
+            "player_name": "Anthony Rendon",
+            "role": "Batter",
+            "team": "The Rockers"
+        },
+        {
+            "player_name": "Blake Snell",
+            "role": "Pitcher",
+            "team": "The Rockers"
+        },
+        {
+            "player_name": "Max Scherzer",
+            "role": "Pitcher",
+            "team": "The Rockers"
+        },
+        {
+            "player_name": "Jonathan Villar",
+            "role": "Batter",
+            "team": "Lee's Team"
+        },
+        {
+            "player_name": "Rhys Hoskins",
+            "role": "Batter",
+            "team": "Lee's Team"
+        },
+        {
+            "player_name": "David Peralta",
+            "role": "Batter",
+            "team": "Lee's Team"
+        },
+        {
+            "player_name": "Jacob deGrom",
+            "role": "Pitcher",
+            "team": "Lee's Team"
+        },
+        {
+            "player_name": "Mike Clevinger",
+            "role": "Pitcher",
+            "team": "Lee's Team"
+        },
+        {
+            "player_name": "Adam Jones",
+            "role": "Batter",
+            "team": "L.A. Bulls"
+        },
+        {
+            "player_name": "Ryon Healy",
+            "role": "Batter",
+            "team": "L.A. Bulls"
+        },
+        {
+            "player_name": "Mitch Haniger",
+            "role": "Batter",
+            "team": "L.A. Bulls"
+        },
+        {
+            "player_name": "Kirby Yates",
+            "role": "Pitcher",
+            "team": "L.A. Bulls"
+        },
+        {
+            "player_name": "Josh Hader",
+            "role": "Pitcher",
+            "team": "L.A. Bulls"
+        }
+    ]
+}

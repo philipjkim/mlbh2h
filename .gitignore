@@ -1,4 +1,5 @@
 /target
 **/*.rs.bk
+/temp
 /data/*
-!/data/rules_sample.json
+!/data/sample

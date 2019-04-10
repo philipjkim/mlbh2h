@@ -1,0 +1,16 @@
+{
+    "batter": {
+        "runs": 2.0,
+        "hits": 5.0,
+        "home_runs": 4.0,
+        "runs_batted_in": 2.0,
+        "stolen_bases": 2.0
+    },
+    "pitcher": {
+        "innings_pitched": 1.0,
+        "wins": 5.0,
+        "saves": 5.0,
+        "earned_runs": -0.5,
+        "strikeouts": 2.0
+    }
+}
