@@ -3,102 +3,82 @@
         {
             "player_name": "Cody Bellinger",
             "role": "Batter",
-            "team": "Avengers"
-        },
-        {
-            "player_name": "Mike Trout",
-            "role": "Batter",
-            "team": "Avengers"
+            "team": "LA Bulls"
         },
         {
             "player_name": "Domingo Santana",
             "role": "Batter",
-            "team": "Avengers"
-        },
-        {
-            "player_name": "Justin Verlander",
-            "role": "Pitcher",
-            "team": "Avengers"
-        },
-        {
-            "player_name": "Chris Sale",
-            "role": "Pitcher",
-            "team": "Avengers"
-        },
-        {
-            "player_name": "Tim Beckham",
-            "role": "Batter",
-            "team": "The Rockers"
-        },
-        {
-            "player_name": "Trey Mancini",
-            "role": "Batter",
-            "team": "The Rockers"
-        },
-        {
-            "player_name": "Anthony Rendon",
-            "role": "Batter",
-            "team": "The Rockers"
+            "team": "LA Bulls"
         },
         {
             "player_name": "Blake Snell",
             "role": "Pitcher",
-            "team": "The Rockers"
+            "team": "LA Bulls"
         },
         {
             "player_name": "Max Scherzer",
             "role": "Pitcher",
-            "team": "The Rockers"
+            "team": "LA Bulls"
         },
         {
-            "player_name": "Jonathan Villar",
+            "player_name": "Christian Yelich",
             "role": "Batter",
-            "team": "Lee's Team"
+            "team": "Chicago Pizzas"
         },
         {
-            "player_name": "Rhys Hoskins",
+            "player_name": "Tim Beckham",
             "role": "Batter",
-            "team": "Lee's Team"
-        },
-        {
-            "player_name": "David Peralta",
-            "role": "Batter",
-            "team": "Lee's Team"
+            "team": "Chicago Pizzas"
         },
         {
             "player_name": "Jacob deGrom",
             "role": "Pitcher",
-            "team": "Lee's Team"
+            "team": "Chicago Pizzas"
+        },
+        {
+            "player_name": "Carlos Rodón",
+            "role": "Pitcher",
+            "team": "Chicago Pizzas"
+        },
+        {
+            "player_name": "Trey Mancini",
+            "role": "Batter",
+            "team": "NY Hotdogs"
+        },
+        {
+            "player_name": "Anthony Rendon",
+            "role": "Batter",
+            "team": "NY Hotdogs"
+        },
+        {
+            "player_name": "José Berríos",
+            "role": "Pitcher",
+            "team": "NY Hotdogs"
         },
         {
             "player_name": "Mike Clevinger",
             "role": "Pitcher",
-            "team": "Lee's Team"
+            "team": "NY Hotdogs"
         },
         {
-            "player_name": "Adam Jones",
+            "player_name": "Jonathan Villar",
             "role": "Batter",
-            "team": "L.A. Bulls"
+            "team": "Seattle Coffees"
         },
         {
-            "player_name": "Ryon Healy",
+            "player_name": "Rhys Hoskins",
             "role": "Batter",
-            "team": "L.A. Bulls"
-        },
-        {
-            "player_name": "Mitch Haniger",
-            "role": "Batter",
-            "team": "L.A. Bulls"
+            "team": "Seattle Coffees"
         },
         {
             "player_name": "Kirby Yates",
             "role": "Pitcher",
-            "team": "L.A. Bulls"
+            "team": "Seattle Coffees"
         },
         {
             "player_name": "Josh Hader",
             "role": "Pitcher",
-            "team": "L.A. Bulls"
+            "team": "Seattle Coffees"
         }
     ]
 }

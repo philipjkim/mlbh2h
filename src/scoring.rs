@@ -1,15 +1,13 @@
 use serde::{Deserialize, Serialize};
 use std::error::Error;
-use std::fmt;
 use std::fs;
 use std::io::{self, prelude::*};
-use std::path::Path;
 
 #[derive(Serialize, Deserialize, Debug, Default)]
 pub struct BatterScoringRule {
     // games_played: f32,
     // games_started: f32,
-    // at_bats: f32,
+    at_bats: f32,
     runs: f32,
     hits: f32,
     // singles: f32,
@@ -23,10 +21,10 @@ pub struct BatterScoringRule {
     // caught_stealing: f32,
     // walks: f32,
     // intentilnal_walks: f32,
-    // hit_by_pitch: f32,
+    hit_by_pitch: f32,
     // strikeouts: f32,
     // ground_into_double_play: f32,
-    // total_bases: f32,
+    total_bases: f32,
     // putouts: f32,
     // assists: f32,
     // errors: f32,
@@ -50,15 +48,15 @@ pub struct PitcherScoringRule {
     // complete_games: f32,
     // shutouts: f32,
     saves: f32,
-    // outs: f32,
-    // hits: f32,
+    outs: f32,
+    hits: f32,
     // total_batters_faced: f32,
     // runs: f32,
     earned_runs: f32,
     // home_runs: f32,
     // walks: f32,
     // intentional_walks: f32,
-    // hit_batters: f32,
+    hit_batters: f32,
     strikeouts: f32,
     // wild_pitches: f32,
     // balks: f32,
@@ -91,27 +89,8 @@ pub struct ScoringRule {
     pitcher: PitcherScoringRule,
 }
 
-#[derive(Debug, Clone)]
-pub struct LeagueNameConflictError(pub String);
-impl fmt::Display for LeagueNameConflictError {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        write!(
-            f,
-            "league with name {} already exists, use other name",
-            self.0
-        )
-    }
-}
-impl Error for LeagueNameConflictError {}
-
-pub fn add(league_name: &str) -> Result<ScoringRule, Box<dyn Error>> {
-    let league_dir = &format!("data/{}", league_name);
-    fs::create_dir_all(league_dir)?;
-
-    let filepath = &format!("{}/scoring.json", league_dir);
-    if Path::new(filepath).exists() {
-        return Err(Box::new(LeagueNameConflictError(league_name.to_string())));
-    }
+pub fn add(dir: &str) -> Result<ScoringRule, Box<dyn Error>> {
+    let filepath = &format!("{}/scoring.json", dir);
 
     let rule = get_scorings_from_stdin()?;
 
@@ -126,7 +105,7 @@ fn get_scorings_from_stdin() -> Result<ScoringRule, Box<dyn Error>> {
 
     // rule.batter.games_played = get_stdin("batter.games_played")?;
     // rule.batter.games_started = get_stdin("batter.games_started")?;
-    // rule.batter.at_bats = get_stdin("batter.at_bats")?;
+    rule.batter.at_bats = get_stdin("batter.at_bats")?;
     rule.batter.runs = get_stdin("batter.runs")?;
     rule.batter.hits = get_stdin("batter.hits")?;
     // rule.batter.singles = get_stdin("batter.singles")?;
@@ -140,10 +119,10 @@ fn get_scorings_from_stdin() -> Result<ScoringRule, Box<dyn Error>> {
     // rule.batter.caught_stealing = get_stdin("batter.caught_stealing")?;
     // rule.batter.walks = get_stdin("batter.walks")?;
     // rule.batter.intentilnal_walks = get_stdin("batter.intentilnal_walks")?;
-    // rule.batter.hit_by_pitch = get_stdin("batter.hit_by_pitch")?;
+    rule.batter.hit_by_pitch = get_stdin("batter.hit_by_pitch")?;
     // rule.batter.strikeouts = get_stdin("batter.strikeouts")?;
     // rule.batter.ground_into_double_play = get_stdin("batter.ground_into_double_play")?;
-    // rule.batter.total_bases = get_stdin("batter.total_bases")?;
+    rule.batter.total_bases = get_stdin("batter.total_bases")?;
     // rule.batter.putouts = get_stdin("batter.putouts")?;
     // rule.batter.assists = get_stdin("batter.assists")?;
     // rule.batter.errors = get_stdin("batter.errors")?;
@@ -164,15 +143,15 @@ fn get_scorings_from_stdin() -> Result<ScoringRule, Box<dyn Error>> {
     // rule.pitcher.complete_games = get_stdin("pitcher.complete_games")?;
     // rule.pitcher.shutouts = get_stdin("pitcher.shutouts")?;
     rule.pitcher.saves = get_stdin("pitcher.saves")?;
-    // rule.pitcher.outs = get_stdin("pitcher.outs")?;
-    // rule.pitcher.hits = get_stdin("pitcher.hits")?;
+    rule.pitcher.outs = get_stdin("pitcher.outs")?;
+    rule.pitcher.hits = get_stdin("pitcher.hits")?;
     // rule.pitcher.total_batters_faced = get_stdin("pitcher.total_batters_faced")?;
     // rule.pitcher.runs = get_stdin("pitcher.runs")?;
     rule.pitcher.earned_runs = get_stdin("pitcher.earned_runs")?;
     // rule.pitcher.home_runs = get_stdin("pitcher.home_runs")?;
     // rule.pitcher.walks = get_stdin("pitcher.walks")?;
     // rule.pitcher.intentional_walks = get_stdin("pitcher.intentional_walks")?;
-    // rule.pitcher.hit_batters = get_stdin("pitcher.hit_batters")?;
+    rule.pitcher.hit_batters = get_stdin("pitcher.hit_batters")?;
     rule.pitcher.strikeouts = get_stdin("pitcher.strikeouts")?;
     // rule.pitcher.wild_pitches = get_stdin("pitcher.wild_pitches")?;
     // rule.pitcher.balks = get_stdin("pitcher.balks")?;
