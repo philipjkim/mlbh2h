@@ -1,5 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::error::Error;
+use std::fmt;
 use std::fs;
 use std::io::{self, prelude::*};
 use std::path::Path;
@@ -90,20 +91,36 @@ pub struct ScoringRule {
     pitcher: PitcherScoringRule,
 }
 
-pub fn add_new_scoring_rule(name: &str) -> Result<ScoringRule, Box<dyn Error>> {
+#[derive(Debug, Clone)]
+struct RuleNameConflictError(String);
+impl fmt::Display for RuleNameConflictError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(
+            f,
+            "rule with name {} already exists, use other name",
+            self.0
+        )
+    }
+}
+impl Error for RuleNameConflictError {}
+
+pub fn add(name: &str) -> Result<ScoringRule, Box<dyn Error>> {
     fs::create_dir_all("data")?;
 
-    let filepath = format!("data/rules_{}.json", name);
-    if Path::new(&filepath).exists() {
-        panic!("Rule {} already exists!", name);
+    let filepath = &format!("data/rules_{}.json", name);
+    if Path::new(filepath).exists() {
+        return Err(Box::new(RuleNameConflictError(name.to_string())));
     }
 
-    let rule = get_scoring_rule_from_stdin()?;
+    let rule = get_scorings_from_stdin()?;
+
+    fs::write(filepath, serde_json::to_string(&rule)?)?;
+    println!("Saved scoring rule to {}.", filepath);
 
     Ok(rule)
 }
 
-fn get_scoring_rule_from_stdin() -> Result<ScoringRule, Box<dyn Error>> {
+fn get_scorings_from_stdin() -> Result<ScoringRule, Box<dyn Error>> {
     let mut rule: ScoringRule = Default::default();
 
     rule.batter.games_played = get_stdin("batter.games_played")?;
