@@ -1,6 +1,5 @@
-extern crate reqwest;
-
 use crate::stats::Config;
+use crate::utils;
 use serde::Deserialize;
 use std::error::Error;
 
@@ -18,8 +17,8 @@ pub fn get_game_ids(config: &Config) -> Result<Vec<String>, Box<dyn Error>> {
     let url = get_schedule_url(config);
     println!("schedule api url: {}", url);
 
-    let json = get_json_res(&url)?;
-    Ok(get_games_ids_from_string(json)?)
+    let json = utils::get_json_res(&url)?;
+    Ok(get_game_ids_from_string(json)?)
 }
 
 fn get_schedule_url(config: &Config) -> String {
@@ -30,11 +29,7 @@ fn get_schedule_url(config: &Config) -> String {
     )
 }
 
-fn get_json_res(url: &String) -> Result<String, Box<dyn Error>> {
-    Ok(reqwest::get(url)?.text()?)
-}
-
-fn get_games_ids_from_string(json: String) -> Result<Vec<String>, Box<dyn Error>> {
+fn get_game_ids_from_string(json: String) -> Result<Vec<String>, Box<dyn Error>> {
     let schedule: Schedule = serde_json::from_str(&json)?;
     Ok(schedule.games.into_iter().map(|g| g.id).collect())
 }
@@ -57,10 +52,10 @@ mod test {
     }
 
     #[test]
-    fn get_games_ids_from_string_should_return_schedule() {
+    fn get_game_ids_from_string_should_return_schedule() {
         use std::fs;
         let json = fs::read_to_string("testdata/schedule.json").unwrap();
-        let ids = get_games_ids_from_string(json).unwrap();
+        let ids = get_game_ids_from_string(json).unwrap();
         assert_eq!(10, ids.len());
         assert_eq!("07d2922e-3f38-4dbe-a9ea-c96644b7dc10", ids.first().unwrap())
     }

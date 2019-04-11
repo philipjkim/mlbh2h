@@ -5,6 +5,7 @@ use std::error::Error;
 
 mod league;
 mod stats;
+mod utils;
 mod version;
 
 fn main() -> Result<(), Box<dyn Error>> {
