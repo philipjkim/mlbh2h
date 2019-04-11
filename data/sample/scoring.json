@@ -6,6 +6,7 @@
         "home_runs": 4.0,
         "runs_batted_in": 2.0,
         "stolen_bases": 2.0,
+        "walks": 0.0,
         "hit_by_pitch": 0.0,
         "total_bases": 0.0
     },
@@ -16,6 +17,7 @@
         "outs": 0.0,
         "hits": 0.0,
         "earned_runs": -0.5,
+        "walks": 0.0,
         "hit_batters": 0.0,
         "strikeouts": 2.0
     }

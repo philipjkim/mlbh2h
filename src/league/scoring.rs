@@ -19,7 +19,7 @@ pub struct BatterScoringRule {
     // sacrifice_flys: f32,
     stolen_bases: f32,
     // caught_stealing: f32,
-    // walks: f32,
+    walks: f32,
     // intentilnal_walks: f32,
     hit_by_pitch: f32,
     // strikeouts: f32,
@@ -54,7 +54,7 @@ pub struct PitcherScoringRule {
     // runs: f32,
     earned_runs: f32,
     // home_runs: f32,
-    // walks: f32,
+    walks: f32,
     // intentional_walks: f32,
     hit_batters: f32,
     strikeouts: f32,
@@ -117,7 +117,7 @@ fn get_scorings_from_stdin() -> Result<ScoringRule, Box<dyn Error>> {
     // rule.batter.sacrifice_flys = get_stdin("batter.sacrifice_flys")?;
     rule.batter.stolen_bases = get_stdin("batter.stolen_bases")?;
     // rule.batter.caught_stealing = get_stdin("batter.caught_stealing")?;
-    // rule.batter.walks = get_stdin("batter.walks")?;
+    rule.batter.walks = get_stdin("batter.walks")?;
     // rule.batter.intentilnal_walks = get_stdin("batter.intentilnal_walks")?;
     rule.batter.hit_by_pitch = get_stdin("batter.hit_by_pitch")?;
     // rule.batter.strikeouts = get_stdin("batter.strikeouts")?;
@@ -149,7 +149,7 @@ fn get_scorings_from_stdin() -> Result<ScoringRule, Box<dyn Error>> {
     // rule.pitcher.runs = get_stdin("pitcher.runs")?;
     rule.pitcher.earned_runs = get_stdin("pitcher.earned_runs")?;
     // rule.pitcher.home_runs = get_stdin("pitcher.home_runs")?;
-    // rule.pitcher.walks = get_stdin("pitcher.walks")?;
+    rule.pitcher.walks = get_stdin("pitcher.walks")?;
     // rule.pitcher.intentional_walks = get_stdin("pitcher.intentional_walks")?;
     rule.pitcher.hit_batters = get_stdin("pitcher.hit_batters")?;
     rule.pitcher.strikeouts = get_stdin("pitcher.strikeouts")?;

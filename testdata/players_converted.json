@@ -1,0 +1,4922 @@
+[
+    {
+        "name": "Tommy La Stella",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 1,
+            "runs_batted_in": 2,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "David Fletcher",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Peter Bourjos",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 0,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Brian Goodwin",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Kole Calhoun",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Mike Trout",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 1,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 2,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Andrelton Simmons",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 1,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Zack Cozart",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 0,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Justin Bour",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 1,
+            "runs_batted_in": 2,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Hansel Robles",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Trevor Cahill",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 6.0,
+            "wins": 1,
+            "saves": 0,
+            "outs": 18,
+            "hits": 5,
+            "earned_runs": 2,
+            "walks": 1,
+            "hit_batters": 1,
+            "strikeouts": 8
+        }
+    },
+    {
+        "name": "Ty Buttrey",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 1,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Cody Allen",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 1,
+            "outs": 3,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "Jonathan Lucroy",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Albert Pujols",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Jhoulys Chacín",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 6.1,
+            "wins": 0,
+            "saves": 0,
+            "outs": 19,
+            "hits": 3,
+            "earned_runs": 3,
+            "walks": 3,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Orlando Arcia",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Mike Moustakas",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 2,
+            "hits": 2,
+            "home_runs": 1,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 5
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Lorenzo Cain",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Christian Yelich",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 1,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Chase Anderson",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 2,
+            "earned_runs": 2,
+            "walks": 2,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "Yasmani Grandal",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Jesús Aguilar",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Alex Wilson",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 0.2,
+            "wins": 0,
+            "saves": 0,
+            "outs": 2,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Eric Thames",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 1,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Ryan Braun",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Travis Shaw",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Billy Hamilton",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Alex Gordon",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 2,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Kevin McCarthy",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 0.1,
+            "wins": 0,
+            "saves": 0,
+            "outs": 1,
+            "hits": 3,
+            "earned_runs": 3,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "Terrance Gore",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Chris Owings",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Martín Maldonado",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Jorge Soler",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Frank Schwindel",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Homer Bailey",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 5.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 15,
+            "hits": 8,
+            "earned_runs": 7,
+            "walks": 2,
+            "hit_batters": 0,
+            "strikeouts": 7
+        }
+    },
+    {
+        "name": "Whit Merrifield",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Tim Hill",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 0.1,
+            "wins": 0,
+            "saves": 0,
+            "outs": 1,
+            "hits": 1,
+            "earned_runs": 2,
+            "walks": 0,
+            "hit_batters": 1,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "Ryan O'Hearn",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 1,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 2,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Lucas Duda",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Hunter Dozier",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 1,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Scott Barlow",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 2.1,
+            "wins": 0,
+            "saves": 0,
+            "outs": 7,
+            "hits": 3,
+            "earned_runs": 1,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 3
+        }
+    },
+    {
+        "name": "Ian Kennedy",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "Adalberto Mondesi",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Chasen Bradford",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 2.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 6,
+            "hits": 5,
+            "earned_runs": 2,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Ryon Healy",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 1,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Omar Narváez",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Cory Gearrin",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 2,
+            "earned_runs": 1,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Jay Bruce",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 1,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Dee Gordon",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Roenis Elías",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 3.0,
+            "wins": 1,
+            "saves": 0,
+            "outs": 9,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 4
+        }
+    },
+    {
+        "name": "Edwin Encarnación",
+        "position": "DH",
+        "primary_position": "DH",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 2,
+            "hits": 2,
+            "home_runs": 2,
+            "runs_batted_in": 4,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 8
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Connor Sadzeck",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 2.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 6,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 2
+        }
+    },
+    {
+        "name": "Dylan Moore",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 3,
+            "hits": 2,
+            "home_runs": 1,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 1,
+            "total_bases": 5
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Mitch Haniger",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 6,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Félix Hernández",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 3,
+            "earned_runs": 2,
+            "walks": 0,
+            "hit_batters": 1,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Domingo Santana",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 1,
+            "hits": 3,
+            "home_runs": 0,
+            "runs_batted_in": 4,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Daniel Vogelbach",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 2,
+            "hits": 1,
+            "home_runs": 1,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 3,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Adam Engel",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Welington Castillo",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Nate Jones",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.1,
+            "wins": 0,
+            "saves": 0,
+            "outs": 4,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 2
+        }
+    },
+    {
+        "name": "Carson Fulmer",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 3.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 9,
+            "hits": 3,
+            "earned_runs": 1,
+            "walks": 2,
+            "hit_batters": 0,
+            "strikeouts": 3
+        }
+    },
+    {
+        "name": "Yonder Alonso",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "James McCann",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "José Rondón",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 2,
+            "home_runs": 1,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 5
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Eloy Jiménez",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "José Abreu",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Carlos Rodón",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 4.2,
+            "wins": 0,
+            "saves": 0,
+            "outs": 14,
+            "hits": 8,
+            "earned_runs": 4,
+            "walks": 5,
+            "hit_batters": 0,
+            "strikeouts": 9
+        }
+    },
+    {
+        "name": "Yoán Moncada",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Tim Anderson",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 1,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Leury García",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 3,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Ji-Man Choi",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Blake Snell",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 6.0,
+            "wins": 1,
+            "saves": 0,
+            "outs": 18,
+            "hits": 6,
+            "earned_runs": 1,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 11
+        }
+    },
+    {
+        "name": "Guillermo Heredia",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Willy Adames",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 2,
+            "hits": 3,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Kevin Kiermaier",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 0,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Mike Zunino",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 2,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Tommy Pham",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 2,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 2,
+            "walks": 2,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Avisaíl García",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 0,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Yandy Díaz",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 6,
+            "runs": 1,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Hunter Wood",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 3.0,
+            "wins": 0,
+            "saves": 1,
+            "outs": 9,
+            "hits": 3,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 3
+        }
+    },
+    {
+        "name": "Austin Meadows",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 0,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Brandon Lowe",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Daniel Robertson",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 1,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Jose Altuve",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 1,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Tyler White",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 1,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Robinson Chirinos",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 2,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Justin Verlander",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 6.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 18,
+            "hits": 7,
+            "earned_runs": 3,
+            "walks": 2,
+            "hit_batters": 0,
+            "strikeouts": 6
+        }
+    },
+    {
+        "name": "Carlos Correa",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Ryan Pressly",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 1,
+            "saves": 0,
+            "outs": 3,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Aledmys Díaz",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Josh Reddick",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Alex Bregman",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 2,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "George Springer",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Jake Marisnick",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Will Harris",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 1,
+            "earned_runs": 0,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Yuli Gurriel",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Michael Brantley",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Roberto Osuna",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 1,
+            "outs": 3,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "Luke Voit",
+        "position": "IF",
+        "primary_position": "DH",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Greg Bird",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Clint Frazier",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Zack Britton",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 0.2,
+            "wins": 0,
+            "saves": 0,
+            "outs": 2,
+            "hits": 2,
+            "earned_runs": 2,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "Brett Gardner",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 1,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Gleyber Torres",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Gio Urshela",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 1,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Aaron Judge",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 1,
+            "hits": 2,
+            "home_runs": 1,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 2,
+            "hit_by_pitch": 0,
+            "total_bases": 5
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Gary Sánchez",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "DJ LeMahieu",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Adam Ottavino",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.1,
+            "wins": 0,
+            "saves": 0,
+            "outs": 4,
+            "hits": 2,
+            "earned_runs": 1,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 4
+        }
+    },
+    {
+        "name": "Masahiro Tanaka",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 6.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 18,
+            "hits": 3,
+            "earned_runs": 1,
+            "walks": 2,
+            "hit_batters": 0,
+            "strikeouts": 3
+        }
+    },
+    {
+        "name": "Miles Mikolas",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 6.0,
+            "wins": 1,
+            "saves": 0,
+            "outs": 18,
+            "hits": 5,
+            "earned_runs": 3,
+            "walks": 1,
+            "hit_batters": 3,
+            "strikeouts": 3
+        }
+    },
+    {
+        "name": "Kolten Wong",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "José Martínez",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Marcell Ozuna",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 1,
+            "runs_batted_in": 2,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Tyler O'Neill",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Yadier Molina",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Paul Goldschmidt",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 1,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 2,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Matt Carpenter",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Dexter Fowler",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "John Gant",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 2.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 6,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Jordan Hicks",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 1,
+            "outs": 3,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Harrison Bader",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Paul DeJong",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 3
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Hyun-Jin Ryu",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.2,
+            "wins": 0,
+            "saves": 0,
+            "outs": 5,
+            "hits": 2,
+            "earned_runs": 2,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Scott Alexander",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 1,
+            "earned_runs": 1,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Pedro Báez",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 2.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 6,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "Russell Martin",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 1,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 1,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Joc Pederson",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 1,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 2,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Joe Kelly",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 2,
+            "earned_runs": 1,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "David Freese",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Alex Verdugo",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Dylan Floro",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 2.1,
+            "wins": 0,
+            "saves": 0,
+            "outs": 7,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 2
+        }
+    },
+    {
+        "name": "Justin Turner",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Kiké Hernández",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Chris Taylor",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Cody Bellinger",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 1,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 2,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Corey Seager",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "A.J. Pollock",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Max Muncy",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Andrew Cashner",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 5.1,
+            "wins": 1,
+            "saves": 0,
+            "outs": 16,
+            "hits": 9,
+            "earned_runs": 3,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Jonathan Villar",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 2,
+            "hits": 2,
+            "home_runs": 1,
+            "runs_batted_in": 4,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 5
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Hanser Alberto",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 2,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Richie Martin",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 3,
+            "hits": 3,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 5
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Joey Rickard",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Jesus Súcre",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 2,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Renato Núñez",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 0,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 3
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Mychal Givens",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 0.2,
+            "wins": 0,
+            "saves": 0,
+            "outs": 2,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Jimmy Yacabonis",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 2.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 6,
+            "hits": 2,
+            "earned_runs": 0,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 2
+        }
+    },
+    {
+        "name": "Nate Karns",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "Chris Davis",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Trey Mancini",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 2,
+            "hits": 3,
+            "home_runs": 1,
+            "runs_batted_in": 2,
+            "stolen_bases": 0,
+            "walks": 2,
+            "hit_by_pitch": 0,
+            "total_bases": 6
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Cedric Mullins",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 2,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 3,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 6
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Yusmeiro Petit",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 2.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 6,
+            "hits": 1,
+            "earned_runs": 1,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "Chad Pinder",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Matt Chapman",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 0,
+            "hits": 3,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 3
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Liam Hendriks",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Ryan Buchter",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 0.1,
+            "wins": 0,
+            "saves": 0,
+            "outs": 1,
+            "hits": 2,
+            "earned_runs": 2,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "Mark Canha",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 2,
+            "hits": 1,
+            "home_runs": 1,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Stephen Piscotty",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Nick Hundley",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 0,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Jurickson Profar",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 1,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Khris Davis",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Robbie Grossman",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Fernando Rodney",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 0.2,
+            "wins": 0,
+            "saves": 0,
+            "outs": 2,
+            "hits": 3,
+            "earned_runs": 3,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Marco Estrada",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 4.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 12,
+            "hits": 9,
+            "earned_runs": 6,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 3
+        }
+    },
+    {
+        "name": "Marcus Semien",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Kendrys Morales",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Josh Phegley",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 1,
+            "runs_batted_in": 2,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Erik Kratz",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Brandon Belt",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Tyler Austin",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Kevin Pillar",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 1,
+            "runs_batted_in": 4,
+            "stolen_bases": 1,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Buster Posey",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Reyes Moronta",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 2,
+            "earned_runs": 1,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "Yangervis Solarte",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 1,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Evan Longoria",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Pablo Sandoval",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Derek Holland",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": null
+    },
+    {
+        "name": "Steven Duggar",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Brandon Crawford",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Joe Panik",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 0,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Gerardo Parra",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 0,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 1,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Sam Dyson",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 2.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 6,
+            "hits": 1,
+            "earned_runs": 0,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Madison Bumgarner",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 6.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 18,
+            "hits": 4,
+            "earned_runs": 5,
+            "walks": 1,
+            "hit_batters": 2,
+            "strikeouts": 3
+        }
+    },
+    {
+        "name": "Craig Stammen",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 1,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Eric Lauer",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 6.0,
+            "wins": 1,
+            "saves": 0,
+            "outs": 18,
+            "hits": 4,
+            "earned_runs": 5,
+            "walks": 2,
+            "hit_batters": 0,
+            "strikeouts": 8
+        }
+    },
+    {
+        "name": "Manny Machado",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Franmil Reyes",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 1,
+            "runs_batted_in": 2,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Brad Wieck",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 1,
+            "strikeouts": 2
+        }
+    },
+    {
+        "name": "Eric Hosmer",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 1,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Francisco Mejía",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Ian Kinsler",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 0,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Hunter Renfroe",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Wil Myers",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 2,
+            "home_runs": 1,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 5
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Luis Urías",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Fernando Tatis Jr.",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 2,
+            "hits": 1,
+            "home_runs": 1,
+            "runs_batted_in": 2,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 2,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Manuel Margot",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 1,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Kirby Yates",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 1,
+            "outs": 3,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 2
+        }
+    },
+    {
+        "name": "Pat Valaika",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Garrett Hampson",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Tony Wolters",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Charlie Blackmon",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Josh Fuentes",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "DJ Johnson",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 2,
+            "earned_runs": 1,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "Raimel Tapia",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Wade Davis",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 3
+        }
+    },
+    {
+        "name": "Nolan Arenado",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Scott Oberg",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 2.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 6,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 2
+        }
+    },
+    {
+        "name": "Mark Reynolds",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 1,
+            "runs_batted_in": 2,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Kyle Freeland",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 5.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 15,
+            "hits": 7,
+            "earned_runs": 7,
+            "walks": 3,
+            "hit_batters": 1,
+            "strikeouts": 3
+        }
+    },
+    {
+        "name": "Chris Iannetta",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Trevor Story",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 1,
+            "runs_batted_in": 3,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Ian Desmond",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 0,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 3
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Luke Jackson",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 1,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Josh Donaldson",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 2,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 2,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Ozzie Albies",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Alex Jackson",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Dansby Swanson",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 3,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 3
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Julio Teheran",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 5.0,
+            "wins": 1,
+            "saves": 0,
+            "outs": 15,
+            "hits": 5,
+            "earned_runs": 6,
+            "walks": 3,
+            "hit_batters": 0,
+            "strikeouts": 3
+        }
+    },
+    {
+        "name": "Chad Sobotka",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.1,
+            "wins": 0,
+            "saves": 0,
+            "outs": 4,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 2
+        }
+    },
+    {
+        "name": "Ronald Acuña Jr.",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 3,
+            "hits": 2,
+            "home_runs": 1,
+            "runs_batted_in": 2,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 1,
+            "total_bases": 5
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Ender Inciarte",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Nick Markakis",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 3,
+            "home_runs": 0,
+            "runs_batted_in": 2,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 3
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Jonny Venters",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 0.2,
+            "wins": 0,
+            "saves": 0,
+            "outs": 2,
+            "hits": 1,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "A.J. Minter",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 1,
+            "outs": 3,
+            "hits": 1,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "Freddie Freeman",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Ben Zobrist",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 2,
+            "stolen_bases": 0,
+            "walks": 2,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Daniel Descalso",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 2,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Jon Lester",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 2.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 6,
+            "hits": 3,
+            "earned_runs": 0,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 4
+        }
+    },
+    {
+        "name": "Javier Báez",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 5,
+            "runs": 1,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Victor Caratini",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Anthony Rizzo",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Jason Heyward",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 2,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Willson Contreras",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Brad Brach",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 2.0,
+            "wins": 1,
+            "saves": 0,
+            "outs": 6,
+            "hits": 1,
+            "earned_runs": 0,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 3
+        }
+    },
+    {
+        "name": "Kyle Schwarber",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 1,
+            "runs_batted_in": 2,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Pedro Strop",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 1,
+            "earned_runs": 0,
+            "walks": 1,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Randy Rosario",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 2.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 6,
+            "hits": 2,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 2
+        }
+    },
+    {
+        "name": "Albert Almora Jr.",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Brandon Kintzler",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 2.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 6,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 1,
+            "strikeouts": 2
+        }
+    },
+    {
+        "name": "Mark Zagunis",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Kris Bryant",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 1,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "David Bote",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Jameson Taillon",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 2.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 6,
+            "hits": 4,
+            "earned_runs": 0,
+            "walks": 1,
+            "hit_batters": 1,
+            "strikeouts": 4
+        }
+    },
+    {
+        "name": "JB Shuck",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 0,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Pablo Reyes",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Starling Marte",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 1,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Josh Bell",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Jung Ho Kang",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Francisco Cervelli",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Jason Martin",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Nick Burdi",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 3
+        }
+    },
+    {
+        "name": "Kevin Newman",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Erik González",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Adam Frazier",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Jacob Stallings",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Melky Cabrera",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 0,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Francisco Liriano",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 2.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 6,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 2
+        }
+    },
+    {
+        "name": "Steven Brault",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 3.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 9,
+            "hits": 4,
+            "earned_runs": 4,
+            "walks": 2,
+            "hit_batters": 0,
+            "strikeouts": 2
+        }
+    },
+    {
+        "name": "Colin Moran",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 2,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Maikel Franco",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Rhys Hoskins",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 2,
+            "hits": 2,
+            "home_runs": 2,
+            "runs_batted_in": 2,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 8
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Seranthony Domínguez",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 1,
+            "saves": 0,
+            "outs": 3,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Pat Neshek",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 1,
+            "outs": 3,
+            "hits": 2,
+            "earned_runs": 1,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "Vince Velasquez",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 5.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 15,
+            "hits": 4,
+            "earned_runs": 2,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 2
+        }
+    },
+    {
+        "name": "Andrew McCutchen",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Odúbel Herrera",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 2,
+            "home_runs": 1,
+            "runs_batted_in": 2,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 5
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "David Robertson",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 1,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Jean Segura",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 2,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Aaron Altherr",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Adam Morgan",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Scott Kingery",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 3,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 3
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Nick Williams",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "J.T. Realmuto",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Bryce Harper",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 1,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Matt Adams",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 1,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Adam Eaton",
+        "position": "OF",
+        "primary_position": "RF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Brian Dozier",
+        "position": "IF",
+        "primary_position": "2B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 1,
+            "runs_batted_in": 1,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 4
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Juan Soto",
+        "position": "OF",
+        "primary_position": "LF",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Kurt Suzuki",
+        "position": "C",
+        "primary_position": "C",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 1,
+            "hits": 2,
+            "home_runs": 1,
+            "runs_batted_in": 2,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 5
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Tony Sipp",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 0.1,
+            "wins": 0,
+            "saves": 0,
+            "outs": 1,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "Anthony Rendon",
+        "position": "IF",
+        "primary_position": "3B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 2
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Wander Suero",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 0.1,
+            "wins": 0,
+            "saves": 0,
+            "outs": 1,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    },
+    {
+        "name": "Wilmer Difo",
+        "position": "IF",
+        "primary_position": "SS",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 0,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 0
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Aníbal Sánchez",
+        "position": "P",
+        "primary_position": "SP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 5.2,
+            "wins": 0,
+            "saves": 0,
+            "outs": 17,
+            "hits": 7,
+            "earned_runs": 3,
+            "walks": 2,
+            "hit_batters": 0,
+            "strikeouts": 6
+        }
+    },
+    {
+        "name": "Ryan Zimmerman",
+        "position": "IF",
+        "primary_position": "1B",
+        "batter_stats": {
+            "at_bats": 4,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Victor Robles",
+        "position": "OF",
+        "primary_position": "CF",
+        "batter_stats": {
+            "at_bats": 3,
+            "runs": 0,
+            "hits": 1,
+            "home_runs": 0,
+            "runs_batted_in": 0,
+            "stolen_bases": 0,
+            "walks": 0,
+            "hit_by_pitch": 0,
+            "total_bases": 1
+        },
+        "pitcher_stats": null
+    },
+    {
+        "name": "Kyle Barraclough",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 0.2,
+            "wins": 0,
+            "saves": 0,
+            "outs": 2,
+            "hits": 0,
+            "earned_runs": 0,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 1
+        }
+    },
+    {
+        "name": "Justin Miller",
+        "position": "P",
+        "primary_position": "RP",
+        "batter_stats": null,
+        "pitcher_stats": {
+            "innings_pitched": 1.0,
+            "wins": 0,
+            "saves": 0,
+            "outs": 3,
+            "hits": 3,
+            "earned_runs": 1,
+            "walks": 0,
+            "hit_batters": 0,
+            "strikeouts": 0
+        }
+    }
+]
