@@ -6,7 +6,6 @@ use std::error::Error;
 use std::fmt;
 use std::fs;
 use std::path::Path;
-use std::rc::Rc;
 
 mod schedule;
 mod sportradar;
@@ -153,7 +152,7 @@ pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
 #[derive(Debug, Default)]
 struct FantasyPlayer {
     team: String,
-    player: Rc<Player>,
+    player: Player,
     fantasy_points: f32,
 }
 
@@ -183,8 +182,8 @@ fn create_fantasy_players(
                 .unwrap_or("unknown".to_owned());
             FantasyPlayer {
                 team: team,
-                player: Rc::new(p.clone()),
                 fantasy_points: get_fantasy_points(&p, &league_scoring),
+                player: p,
             }
         })
         .collect();
