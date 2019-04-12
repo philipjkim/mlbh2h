@@ -299,6 +299,7 @@ pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
     let league_roster = roster::load(&config.league)?;
     let fan_players = create_fantasy_players(players, &league_scoring, &league_roster)?;
 
+    println!();
     print_fantasy_players(fan_players, &config.date, &league_scoring);
     // println!("fantasy players:\n{:#?}", fan_players);
 
@@ -322,9 +323,8 @@ fn create_fantasy_players(
     r: &roster::Roster,
 ) -> Result<Vec<FantasyPlayer>, Box<dyn Error>> {
     let names: Vec<String> = r.players.iter().map(|p| p.name.to_owned()).collect();
-    println!("names: {:#?}", names);
+    // println!("names: {:#?}", names);
 
-    // TODO: sort by fantasy points
     let players: Vec<FantasyPlayer> = players
         .into_iter()
         .filter(|p| names.iter().find(|&n| *n == p.name).is_some())

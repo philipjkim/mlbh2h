@@ -172,11 +172,16 @@ pub fn get_players(config: &Config) -> Result<Vec<Player>, Box<dyn Error>> {
         // println!("game summary api url: {}", url);
 
         let json = utils::get_json_res(&url)?;
-        let mut players = get_players_from_string(json)?
-            .into_iter()
-            .filter(|p| p.status == "A")
-            .collect();
-        result.append(&mut players);
+        match get_players_from_string(json) {
+            Ok(p) => {
+                let mut players = p.into_iter().filter(|p| p.status == "A").collect();
+                result.append(&mut players);
+            }
+            Err(e) => {
+                println!("Fetch failed: {}", e);
+            }
+        }
+
         println!("game summary fetched: {}/{}", i + 1, game_ids.len());
     }
 
