@@ -1,3 +1,4 @@
+use crate::league::{roster, scoring};
 use clap::ArgMatches;
 use serde::{Deserialize, Serialize};
 use std::env;
@@ -5,6 +6,7 @@ use std::error::Error;
 use std::fmt;
 use std::fs;
 use std::path::Path;
+use std::rc::Rc;
 
 mod schedule;
 mod sportradar;
@@ -15,7 +17,7 @@ pub struct Config {
     api_key: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 struct Player {
     name: String,
     position: String,
@@ -24,7 +26,7 @@ struct Player {
     pitcher_stats: Option<PitcherStats>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 struct BatterStats {
     // games_played: u32,
     // games_started: u32,
@@ -59,7 +61,7 @@ struct BatterStats {
     // catcher_interference: u32,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 struct PitcherStats {
     // pitching_appearances: u32,
     // games_started: u32,
@@ -142,9 +144,80 @@ pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
 
     println!("players.length: {}", players.len());
 
-    // TODO: calculate fantasy points and show players in roster
+    let fan_players = create_fantasy_players(players, &config)?;
+    println!("fantasy players:\n{:#?}", fan_players);
 
     Ok(())
+}
+
+#[derive(Debug, Default)]
+struct FantasyPlayer {
+    team: String,
+    player: Rc<Player>,
+    fantasy_points: f32,
+}
+
+fn create_fantasy_players(
+    players: Vec<Player>,
+    config: &Config,
+) -> Result<Vec<FantasyPlayer>, Box<dyn Error>> {
+    let league_scoring = scoring::load(&config.league)?;
+    let league_roster = roster::load(&config.league)?;
+
+    let names: Vec<String> = league_roster
+        .players
+        .iter()
+        .map(|p| p.name.to_owned())
+        .collect();
+    println!("names: {:#?}", names);
+
+    let players: Vec<FantasyPlayer> = players
+        .into_iter()
+        .filter(|p| names.iter().find(|&n| *n == p.name).is_some())
+        .map(|p| {
+            let team = league_roster
+                .players
+                .iter()
+                .find(|rp| rp.name == p.name)
+                .map(|rp| rp.team.to_owned())
+                .unwrap_or("unknown".to_owned());
+            FantasyPlayer {
+                team: team,
+                player: Rc::new(p.clone()),
+                fantasy_points: get_fantasy_points(&p, &league_scoring),
+            }
+        })
+        .collect();
+
+    Ok(players)
+}
+
+fn get_fantasy_points(p: &Player, s: &scoring::ScoringRule) -> f32 {
+    if let Some(stats) = &p.batter_stats {
+        return (stats.at_bats as f32 * s.batter.at_bats)
+            + (stats.runs as f32 * s.batter.runs)
+            + (stats.hits as f32 * s.batter.hits)
+            + (stats.home_runs as f32 * s.batter.home_runs)
+            + (stats.runs_batted_in as f32 * s.batter.runs_batted_in)
+            + (stats.stolen_bases as f32 * s.batter.stolen_bases)
+            + (stats.walks as f32 * s.batter.walks)
+            + (stats.hit_by_pitch as f32 * s.batter.hit_by_pitch)
+            + (stats.total_bases as f32 * s.batter.total_bases);
+    }
+
+    if let Some(stats) = &p.pitcher_stats {
+        return (stats.innings_pitched * s.pitcher.innings_pitched)
+            + (stats.wins as f32 * s.pitcher.wins)
+            + (stats.saves as f32 * s.pitcher.saves)
+            + (stats.outs as f32 * s.pitcher.outs)
+            + (stats.hits as f32 * s.pitcher.hits)
+            + (stats.earned_runs as f32 * s.pitcher.earned_runs)
+            + (stats.walks as f32 * s.pitcher.walks)
+            + (stats.hit_batters as f32 * s.pitcher.hit_batters)
+            + (stats.strikeouts as f32 * s.pitcher.strikeouts);
+    }
+
+    return 0.0;
 }
 
 fn convert_players(sr_players: Vec<sportradar::Player>) -> Result<Vec<Player>, Box<dyn Error>> {
@@ -273,5 +346,49 @@ mod test {
         println!("pitcher: {:#?}", pitcher);
         assert_eq!(false, pitcher.batter_stats.is_some());
         assert_eq!(true, pitcher.pitcher_stats.is_some());
+    }
+
+    #[test]
+    fn get_fantasy_points_should_return_fantasy_points() {
+        let batter = Player {
+            name: "Trey Mancini".to_owned(),
+            position: "OF".to_owned(),
+            primary_position: "RF".to_owned(),
+            batter_stats: Some(BatterStats {
+                at_bats: 3,
+                runs: 2,
+                hits: 3,
+                home_runs: 1,
+                runs_batted_in: 2,
+                stolen_bases: 0,
+                walks: 2,
+                hit_by_pitch: 0,
+                total_bases: 6,
+            }),
+            pitcher_stats: None,
+        };
+
+        let pitcher = Player {
+            name: "Blake Snell".to_owned(),
+            position: "P".to_owned(),
+            primary_position: "SP".to_owned(),
+            batter_stats: None,
+            pitcher_stats: Some(PitcherStats {
+                innings_pitched: 6.0,
+                wins: 1,
+                saves: 0,
+                outs: 18,
+                hits: 6,
+                earned_runs: 1,
+                walks: 0,
+                hit_batters: 0,
+                strikeouts: 11,
+            }),
+        };
+
+        let sr = scoring::load(&"sample".to_owned()).unwrap();
+
+        assert_eq!(13.5, get_fantasy_points(&batter, &sr));
+        assert_eq!(32.5, get_fantasy_points(&pitcher, &sr));
     }
 }

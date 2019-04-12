@@ -1,82 +1,82 @@
 {
     "players": [
         {
-            "player_name": "Cody Bellinger",
+            "name": "Cody Bellinger",
             "role": "Batter",
             "team": "LA Bulls"
         },
         {
-            "player_name": "Domingo Santana",
+            "name": "Domingo Santana",
             "role": "Batter",
             "team": "LA Bulls"
         },
         {
-            "player_name": "Blake Snell",
+            "name": "Blake Snell",
             "role": "Pitcher",
             "team": "LA Bulls"
         },
         {
-            "player_name": "Max Scherzer",
+            "name": "Max Scherzer",
             "role": "Pitcher",
             "team": "LA Bulls"
         },
         {
-            "player_name": "Christian Yelich",
+            "name": "Christian Yelich",
             "role": "Batter",
             "team": "Chicago Pizzas"
         },
         {
-            "player_name": "Tim Beckham",
+            "name": "Tim Beckham",
             "role": "Batter",
             "team": "Chicago Pizzas"
         },
         {
-            "player_name": "Jacob deGrom",
+            "name": "Jacob deGrom",
             "role": "Pitcher",
             "team": "Chicago Pizzas"
         },
         {
-            "player_name": "Carlos Rodón",
+            "name": "Carlos Rodón",
             "role": "Pitcher",
             "team": "Chicago Pizzas"
         },
         {
-            "player_name": "Trey Mancini",
+            "name": "Trey Mancini",
             "role": "Batter",
             "team": "NY Hotdogs"
         },
         {
-            "player_name": "Anthony Rendon",
+            "name": "Anthony Rendon",
             "role": "Batter",
             "team": "NY Hotdogs"
         },
         {
-            "player_name": "José Berríos",
+            "name": "José Berríos",
             "role": "Pitcher",
             "team": "NY Hotdogs"
         },
         {
-            "player_name": "Mike Clevinger",
+            "name": "Mike Clevinger",
             "role": "Pitcher",
             "team": "NY Hotdogs"
         },
         {
-            "player_name": "Jonathan Villar",
+            "name": "Jonathan Villar",
             "role": "Batter",
             "team": "Seattle Coffees"
         },
         {
-            "player_name": "Rhys Hoskins",
+            "name": "Rhys Hoskins",
             "role": "Batter",
             "team": "Seattle Coffees"
         },
         {
-            "player_name": "Kirby Yates",
+            "name": "Kirby Yates",
             "role": "Pitcher",
             "team": "Seattle Coffees"
         },
         {
-            "player_name": "Josh Hader",
+            "name": "Josh Hader",
             "role": "Pitcher",
             "team": "Seattle Coffees"
         }

@@ -5,88 +5,88 @@ use std::io::{self, prelude::*};
 
 #[derive(Serialize, Deserialize, Debug, Default)]
 pub struct BatterScoringRule {
-    // games_played: f32,
-    // games_started: f32,
-    at_bats: f32,
-    runs: f32,
-    hits: f32,
-    // singles: f32,
-    // doubles: f32,
-    // triples: f32,
-    home_runs: f32,
-    runs_batted_in: f32,
-    // sacrifice_hits: f32,
-    // sacrifice_flys: f32,
-    stolen_bases: f32,
-    // caught_stealing: f32,
-    walks: f32,
-    // intentilnal_walks: f32,
-    hit_by_pitch: f32,
-    // strikeouts: f32,
-    // ground_into_double_play: f32,
-    total_bases: f32,
-    // putouts: f32,
-    // assists: f32,
-    // errors: f32,
-    // extra_base_hits: f32,
-    // net_stolen_bases: f32,
-    // hitting_for_the_cycle: f32,
-    // plate_appearances: f32,
-    // grand_slam_home_runs: f32,
-    // outfield_assists: f32,
-    // double_plays_turned: f32,
-    // catcher_interference: f32,
+    // pub games_played: f32,
+    // pub games_started: f32,
+    pub at_bats: f32,
+    pub runs: f32,
+    pub hits: f32,
+    // pub singles: f32,
+    // pub doubles: f32,
+    // pub triples: f32,
+    pub home_runs: f32,
+    pub runs_batted_in: f32,
+    // pub sacrifice_hits: f32,
+    // pub sacrifice_flys: f32,
+    pub stolen_bases: f32,
+    // pub caught_stealing: f32,
+    pub walks: f32,
+    // pub intentilnal_walks: f32,
+    pub hit_by_pitch: f32,
+    // pub strikeouts: f32,
+    // pub ground_into_double_play: f32,
+    pub total_bases: f32,
+    // pub putouts: f32,
+    // pub assists: f32,
+    // pub errors: f32,
+    // pub extra_base_hits: f32,
+    // pub net_stolen_bases: f32,
+    // pub hitting_for_the_cycle: f32,
+    // pub plate_appearances: f32,
+    // pub grand_slam_home_runs: f32,
+    // pub outfield_assists: f32,
+    // pub double_plays_turned: f32,
+    // pub catcher_interference: f32,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default)]
 pub struct PitcherScoringRule {
-    // pitching_appearances: f32,
-    // games_started: f32,
-    innings_pitched: f32,
-    wins: f32,
-    // losses: f32,
-    // complete_games: f32,
-    // shutouts: f32,
-    saves: f32,
-    outs: f32,
-    hits: f32,
-    // total_batters_faced: f32,
-    // runs: f32,
-    earned_runs: f32,
-    // home_runs: f32,
-    walks: f32,
-    // intentional_walks: f32,
-    hit_batters: f32,
-    strikeouts: f32,
-    // wild_pitches: f32,
-    // balks: f32,
-    // stolen_bases_allowed: f32,
-    // batters_grounded_into_double_plays: f32,
-    // save_chances: f32,
-    // holds: f32,
-    // total_bases_allowed: f32,
-    // pitch_count: f32,
-    // singles_allowed: f32,
-    // doubles_allowed: f32,
-    // triples_allowed: f32,
-    // relief_wins: f32,
-    // relief_losses: f32,
-    // pickoffs: f32,
-    // relief_appearances: f32,
-    // no_hitters: f32,
-    // perfect_games: f32,
-    // inherited_runners_scored: f32,
-    // quality_starts: f32,
-    // blown_saves: f32,
-    // net_saves: f32,
-    // saves_and_holds: f32,
-    // net_saves_and_holds: f32,
+    // pub pitching_appearances: f32,
+    // pub games_started: f32,
+    pub innings_pitched: f32,
+    pub wins: f32,
+    // pub losses: f32,
+    // pub complete_games: f32,
+    // pub shutouts: f32,
+    pub saves: f32,
+    pub outs: f32,
+    pub hits: f32,
+    // pub total_batters_faced: f32,
+    // pub runs: f32,
+    pub earned_runs: f32,
+    // pub home_runs: f32,
+    pub walks: f32,
+    // pub intentional_walks: f32,
+    pub hit_batters: f32,
+    pub strikeouts: f32,
+    // pub wild_pitches: f32,
+    // pub balks: f32,
+    // pub stolen_bases_allowed: f32,
+    // pub batters_grounded_into_double_plays: f32,
+    // pub save_chances: f32,
+    // pub holds: f32,
+    // pub total_bases_allowed: f32,
+    // pub pitch_count: f32,
+    // pub singles_allowed: f32,
+    // pub doubles_allowed: f32,
+    // pub triples_allowed: f32,
+    // pub relief_wins: f32,
+    // pub relief_losses: f32,
+    // pub pickoffs: f32,
+    // pub relief_appearances: f32,
+    // pub no_hitters: f32,
+    // pub perfect_games: f32,
+    // pub inherited_runners_scored: f32,
+    // pub quality_starts: f32,
+    // pub blown_saves: f32,
+    // pub net_saves: f32,
+    // pub saves_and_holds: f32,
+    // pub net_saves_and_holds: f32,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default)]
 pub struct ScoringRule {
-    batter: BatterScoringRule,
-    pitcher: PitcherScoringRule,
+    pub batter: BatterScoringRule,
+    pub pitcher: PitcherScoringRule,
 }
 
 pub fn add(dir: &str) -> Result<ScoringRule, Box<dyn Error>> {
@@ -203,5 +203,26 @@ fn get_stdin(label: &str) -> Result<f32, Box<dyn Error>> {
             }
             Err(_) => println!("Please input an integer. your input: {}", input_str),
         }
+    }
+}
+
+pub fn load(league_name: &String) -> Result<ScoringRule, Box<dyn Error>> {
+    let filepath = format!("data/{}/scoring.json", league_name);
+    println!("Loading the scoring rule from file {}", filepath);
+    let json = fs::read_to_string(filepath)?;
+    Ok(serde_json::from_str(&json)?)
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn load_should_return_scoring_rule_for_given_league() {
+        let scoring = load(&"sample".to_owned()).unwrap();
+        println!("scoring: {:#?}", scoring);
+
+        assert_eq!(0.5, scoring.batter.hits);
+        assert_eq!(-0.5, scoring.pitcher.earned_runs);
     }
 }

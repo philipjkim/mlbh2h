@@ -4,29 +4,29 @@ use std::fs;
 use std::io::{self, prelude::*};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub enum FantasyPlayerRole {
+pub enum PlayerType {
     Batter,
     Pitcher,
 }
-impl Default for FantasyPlayerRole {
+impl Default for PlayerType {
     fn default() -> Self {
-        FantasyPlayerRole::Batter
+        PlayerType::Batter
     }
 }
 
 #[derive(Serialize, Deserialize, Debug, Default)]
-pub struct FantasyPlayer {
-    player_name: String,
-    role: FantasyPlayerRole,
-    team: String,
+pub struct Player {
+    pub name: String,
+    pub role: PlayerType,
+    pub team: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default)]
-pub struct WeeklyRoster {
-    players: Vec<FantasyPlayer>,
+pub struct Roster {
+    pub players: Vec<Player>,
 }
 
-pub fn add(dir: &str) -> Result<WeeklyRoster, Box<dyn Error>> {
+pub fn add(dir: &str) -> Result<Roster, Box<dyn Error>> {
     let filepath = &format!("{}/roster.json", dir);
 
     let roster = get_roster_from_stdin()?;
@@ -37,8 +37,8 @@ pub fn add(dir: &str) -> Result<WeeklyRoster, Box<dyn Error>> {
     Ok(roster)
 }
 
-fn get_roster_from_stdin() -> Result<WeeklyRoster, Box<dyn Error>> {
-    let mut roster: WeeklyRoster = Default::default();
+fn get_roster_from_stdin() -> Result<Roster, Box<dyn Error>> {
+    let mut roster: Roster = Default::default();
 
     let num_batters = get_usize_stdin("How many batters are in a team roster?", 1, 15)?;
     let num_pitchers = get_usize_stdin("How many pitchers are in a team roster?", 1, 15)?;
@@ -56,19 +56,18 @@ fn get_roster_from_stdin() -> Result<WeeklyRoster, Box<dyn Error>> {
     println!("team_names: {:#?}", team_names);
 
     for team in team_names {
-        let mut batters = get_players_stdin(FantasyPlayerRole::Batter, num_batters, team.clone());
+        let mut batters = get_players_stdin(PlayerType::Batter, num_batters, team.clone());
         roster.players.append(&mut batters);
 
-        let mut pitchers =
-            get_players_stdin(FantasyPlayerRole::Pitcher, num_pitchers, team.clone());
+        let mut pitchers = get_players_stdin(PlayerType::Pitcher, num_pitchers, team.clone());
         roster.players.append(&mut pitchers);
     }
 
     Ok(roster)
 }
 
-fn get_players_stdin(role: FantasyPlayerRole, size: usize, team: String) -> Vec<FantasyPlayer> {
-    let mut players: Vec<FantasyPlayer> = Vec::new();
+fn get_players_stdin(role: PlayerType, size: usize, team: String) -> Vec<Player> {
+    let mut players: Vec<Player> = Vec::new();
     let mut players_saved = 0;
     while players_saved < size {
         let label = format!(
@@ -78,8 +77,8 @@ fn get_players_stdin(role: FantasyPlayerRole, size: usize, team: String) -> Vec<
             team
         );
         if let Ok(name) = get_string_stdin(label.as_str()) {
-            players.push(FantasyPlayer {
-                player_name: name,
+            players.push(Player {
+                name: name,
                 team: team.clone(),
                 role: role.clone(),
             });
@@ -125,5 +124,25 @@ fn get_string_stdin(label: &str) -> Result<String, Box<dyn Error>> {
         }
 
         println!("Please input a non-empty string.");
+    }
+}
+
+pub fn load(league_name: &String) -> Result<Roster, Box<dyn Error>> {
+    let filepath = format!("data/{}/roster.json", league_name);
+    println!("Loading the weekly roster from file {}", filepath);
+    let json = fs::read_to_string(filepath)?;
+    Ok(serde_json::from_str(&json)?)
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn load_should_return_weekly_roster_for_given_league() {
+        let roster = load(&"sample".to_owned()).unwrap();
+        println!("roster: {:#?}", roster);
+
+        assert_eq!(16, roster.players.len());
     }
 }

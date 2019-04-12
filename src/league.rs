@@ -4,8 +4,8 @@ use std::fmt;
 use std::fs;
 use std::path::Path;
 
-mod roster;
-mod scoring;
+pub mod roster;
+pub mod scoring;
 
 #[derive(Debug, Clone)]
 pub struct LeagueNameConflict(pub String);
