@@ -27,82 +27,44 @@ struct Player {
 
 #[derive(Serialize, Deserialize, Debug, Default)]
 struct BatterStats {
-    // games_played: u32,
-    // games_started: u32,
     at_bats: u32,
     runs: u32,
     hits: u32,
-    // singles: u32,
-    // doubles: u32,
-    // triples: u32,
+    singles: u32,
+    doubles: u32,
+    triples: u32,
     home_runs: u32,
     runs_batted_in: u32,
-    // sacrifice_hits: u32,
-    // sacrifice_flys: u32,
+    sacrifice_hits: u32,
     stolen_bases: u32,
-    // caught_stealing: u32,
+    caught_stealing: u32,
     walks: u32,
-    // intentilnal_walks: u32,
+    intentional_walks: u32,
     hit_by_pitch: u32,
-    // strikeouts: u32,
-    // ground_into_double_play: u32,
+    strikeouts: u32,
+    ground_into_double_play: u32,
     total_bases: u32,
-    // putouts: u32,
-    // assists: u32,
-    // errors: u32,
-    // extra_base_hits: u32,
-    // net_stolen_bases: u32,
-    // hitting_for_the_cycle: u32,
-    // plate_appearances: u32,
-    // grand_slam_home_runs: u32,
-    // outfield_assists: u32,
-    // double_plays_turned: u32,
-    // catcher_interference: u32,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default)]
 struct PitcherStats {
-    // pitching_appearances: u32,
-    // games_started: u32,
     innings_pitched: f32,
     wins: u32,
-    // losses: u32,
-    // complete_games: u32,
-    // shutouts: u32,
+    losses: u32,
+    complete_games: u32,
+    shutouts: u32,
     saves: u32,
     outs: u32,
     hits: u32,
-    // total_batters_faced: u32,
-    // runs: u32,
     earned_runs: u32,
-    // home_runs: u32,
+    home_runs: u32,
     walks: u32,
-    // intentional_walks: u32,
+    intentional_walks: u32,
     hit_batters: u32,
     strikeouts: u32,
-    // wild_pitches: u32,
-    // balks: u32,
-    // stolen_bases_allowed: u32,
-    // batters_grounded_into_double_plays: u32,
-    // save_chances: u32,
-    // holds: u32,
-    // total_bases_allowed: u32,
-    // pitch_count: u32,
-    // singles_allowed: u32,
-    // doubles_allowed: u32,
-    // triples_allowed: u32,
-    // relief_wins: u32,
-    // relief_losses: u32,
-    // pickoffs: u32,
-    // relief_appearances: u32,
-    // no_hitters: u32,
-    // perfect_games: u32,
-    // inherited_runners_scored: u32,
-    // quality_starts: u32,
-    // blown_saves: u32,
-    // net_saves: u32,
-    // saves_and_holds: u32,
-    // net_saves_and_holds: u32,
+    stolen_bases_allowed: u32,
+    batters_grounded_into_double_plays: u32,
+    total_bases_allowed: u32,
 }
 
 #[derive(Debug, Default)]
@@ -121,7 +83,7 @@ impl FantasyPlayer {
             .map(|h| match h.as_str() {
                 "Player" => self.player.name.to_owned(),
                 "Team" => self.team.to_owned(),
-                "FanPts" => self.fantasy_points.to_string(),
+                "FanPts" => format!("{:.2}", self.fantasy_points),
                 "Pos" => self.player.position.to_owned(),
                 "B.AB" => {
                     if let Some(s) = bstats {
@@ -144,6 +106,27 @@ impl FantasyPlayer {
                         "".to_owned()
                     }
                 }
+                "B.1B" => {
+                    if let Some(s) = bstats {
+                        s.singles.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "B.2B" => {
+                    if let Some(s) = bstats {
+                        s.doubles.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "B.3B" => {
+                    if let Some(s) = bstats {
+                        s.triples.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
                 "B.HR" => {
                     if let Some(s) = bstats {
                         s.home_runs.to_string()
@@ -158,9 +141,23 @@ impl FantasyPlayer {
                         "".to_owned()
                     }
                 }
+                "B.SAC" => {
+                    if let Some(s) = bstats {
+                        s.sacrifice_hits.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
                 "B.SB" => {
                     if let Some(s) = bstats {
                         s.stolen_bases.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "B.CS" => {
+                    if let Some(s) = bstats {
+                        s.caught_stealing.to_string()
                     } else {
                         "".to_owned()
                     }
@@ -172,9 +169,30 @@ impl FantasyPlayer {
                         "".to_owned()
                     }
                 }
+                "B.IBB" => {
+                    if let Some(s) = bstats {
+                        s.intentional_walks.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
                 "B.HBP" => {
                     if let Some(s) = bstats {
                         s.hit_by_pitch.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "B.K" => {
+                    if let Some(s) = bstats {
+                        s.strikeouts.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "B.GIDP" => {
+                    if let Some(s) = bstats {
+                        s.ground_into_double_play.to_string()
                     } else {
                         "".to_owned()
                     }
@@ -196,6 +214,27 @@ impl FantasyPlayer {
                 "P.W" => {
                     if let Some(s) = pstats {
                         s.wins.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "P.L" => {
+                    if let Some(s) = pstats {
+                        s.losses.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "P.CG" => {
+                    if let Some(s) = pstats {
+                        s.complete_games.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "P.SHO" => {
+                    if let Some(s) = pstats {
+                        s.shutouts.to_string()
                     } else {
                         "".to_owned()
                     }
@@ -228,9 +267,23 @@ impl FantasyPlayer {
                         "".to_owned()
                     }
                 }
+                "P.HR" => {
+                    if let Some(s) = pstats {
+                        s.home_runs.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
                 "P.BB" => {
                     if let Some(s) = pstats {
                         s.walks.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "P.IBB" => {
+                    if let Some(s) = pstats {
+                        s.intentional_walks.to_string()
                     } else {
                         "".to_owned()
                     }
@@ -245,6 +298,27 @@ impl FantasyPlayer {
                 "P.K" => {
                     if let Some(s) = pstats {
                         s.strikeouts.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "P.SB" => {
+                    if let Some(s) = pstats {
+                        s.stolen_bases_allowed.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "P.GIDP" => {
+                    if let Some(s) = pstats {
+                        s.batters_grounded_into_double_plays.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "P.TB" => {
+                    if let Some(s) = pstats {
+                        s.total_bases_allowed.to_string()
                     } else {
                         "".to_owned()
                     }
@@ -357,27 +431,55 @@ fn get_fantasy_points(p: &Player, s: &scoring::ScoringRule) -> f32 {
         return (stats.at_bats as f32 * s.batter.at_bats)
             + (stats.runs as f32 * s.batter.runs)
             + (stats.hits as f32 * s.batter.hits)
+            + (stats.singles as f32 * s.batter.singles)
+            + (stats.doubles as f32 * s.batter.doubles)
+            + (stats.triples as f32 * s.batter.triples)
             + (stats.home_runs as f32 * s.batter.home_runs)
             + (stats.runs_batted_in as f32 * s.batter.runs_batted_in)
+            + (stats.sacrifice_hits as f32 * s.batter.sacrifice_hits)
             + (stats.stolen_bases as f32 * s.batter.stolen_bases)
+            + (stats.caught_stealing as f32 * s.batter.caught_stealing)
             + (stats.walks as f32 * s.batter.walks)
+            + (stats.intentional_walks as f32 * s.batter.intentional_walks)
             + (stats.hit_by_pitch as f32 * s.batter.hit_by_pitch)
+            + (stats.strikeouts as f32 * s.batter.strikeouts)
+            + (stats.ground_into_double_play as f32 * s.batter.ground_into_double_play)
             + (stats.total_bases as f32 * s.batter.total_bases);
     }
 
     if let Some(stats) = &p.pitcher_stats {
-        return (stats.innings_pitched * s.pitcher.innings_pitched)
+        return inning_score(stats.innings_pitched, s.pitcher.innings_pitched)
             + (stats.wins as f32 * s.pitcher.wins)
+            + (stats.losses as f32 * s.pitcher.losses)
+            + (stats.complete_games as f32 * s.pitcher.complete_games)
+            + (stats.shutouts as f32 * s.pitcher.shutouts)
             + (stats.saves as f32 * s.pitcher.saves)
             + (stats.outs as f32 * s.pitcher.outs)
             + (stats.hits as f32 * s.pitcher.hits)
             + (stats.earned_runs as f32 * s.pitcher.earned_runs)
+            + (stats.home_runs as f32 * s.pitcher.home_runs)
             + (stats.walks as f32 * s.pitcher.walks)
+            + (stats.intentional_walks as f32 * s.pitcher.intentional_walks)
             + (stats.hit_batters as f32 * s.pitcher.hit_batters)
-            + (stats.strikeouts as f32 * s.pitcher.strikeouts);
+            + (stats.strikeouts as f32 * s.pitcher.strikeouts)
+            + (stats.stolen_bases_allowed as f32 * s.pitcher.stolen_bases_allowed)
+            + (stats.batters_grounded_into_double_plays as f32
+                * s.pitcher.batters_grounded_into_double_plays)
+            + (stats.total_bases_allowed as f32 * s.pitcher.total_bases_allowed);
     }
 
     return 0.0;
+}
+
+fn inning_score(inning_pitched: f32, score: f32) -> f32 {
+    let quotient = ((inning_pitched * 10.0) as i32 / 10) as f32;
+    let remainder = (inning_pitched * 10.0 % 10.0) as i32;
+
+    match remainder {
+        1 => (quotient * score) + (score / 3.0),
+        2 => (quotient * score) + (score * 2.0 / 3.0),
+        _ => (quotient * score),
+    }
 }
 
 fn convert_players(sr_players: Vec<sportradar::Player>) -> Result<Vec<Player>, Box<dyn Error>> {
@@ -389,11 +491,19 @@ fn convert_players(sr_players: Vec<sportradar::Player>) -> Result<Vec<Player>, B
                 at_bats: s.overall.ab,
                 runs: s.overall.runs.total,
                 hits: s.overall.onbase.h,
+                singles: s.overall.onbase.s,
+                doubles: s.overall.onbase.d,
+                triples: s.overall.onbase.t,
                 home_runs: s.overall.onbase.hr,
                 runs_batted_in: s.overall.rbi,
+                sacrifice_hits: s.overall.outs.sachit,
                 stolen_bases: s.overall.steal.stolen,
+                caught_stealing: s.overall.steal.caught,
                 walks: s.overall.onbase.bb,
+                intentional_walks: s.overall.onbase.ibb,
                 hit_by_pitch: s.overall.onbase.hbp,
+                strikeouts: s.overall.outs.ktotal,
+                ground_into_double_play: s.overall.outs.gidp,
                 total_bases: s.overall.onbase.tb,
             }),
             _ => None,
@@ -402,13 +512,21 @@ fn convert_players(sr_players: Vec<sportradar::Player>) -> Result<Vec<Player>, B
             Some(s) => Some(PitcherStats {
                 innings_pitched: s.overall.ip_2,
                 wins: s.overall.games.win,
+                losses: s.overall.games.loss,
+                complete_games: s.overall.games.complete,
+                shutouts: s.overall.games.shutout,
                 saves: s.overall.games.save,
                 outs: s.overall.ip_1,
                 hits: s.overall.onbase.h,
                 earned_runs: s.overall.runs.earned,
+                home_runs: s.overall.onbase.hr,
                 walks: s.overall.onbase.bb,
+                intentional_walks: s.overall.onbase.ibb,
                 hit_batters: s.overall.onbase.hbp,
                 strikeouts: s.overall.outs.ktotal,
+                stolen_bases_allowed: s.overall.steal.stolen,
+                batters_grounded_into_double_plays: s.overall.outs.gidp,
+                total_bases_allowed: s.overall.onbase.tb,
             }),
             None => None,
         };
@@ -494,18 +612,12 @@ mod test {
 
         assert_eq!(3, players.len());
 
-        let batter = players
-            .iter()
-            .find(|p| p.name == "Tommy La Stella")
-            .unwrap();
+        let batter = players.iter().find(|p| p.name == "Trey Mancini").unwrap();
         println!("batter: {:#?}", batter);
         assert_eq!(true, batter.batter_stats.is_some());
         assert_eq!(false, batter.pitcher_stats.is_some());
 
-        let pitcher = players
-            .iter()
-            .find(|p| p.name == "Aníbal Sánchez")
-            .unwrap();
+        let pitcher = players.iter().find(|p| p.name == "Blake Snell").unwrap();
         println!("pitcher: {:#?}", pitcher);
         assert_eq!(false, pitcher.batter_stats.is_some());
         assert_eq!(true, pitcher.pitcher_stats.is_some());
@@ -520,11 +632,19 @@ mod test {
                 at_bats: 3,
                 runs: 2,
                 hits: 3,
+                singles: 2,
+                doubles: 0,
+                triples: 0,
                 home_runs: 1,
                 runs_batted_in: 2,
+                sacrifice_hits: 0,
                 stolen_bases: 0,
+                caught_stealing: 0,
                 walks: 2,
+                intentional_walks: 0,
                 hit_by_pitch: 0,
+                strikeouts: 0,
+                ground_into_double_play: 0,
                 total_bases: 6,
             }),
             pitcher_stats: None,
@@ -540,13 +660,21 @@ mod test {
             pitcher_stats: Some(PitcherStats {
                 innings_pitched: 6.0,
                 wins: 1,
+                losses: 0,
+                complete_games: 0,
+                shutouts: 0,
                 saves: 0,
                 outs: 18,
                 hits: 6,
                 earned_runs: 1,
+                home_runs: 1,
                 walks: 0,
+                intentional_walks: 0,
                 hit_batters: 0,
                 strikeouts: 11,
+                stolen_bases_allowed: 1,
+                batters_grounded_into_double_plays: 1,
+                total_bases_allowed: 10,
             }),
         }
     }
@@ -611,5 +739,12 @@ mod test {
         let points: Vec<f32> = sorted.iter().map(|p| p.fantasy_points).collect();
 
         assert_eq!(vec![10.0, 1.0, -2.0], points);
+    }
+
+    #[test]
+    fn inning_score_should_return_score() {
+        assert_eq!(9.0, inning_score(3.0, 3.0));
+        assert_eq!(10.0, inning_score(3.1, 3.0));
+        assert_eq!(11.0, inning_score(3.2, 3.0));
     }
 }

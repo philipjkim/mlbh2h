@@ -5,82 +5,44 @@ use std::io::{self, prelude::*};
 
 #[derive(Serialize, Deserialize, Debug, Default)]
 pub struct BatterScoringRule {
-    // pub games_played: f32,
-    // pub games_started: f32,
     pub at_bats: f32,
     pub runs: f32,
     pub hits: f32,
-    // pub singles: f32,
-    // pub doubles: f32,
-    // pub triples: f32,
+    pub singles: f32,
+    pub doubles: f32,
+    pub triples: f32,
     pub home_runs: f32,
     pub runs_batted_in: f32,
-    // pub sacrifice_hits: f32,
-    // pub sacrifice_flys: f32,
+    pub sacrifice_hits: f32,
     pub stolen_bases: f32,
-    // pub caught_stealing: f32,
+    pub caught_stealing: f32,
     pub walks: f32,
-    // pub intentilnal_walks: f32,
+    pub intentional_walks: f32,
     pub hit_by_pitch: f32,
-    // pub strikeouts: f32,
-    // pub ground_into_double_play: f32,
+    pub strikeouts: f32,
+    pub ground_into_double_play: f32,
     pub total_bases: f32,
-    // pub putouts: f32,
-    // pub assists: f32,
-    // pub errors: f32,
-    // pub extra_base_hits: f32,
-    // pub net_stolen_bases: f32,
-    // pub hitting_for_the_cycle: f32,
-    // pub plate_appearances: f32,
-    // pub grand_slam_home_runs: f32,
-    // pub outfield_assists: f32,
-    // pub double_plays_turned: f32,
-    // pub catcher_interference: f32,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default)]
 pub struct PitcherScoringRule {
-    // pub pitching_appearances: f32,
-    // pub games_started: f32,
     pub innings_pitched: f32,
     pub wins: f32,
-    // pub losses: f32,
-    // pub complete_games: f32,
-    // pub shutouts: f32,
+    pub losses: f32,
+    pub complete_games: f32,
+    pub shutouts: f32,
     pub saves: f32,
     pub outs: f32,
     pub hits: f32,
-    // pub total_batters_faced: f32,
-    // pub runs: f32,
     pub earned_runs: f32,
-    // pub home_runs: f32,
+    pub home_runs: f32,
     pub walks: f32,
-    // pub intentional_walks: f32,
+    pub intentional_walks: f32,
     pub hit_batters: f32,
     pub strikeouts: f32,
-    // pub wild_pitches: f32,
-    // pub balks: f32,
-    // pub stolen_bases_allowed: f32,
-    // pub batters_grounded_into_double_plays: f32,
-    // pub save_chances: f32,
-    // pub holds: f32,
-    // pub total_bases_allowed: f32,
-    // pub pitch_count: f32,
-    // pub singles_allowed: f32,
-    // pub doubles_allowed: f32,
-    // pub triples_allowed: f32,
-    // pub relief_wins: f32,
-    // pub relief_losses: f32,
-    // pub pickoffs: f32,
-    // pub relief_appearances: f32,
-    // pub no_hitters: f32,
-    // pub perfect_games: f32,
-    // pub inherited_runners_scored: f32,
-    // pub quality_starts: f32,
-    // pub blown_saves: f32,
-    // pub net_saves: f32,
-    // pub saves_and_holds: f32,
-    // pub net_saves_and_holds: f32,
+    pub stolen_bases_allowed: f32,
+    pub batters_grounded_into_double_plays: f32,
+    pub total_bases_allowed: f32,
 }
 
 #[derive(Serialize, Deserialize, Debug, Default)]
@@ -107,20 +69,44 @@ impl ScoringRule {
         if self.batter.hits != 0.0 {
             items.push("B.H".to_owned());
         }
+        if self.batter.singles != 0.0 {
+            items.push("B.1B".to_owned());
+        }
+        if self.batter.doubles != 0.0 {
+            items.push("B.2B".to_owned());
+        }
+        if self.batter.triples != 0.0 {
+            items.push("B.3B".to_owned());
+        }
         if self.batter.home_runs != 0.0 {
             items.push("B.HR".to_owned());
         }
         if self.batter.runs_batted_in != 0.0 {
             items.push("B.RBI".to_owned());
         }
+        if self.batter.sacrifice_hits != 0.0 {
+            items.push("B.SAC".to_owned());
+        }
         if self.batter.stolen_bases != 0.0 {
             items.push("B.SB".to_owned());
+        }
+        if self.batter.caught_stealing != 0.0 {
+            items.push("B.CS".to_owned());
         }
         if self.batter.walks != 0.0 {
             items.push("B.BB".to_owned());
         }
+        if self.batter.intentional_walks != 0.0 {
+            items.push("B.IBB".to_owned());
+        }
         if self.batter.hit_by_pitch != 0.0 {
             items.push("B.HBP".to_owned());
+        }
+        if self.batter.strikeouts != 0.0 {
+            items.push("B.K".to_owned());
+        }
+        if self.batter.ground_into_double_play != 0.0 {
+            items.push("B.GIDP".to_owned());
         }
         if self.batter.total_bases != 0.0 {
             items.push("B.TB".to_owned());
@@ -131,6 +117,15 @@ impl ScoringRule {
         }
         if self.pitcher.wins != 0.0 {
             items.push("P.W".to_owned());
+        }
+        if self.pitcher.losses != 0.0 {
+            items.push("P.L".to_owned());
+        }
+        if self.pitcher.complete_games != 0.0 {
+            items.push("P.CG".to_owned());
+        }
+        if self.pitcher.shutouts != 0.0 {
+            items.push("P.SHO".to_owned());
         }
         if self.pitcher.saves != 0.0 {
             items.push("P.SV".to_owned());
@@ -144,14 +139,29 @@ impl ScoringRule {
         if self.pitcher.earned_runs != 0.0 {
             items.push("P.ER".to_owned());
         }
+        if self.pitcher.home_runs != 0.0 {
+            items.push("P.HR".to_owned());
+        }
         if self.pitcher.walks != 0.0 {
             items.push("P.BB".to_owned());
+        }
+        if self.pitcher.intentional_walks != 0.0 {
+            items.push("P.IBB".to_owned());
         }
         if self.pitcher.hit_batters != 0.0 {
             items.push("P.HBP".to_owned());
         }
         if self.pitcher.strikeouts != 0.0 {
             items.push("P.K".to_owned());
+        }
+        if self.pitcher.stolen_bases_allowed != 0.0 {
+            items.push("P.SB".to_owned());
+        }
+        if self.pitcher.batters_grounded_into_double_plays != 0.0 {
+            items.push("P.GIDP".to_owned());
+        }
+        if self.pitcher.total_bases_allowed != 0.0 {
+            items.push("P.TB".to_owned());
         }
 
         items
@@ -172,80 +182,42 @@ pub fn add(dir: &str) -> Result<ScoringRule, Box<dyn Error>> {
 fn get_scorings_from_stdin() -> Result<ScoringRule, Box<dyn Error>> {
     let mut rule: ScoringRule = Default::default();
 
-    // rule.batter.games_played = get_stdin("batter.games_played")?;
-    // rule.batter.games_started = get_stdin("batter.games_started")?;
     rule.batter.at_bats = get_stdin("batter.at_bats")?;
     rule.batter.runs = get_stdin("batter.runs")?;
     rule.batter.hits = get_stdin("batter.hits")?;
-    // rule.batter.singles = get_stdin("batter.singles")?;
-    // rule.batter.doubles = get_stdin("batter.doubles")?;
-    // rule.batter.triples = get_stdin("batter.triples")?;
+    rule.batter.singles = get_stdin("batter.singles")?;
+    rule.batter.doubles = get_stdin("batter.doubles")?;
+    rule.batter.triples = get_stdin("batter.triples")?;
     rule.batter.home_runs = get_stdin("batter.home_runs")?;
     rule.batter.runs_batted_in = get_stdin("batter.runs_batted_in")?;
-    // rule.batter.sacrifice_hits = get_stdin("batter.sacrifice_hits")?;
-    // rule.batter.sacrifice_flys = get_stdin("batter.sacrifice_flys")?;
+    rule.batter.sacrifice_hits = get_stdin("batter.sacrifice_hits")?;
     rule.batter.stolen_bases = get_stdin("batter.stolen_bases")?;
-    // rule.batter.caught_stealing = get_stdin("batter.caught_stealing")?;
+    rule.batter.caught_stealing = get_stdin("batter.caught_stealing")?;
     rule.batter.walks = get_stdin("batter.walks")?;
-    // rule.batter.intentilnal_walks = get_stdin("batter.intentilnal_walks")?;
+    rule.batter.intentional_walks = get_stdin("batter.intentional_walks")?;
     rule.batter.hit_by_pitch = get_stdin("batter.hit_by_pitch")?;
-    // rule.batter.strikeouts = get_stdin("batter.strikeouts")?;
-    // rule.batter.ground_into_double_play = get_stdin("batter.ground_into_double_play")?;
+    rule.batter.strikeouts = get_stdin("batter.strikeouts")?;
+    rule.batter.ground_into_double_play = get_stdin("batter.ground_into_double_play")?;
     rule.batter.total_bases = get_stdin("batter.total_bases")?;
-    // rule.batter.putouts = get_stdin("batter.putouts")?;
-    // rule.batter.assists = get_stdin("batter.assists")?;
-    // rule.batter.errors = get_stdin("batter.errors")?;
-    // rule.batter.extra_base_hits = get_stdin("batter.extra_base_hits")?;
-    // rule.batter.net_stolen_bases = get_stdin("batter.net_stolen_bases")?;
-    // rule.batter.hitting_for_the_cycle = get_stdin("batter.hitting_for_the_cycle")?;
-    // rule.batter.plate_appearances = get_stdin("batter.plate_appearances")?;
-    // rule.batter.grand_slam_home_runs = get_stdin("batter.grand_slam_home_runs")?;
-    // rule.batter.outfield_assists = get_stdin("batter.outfield_assists")?;
-    // rule.batter.double_plays_turned = get_stdin("batter.double_plays_turned")?;
-    // rule.batter.catcher_interference = get_stdin("batter.catcher_interference")?;
 
-    // rule.pitcher.pitching_appearances = get_stdin("pitcher.pitching_appearances")?;
-    // rule.pitcher.games_started = get_stdin("pitcher.games_started")?;
     rule.pitcher.innings_pitched = get_stdin("pitcher.innings_pitched")?;
     rule.pitcher.wins = get_stdin("pitcher.wins")?;
-    // rule.pitcher.losses = get_stdin("pitcher.losses")?;
-    // rule.pitcher.complete_games = get_stdin("pitcher.complete_games")?;
-    // rule.pitcher.shutouts = get_stdin("pitcher.shutouts")?;
+    rule.pitcher.losses = get_stdin("pitcher.losses")?;
+    rule.pitcher.complete_games = get_stdin("pitcher.complete_games")?;
+    rule.pitcher.shutouts = get_stdin("pitcher.shutouts")?;
     rule.pitcher.saves = get_stdin("pitcher.saves")?;
     rule.pitcher.outs = get_stdin("pitcher.outs")?;
     rule.pitcher.hits = get_stdin("pitcher.hits")?;
-    // rule.pitcher.total_batters_faced = get_stdin("pitcher.total_batters_faced")?;
-    // rule.pitcher.runs = get_stdin("pitcher.runs")?;
     rule.pitcher.earned_runs = get_stdin("pitcher.earned_runs")?;
-    // rule.pitcher.home_runs = get_stdin("pitcher.home_runs")?;
+    rule.pitcher.home_runs = get_stdin("pitcher.home_runs")?;
     rule.pitcher.walks = get_stdin("pitcher.walks")?;
-    // rule.pitcher.intentional_walks = get_stdin("pitcher.intentional_walks")?;
+    rule.pitcher.intentional_walks = get_stdin("pitcher.intentional_walks")?;
     rule.pitcher.hit_batters = get_stdin("pitcher.hit_batters")?;
     rule.pitcher.strikeouts = get_stdin("pitcher.strikeouts")?;
-    // rule.pitcher.wild_pitches = get_stdin("pitcher.wild_pitches")?;
-    // rule.pitcher.balks = get_stdin("pitcher.balks")?;
-    // rule.pitcher.stolen_bases_allowed = get_stdin("pitcher.stolen_bases_allowed")?;
-    // rule.pitcher.batters_grounded_into_double_plays =
-    //     get_stdin("pitcher.batters_grounded_into_double_plays")?;
-    // rule.pitcher.save_chances = get_stdin("pitcher.save_chances")?;
-    // rule.pitcher.holds = get_stdin("pitcher.holds")?;
-    // rule.pitcher.total_bases_allowed = get_stdin("pitcher.total_bases_allowed")?;
-    // rule.pitcher.pitch_count = get_stdin("pitcher.pitch_count")?;
-    // rule.pitcher.singles_allowed = get_stdin("pitcher.singles_allowed")?;
-    // rule.pitcher.doubles_allowed = get_stdin("pitcher.doubles_allowed")?;
-    // rule.pitcher.triples_allowed = get_stdin("pitcher.triples_allowed")?;
-    // rule.pitcher.relief_wins = get_stdin("pitcher.relief_wins")?;
-    // rule.pitcher.relief_losses = get_stdin("pitcher.relief_losses")?;
-    // rule.pitcher.pickoffs = get_stdin("pitcher.pickoffs")?;
-    // rule.pitcher.relief_appearances = get_stdin("pitcher.relief_appearances")?;
-    // rule.pitcher.no_hitters = get_stdin("pitcher.no_hitters")?;
-    // rule.pitcher.perfect_games = get_stdin("pitcher.perfect_games")?;
-    // rule.pitcher.inherited_runners_scored = get_stdin("pitcher.inherited_runners_scored")?;
-    // rule.pitcher.quality_starts = get_stdin("pitcher.quality_starts")?;
-    // rule.pitcher.blown_saves = get_stdin("pitcher.blown_saves")?;
-    // rule.pitcher.net_saves = get_stdin("pitcher.net_saves")?;
-    // rule.pitcher.saves_and_holds = get_stdin("pitcher.saves_and_holds")?;
-    // rule.pitcher.net_saves_and_holds = get_stdin("pitcher.net_saves_and_holds")?;
+    rule.pitcher.stolen_bases_allowed = get_stdin("pitcher.stolen_bases_allowed")?;
+    rule.pitcher.batters_grounded_into_double_plays =
+        get_stdin("pitcher.batters_grounded_into_double_plays")?;
+    rule.pitcher.total_bases_allowed = get_stdin("pitcher.total_bases_allowed")?;
 
     Ok(rule)
 }
