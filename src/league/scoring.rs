@@ -89,6 +89,75 @@ pub struct ScoringRule {
     pub pitcher: PitcherScoringRule,
 }
 
+impl ScoringRule {
+    pub fn header_items(&self) -> Vec<String> {
+        let mut items = vec![
+            "Player".to_owned(),
+            "Team".to_owned(),
+            "FanPts".to_owned(),
+            "Pos".to_owned(),
+        ];
+
+        if self.batter.at_bats != 0.0 {
+            items.push("B.AB".to_owned());
+        }
+        if self.batter.runs != 0.0 {
+            items.push("B.R".to_owned());
+        }
+        if self.batter.hits != 0.0 {
+            items.push("B.H".to_owned());
+        }
+        if self.batter.home_runs != 0.0 {
+            items.push("B.HR".to_owned());
+        }
+        if self.batter.runs_batted_in != 0.0 {
+            items.push("B.RBI".to_owned());
+        }
+        if self.batter.stolen_bases != 0.0 {
+            items.push("B.SB".to_owned());
+        }
+        if self.batter.walks != 0.0 {
+            items.push("B.BB".to_owned());
+        }
+        if self.batter.hit_by_pitch != 0.0 {
+            items.push("B.HBP".to_owned());
+        }
+        if self.batter.total_bases != 0.0 {
+            items.push("B.TB".to_owned());
+        }
+
+        if self.pitcher.innings_pitched != 0.0 {
+            items.push("P.IP".to_owned());
+        }
+        if self.pitcher.wins != 0.0 {
+            items.push("P.W".to_owned());
+        }
+        if self.pitcher.saves != 0.0 {
+            items.push("P.SV".to_owned());
+        }
+        if self.pitcher.outs != 0.0 {
+            items.push("P.OUT".to_owned());
+        }
+        if self.pitcher.hits != 0.0 {
+            items.push("P.H".to_owned());
+        }
+        if self.pitcher.earned_runs != 0.0 {
+            items.push("P.ER".to_owned());
+        }
+        if self.pitcher.walks != 0.0 {
+            items.push("P.BB".to_owned());
+        }
+        if self.pitcher.hit_batters != 0.0 {
+            items.push("P.HBP".to_owned());
+        }
+        if self.pitcher.strikeouts != 0.0 {
+            items.push("P.K".to_owned());
+        }
+
+        items
+    }
+}
+
 pub fn add(dir: &str) -> Result<ScoringRule, Box<dyn Error>> {
     let filepath = &format!("{}/scoring.json", dir);
 
@@ -217,12 +286,27 @@ pub fn load(league_name: &String) -> Result<ScoringRule, Box<dyn Error>> {
 mod test {
     use super::*;
 
+    fn mock_scoring() -> ScoringRule {
+        load(&"sample".to_owned()).unwrap()
+    }
+
     #[test]
     fn load_should_return_scoring_rule_for_given_league() {
-        let scoring = load(&"sample".to_owned()).unwrap();
-        println!("scoring: {:#?}", scoring);
+        let scoring = mock_scoring();
 
         assert_eq!(0.5, scoring.batter.hits);
         assert_eq!(-0.5, scoring.pitcher.earned_runs);
+    }
+
+    #[test]
+    fn header_items_should_return_header_items_to_display() {
+        let scoring = mock_scoring();
+        let items = scoring.header_items();
+
+        assert_eq!(14, items.len());
+        assert_eq!(
+            "Player,Team,FanPts,Pos,B.R,B.H,B.HR,B.RBI,B.SB,P.IP,P.W,P.SV,P.ER,P.K".to_owned(),
+            items.join(",")
+        );
     }
 }

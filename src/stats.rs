@@ -16,7 +16,7 @@ pub struct Config {
     api_key: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+#[derive(Serialize, Deserialize, Debug, Default)]
 struct Player {
     name: String,
     position: String,
@@ -25,7 +25,7 @@ struct Player {
     pitcher_stats: Option<PitcherStats>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+#[derive(Serialize, Deserialize, Debug, Default)]
 struct BatterStats {
     // games_played: u32,
     // games_started: u32,
@@ -60,7 +60,7 @@ struct BatterStats {
     // catcher_interference: u32,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+#[derive(Serialize, Deserialize, Debug, Default)]
 struct PitcherStats {
     // pitching_appearances: u32,
     // games_started: u32,
@@ -105,6 +105,158 @@ struct PitcherStats {
     // net_saves_and_holds: u32,
 }
 
+#[derive(Debug, Default)]
+struct FantasyPlayer {
+    team: String,
+    player: Player,
+    fantasy_points: f32,
+}
+impl FantasyPlayer {
+    fn get_stats_string(&self, header_items: &Vec<String>) -> String {
+        let bstats = &self.player.batter_stats;
+        let pstats = &self.player.pitcher_stats;
+
+        let items: Vec<String> = header_items
+            .iter()
+            .map(|h| match h.as_str() {
+                "Player" => self.player.name.to_owned(),
+                "Team" => self.team.to_owned(),
+                "FanPts" => self.fantasy_points.to_string(),
+                "Pos" => self.player.position.to_owned(),
+                "B.AB" => {
+                    if let Some(s) = bstats {
+                        s.at_bats.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "B.R" => {
+                    if let Some(s) = bstats {
+                        s.runs.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "B.H" => {
+                    if let Some(s) = bstats {
+                        s.hits.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "B.HR" => {
+                    if let Some(s) = bstats {
+                        s.home_runs.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "B.RBI" => {
+                    if let Some(s) = bstats {
+                        s.runs_batted_in.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "B.SB" => {
+                    if let Some(s) = bstats {
+                        s.stolen_bases.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "B.BB" => {
+                    if let Some(s) = bstats {
+                        s.walks.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "B.HBP" => {
+                    if let Some(s) = bstats {
+                        s.hit_by_pitch.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "B.TB" => {
+                    if let Some(s) = bstats {
+                        s.total_bases.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "P.IP" => {
+                    if let Some(s) = pstats {
+                        s.innings_pitched.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "P.W" => {
+                    if let Some(s) = pstats {
+                        s.wins.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "P.SV" => {
+                    if let Some(s) = pstats {
+                        s.saves.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "P.OUT" => {
+                    if let Some(s) = pstats {
+                        s.outs.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "P.H" => {
+                    if let Some(s) = pstats {
+                        s.hits.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "P.ER" => {
+                    if let Some(s) = pstats {
+                        s.earned_runs.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "P.BB" => {
+                    if let Some(s) = pstats {
+                        s.walks.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "P.HBP" => {
+                    if let Some(s) = pstats {
+                        s.hit_batters.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                "P.K" => {
+                    if let Some(s) = pstats {
+                        s.strikeouts.to_string()
+                    } else {
+                        "".to_owned()
+                    }
+                }
+                _ => "".to_owned(),
+            })
+            .collect();
+
+        items.join(",")
+    }
+}
+
 #[derive(Debug, Clone)]
 struct ApiKeyNotFound;
 impl fmt::Display for ApiKeyNotFound {
@@ -143,38 +295,40 @@ pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
 
     println!("players.length: {}", players.len());
 
-    let fan_players = create_fantasy_players(players, &config)?;
-    println!("fantasy players:\n{:#?}", fan_players);
+    let league_scoring = scoring::load(&config.league)?;
+    let league_roster = roster::load(&config.league)?;
+    let fan_players = create_fantasy_players(players, &league_scoring, &league_roster)?;
+
+    print_fantasy_players(fan_players, &config.date, &league_scoring);
+    // println!("fantasy players:\n{:#?}", fan_players);
 
     Ok(())
 }
 
-#[derive(Debug, Default)]
-struct FantasyPlayer {
-    team: String,
-    player: Player,
-    fantasy_points: f32,
+fn print_fantasy_players(players: Vec<FantasyPlayer>, date: &String, s: &scoring::ScoringRule) {
+    println!("{}", date);
+
+    let header_items = s.header_items();
+    println!("{}", header_items.join(","));
+
+    for p in players.iter() {
+        println!("{}", p.get_stats_string(&header_items));
+    }
 }
 
 fn create_fantasy_players(
     players: Vec<Player>,
-    config: &Config,
+    s: &scoring::ScoringRule,
+    r: &roster::Roster,
 ) -> Result<Vec<FantasyPlayer>, Box<dyn Error>> {
-    let league_scoring = scoring::load(&config.league)?;
-    let league_roster = roster::load(&config.league)?;
-
-    let names: Vec<String> = league_roster
-        .players
-        .iter()
-        .map(|p| p.name.to_owned())
-        .collect();
+    let names: Vec<String> = r.players.iter().map(|p| p.name.to_owned()).collect();
     println!("names: {:#?}", names);
 
     let players: Vec<FantasyPlayer> = players
         .into_iter()
         .filter(|p| names.iter().find(|&n| *n == p.name).is_some())
         .map(|p| {
-            let team = league_roster
+            let team = r
                 .players
                 .iter()
                 .find(|rp| rp.name == p.name)
@@ -182,7 +336,7 @@ fn create_fantasy_players(
                 .unwrap_or("unknown".to_owned());
             FantasyPlayer {
                 team: team,
-                fantasy_points: get_fantasy_points(&p, &league_scoring),
+                fantasy_points: get_fantasy_points(&p, s),
                 player: p,
             }
         })
@@ -347,9 +501,8 @@ mod test {
         assert_eq!(true, pitcher.pitcher_stats.is_some());
     }
 
-    #[test]
-    fn get_fantasy_points_should_return_fantasy_points() {
-        let batter = Player {
+    fn mock_batter() -> Player {
+        Player {
             name: "Trey Mancini".to_owned(),
             position: "OF".to_owned(),
             primary_position: "RF".to_owned(),
@@ -365,9 +518,11 @@ mod test {
                 total_bases: 6,
             }),
             pitcher_stats: None,
-        };
+        }
+    }
 
-        let pitcher = Player {
+    fn mock_pitcher() -> Player {
+        Player {
             name: "Blake Snell".to_owned(),
             position: "P".to_owned(),
             primary_position: "SP".to_owned(),
@@ -383,11 +538,51 @@ mod test {
                 hit_batters: 0,
                 strikeouts: 11,
             }),
-        };
+        }
+    }
 
-        let sr = scoring::load(&"sample".to_owned()).unwrap();
+    fn mock_scoring_rule() -> scoring::ScoringRule {
+        scoring::load(&"sample".to_owned()).unwrap()
+    }
+
+    #[test]
+    fn get_fantasy_points_should_return_fantasy_points() {
+        let batter = mock_batter();
+        let pitcher = mock_pitcher();
+
+        let sr = mock_scoring_rule();
 
         assert_eq!(13.5, get_fantasy_points(&batter, &sr));
         assert_eq!(32.5, get_fantasy_points(&pitcher, &sr));
+    }
+
+    #[test]
+    fn fantasy_player_get_stats_string_should_return_string() {
+        let s = mock_scoring_rule();
+        let header_items = s.header_items();
+
+        let batter = mock_batter();
+        let fp = FantasyPlayer {
+            team: "Avengers".to_owned(),
+            fantasy_points: get_fantasy_points(&batter, &s),
+            player: batter,
+        };
+
+        assert_eq!(
+            "Trey Mancini,Avengers,13.5,OF,2,3,1,2,0,,,,,".to_owned(),
+            fp.get_stats_string(&header_items)
+        );
+
+        let pitcher = mock_pitcher();
+        let fp = FantasyPlayer {
+            team: "Avengers".to_owned(),
+            fantasy_points: get_fantasy_points(&pitcher, &s),
+            player: pitcher,
+        };
+
+        assert_eq!(
+            "Blake Snell,Avengers,32.5,P,,,,,,6,1,0,1,11".to_owned(),
+            fp.get_stats_string(&header_items)
+        );
     }
 }
