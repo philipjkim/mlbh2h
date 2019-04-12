@@ -324,6 +324,7 @@ fn create_fantasy_players(
     let names: Vec<String> = r.players.iter().map(|p| p.name.to_owned()).collect();
     println!("names: {:#?}", names);
 
+    // TODO: sort by fantasy points
     let players: Vec<FantasyPlayer> = players
         .into_iter()
         .filter(|p| names.iter().find(|&n| *n == p.name).is_some())
@@ -342,7 +343,13 @@ fn create_fantasy_players(
         })
         .collect();
 
-    Ok(players)
+    Ok(sort_by_fantasy_points(players))
+}
+
+fn sort_by_fantasy_points(mut players: Vec<FantasyPlayer>) -> Vec<FantasyPlayer> {
+    players.sort_by(|a, b| b.fantasy_points.partial_cmp(&a.fantasy_points).unwrap());
+
+    players
 }
 
 fn get_fantasy_points(p: &Player, s: &scoring::ScoringRule) -> f32 {
@@ -485,16 +492,19 @@ mod test {
         let filepath = "testdata/players_converted.json".to_owned();
         let players = get_players_from_file(&filepath).unwrap();
 
-        assert_eq!(290, players.len());
+        assert_eq!(3, players.len());
 
-        let batter = players.iter().find(|p| p.name == "Mike Trout").unwrap();
+        let batter = players
+            .iter()
+            .find(|p| p.name == "Tommy La Stella")
+            .unwrap();
         println!("batter: {:#?}", batter);
         assert_eq!(true, batter.batter_stats.is_some());
         assert_eq!(false, batter.pitcher_stats.is_some());
 
         let pitcher = players
             .iter()
-            .find(|p| p.name == "Justin Verlander")
+            .find(|p| p.name == "Aníbal Sánchez")
             .unwrap();
         println!("pitcher: {:#?}", pitcher);
         assert_eq!(false, pitcher.batter_stats.is_some());
@@ -584,5 +594,22 @@ mod test {
             "Blake Snell,Avengers,32.5,P,,,,,,6,1,0,1,11".to_owned(),
             fp.get_stats_string(&header_items)
         );
+    }
+
+    #[test]
+    fn sort_by_fantasy_points_should_sort_players_by_fan_pts_descending() {
+        let mut p1: FantasyPlayer = Default::default();
+        p1.fantasy_points = 1.0;
+        let mut p2: FantasyPlayer = Default::default();
+        p2.fantasy_points = 10.0;
+        let mut p3: FantasyPlayer = Default::default();
+        p3.fantasy_points = -2.0;
+
+        let players = vec![p1, p2, p3];
+
+        let sorted = sort_by_fantasy_points(players);
+        let points: Vec<f32> = sorted.iter().map(|p| p.fantasy_points).collect();
+
+        assert_eq!(vec![10.0, 1.0, -2.0], points);
     }
 }
