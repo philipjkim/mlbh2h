@@ -1,12 +1,11 @@
 extern crate clap;
 
-use clap::{App, Arg, SubCommand};
+use clap::{crate_version, App, Arg, SubCommand};
 use std::error::Error;
 
 mod league;
 mod stats;
 mod utils;
-mod version;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let matches = get_app().get_matches();
@@ -28,10 +27,8 @@ fn main() -> Result<(), Box<dyn Error>> {
 }
 
 fn get_app<'a, 'b>() -> App<'a, 'b> {
-    let version = version::get();
-
     App::new("mlbh2h")
-        .version(version)
+        .version(&crate_version!()[..])
         .author("Soo Philip Jason Kim <philipjkim@gmail.com>")
         .about("This app Shows Fantasy Baseball Head-to-Head points by your scoring settings.")
         .arg(
