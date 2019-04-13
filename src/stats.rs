@@ -401,12 +401,17 @@ fn create_fantasy_players(
 
     let players: Vec<FantasyPlayer> = players
         .into_iter()
-        .filter(|p| names.iter().find(|&n| *n == p.name).is_some())
+        .filter(|p| {
+            names
+                .iter()
+                .find(|&n| *n.to_lowercase() == p.name.to_lowercase())
+                .is_some()
+        })
         .map(|p| {
             let team = r
                 .players
                 .iter()
-                .find(|rp| rp.name == p.name)
+                .find(|rp| rp.name.to_lowercase() == p.name.to_lowercase())
                 .map(|rp| rp.team.to_owned())
                 .unwrap_or("unknown".to_owned());
             FantasyPlayer {
@@ -683,6 +688,10 @@ mod test {
         scoring::load(&"sample".to_owned()).unwrap()
     }
 
+    fn mock_roster() -> roster::Roster {
+        roster::load(&"sample".to_owned()).unwrap()
+    }
+
     #[test]
     fn get_fantasy_points_should_return_fantasy_points() {
         let batter = mock_batter();
@@ -707,7 +716,7 @@ mod test {
         };
 
         assert_eq!(
-            "Trey Mancini,Avengers,13.5,OF,2,3,1,2,0,,,,,".to_owned(),
+            "Trey Mancini,Avengers,13.50,OF,2,3,1,2,0,,,,,".to_owned(),
             fp.get_stats_string(&header_items)
         );
 
@@ -719,7 +728,7 @@ mod test {
         };
 
         assert_eq!(
-            "Blake Snell,Avengers,32.5,P,,,,,,6,1,0,1,11".to_owned(),
+            "Blake Snell,Avengers,32.50,P,,,,,,6,1,0,1,11".to_owned(),
             fp.get_stats_string(&header_items)
         );
     }
@@ -746,5 +755,19 @@ mod test {
         assert_eq!(9.0, inning_score(3.0, 3.0));
         assert_eq!(10.0, inning_score(3.1, 3.0));
         assert_eq!(11.0, inning_score(3.2, 3.0));
+    }
+
+    #[test]
+    fn create_fantasy_players_should_apply_to_names_case_insensitive() {
+        let mut batter = mock_batter();
+        batter.name = batter.name.to_lowercase();
+
+        let players = vec![batter];
+        let sc = mock_scoring_rule();
+        let r = mock_roster();
+
+        let f_players = create_fantasy_players(players, &sc, &r).unwrap();
+
+        assert_eq!(1, f_players.len());
     }
 }
