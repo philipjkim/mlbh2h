@@ -583,51 +583,6 @@ fn get_config(matches: &ArgMatches) -> Result<Config, Box<dyn Error>> {
 mod test {
     use super::*;
 
-    #[test]
-    fn convert_players_should_convert_players() {
-        use std::fs;
-        let json = fs::read_to_string("testdata/batter_stats.json").unwrap();
-        let batter: sportradar::Player = serde_json::from_str(&json).unwrap();
-
-        let json = fs::read_to_string("testdata/pitcher_stats.json").unwrap();
-        let pitcher: sportradar::Player = serde_json::from_str(&json).unwrap();
-
-        let sr_players = vec![batter, pitcher];
-        // println!("sr_players: {:#?}", sr_players);
-
-        let converted = convert_players(sr_players).unwrap();
-        // println!("converted: {:#?}", converted);
-        assert_eq!(2, converted.len());
-
-        let batter = converted.first().unwrap();
-        assert_eq!("Mike Trout", batter.name);
-        assert_eq!(true, batter.batter_stats.is_some());
-        assert_eq!(false, batter.pitcher_stats.is_some());
-
-        let pitcher = converted.last().unwrap();
-        assert_eq!("Trevor Cahill", pitcher.name);
-        assert_eq!(false, pitcher.batter_stats.is_some());
-        assert_eq!(true, pitcher.pitcher_stats.is_some());
-    }
-
-    #[test]
-    fn get_players_from_file_should_load_players() {
-        let filepath = "testdata/players_converted.json".to_owned();
-        let players = get_players_from_file(&filepath).unwrap();
-
-        assert_eq!(3, players.len());
-
-        let batter = players.iter().find(|p| p.name == "Trey Mancini").unwrap();
-        println!("batter: {:#?}", batter);
-        assert_eq!(true, batter.batter_stats.is_some());
-        assert_eq!(false, batter.pitcher_stats.is_some());
-
-        let pitcher = players.iter().find(|p| p.name == "Blake Snell").unwrap();
-        println!("pitcher: {:#?}", pitcher);
-        assert_eq!(false, pitcher.batter_stats.is_some());
-        assert_eq!(true, pitcher.pitcher_stats.is_some());
-    }
-
     fn mock_batter() -> Player {
         Player {
             name: "Trey Mancini".to_owned(),
@@ -684,20 +639,54 @@ mod test {
         }
     }
 
-    fn mock_scoring_rule() -> scoring::ScoringRule {
-        scoring::load(&"sample".to_owned()).unwrap()
+    #[test]
+    fn convert_players_should_convert_players() {
+        use std::fs;
+        let json = fs::read_to_string("testdata/batter_stats.json").unwrap();
+        let batter: sportradar::Player = serde_json::from_str(&json).unwrap();
+
+        let json = fs::read_to_string("testdata/pitcher_stats.json").unwrap();
+        let pitcher: sportradar::Player = serde_json::from_str(&json).unwrap();
+
+        let sr_players = vec![batter, pitcher];
+
+        let converted = convert_players(sr_players).unwrap();
+        assert_eq!(2, converted.len());
+
+        let batter = converted.first().unwrap();
+        assert_eq!("Mike Trout", batter.name);
+        assert_eq!(true, batter.batter_stats.is_some());
+        assert_eq!(false, batter.pitcher_stats.is_some());
+
+        let pitcher = converted.last().unwrap();
+        assert_eq!("Trevor Cahill", pitcher.name);
+        assert_eq!(false, pitcher.batter_stats.is_some());
+        assert_eq!(true, pitcher.pitcher_stats.is_some());
     }
 
-    fn mock_roster() -> roster::Roster {
-        roster::load(&"sample".to_owned()).unwrap()
+    #[test]
+    fn get_players_from_file_should_load_players() {
+        let filepath = "testdata/players_converted.json".to_owned();
+        let players = get_players_from_file(&filepath).unwrap();
+
+        assert_eq!(3, players.len());
+
+        let batter = players.iter().find(|p| p.name == "Trey Mancini").unwrap();
+        assert_eq!(true, batter.batter_stats.is_some());
+        assert_eq!(false, batter.pitcher_stats.is_some());
+
+        let pitcher = players.iter().find(|p| p.name == "Blake Snell").unwrap();
+        assert_eq!(false, pitcher.batter_stats.is_some());
+        assert_eq!(true, pitcher.pitcher_stats.is_some());
     }
 
     #[test]
     fn get_fantasy_points_should_return_fantasy_points() {
+        use crate::league::scoring::test::mock_scoring_rule;
+        let sr = mock_scoring_rule();
+
         let batter = mock_batter();
         let pitcher = mock_pitcher();
-
-        let sr = mock_scoring_rule();
 
         assert_eq!(13.5, get_fantasy_points(&batter, &sr));
         assert_eq!(32.5, get_fantasy_points(&pitcher, &sr));
@@ -705,7 +694,9 @@ mod test {
 
     #[test]
     fn fantasy_player_get_stats_string_should_return_string() {
+        use crate::league::scoring::test::mock_scoring_rule;
         let s = mock_scoring_rule();
+
         let header_items = s.header_items();
 
         let batter = mock_batter();
@@ -759,12 +750,16 @@ mod test {
 
     #[test]
     fn create_fantasy_players_should_apply_to_names_case_insensitive() {
+        use crate::league::scoring::test::mock_scoring_rule;
+        let sc = mock_scoring_rule();
+
+        use crate::league::roster::test::mock_roster;
+        let r = mock_roster();
+
         let mut batter = mock_batter();
         batter.name = batter.name.to_lowercase();
 
         let players = vec![batter];
-        let sc = mock_scoring_rule();
-        let r = mock_roster();
 
         let f_players = create_fantasy_players(players, &sc, &r).unwrap();
 
