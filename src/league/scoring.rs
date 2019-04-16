@@ -248,62 +248,66 @@ fn get_stdin(label: &str) -> Result<f32, Box<dyn Error>> {
 }
 
 pub fn load(league_name: &String) -> Result<ScoringRule, Box<dyn Error>> {
+    if league_name == "sample" {
+        return Ok(sample_scoring_rule());
+    }
+
     let filepath = format!("data/{}/scoring.json", league_name);
     println!("Loading the scoring rule from file {}", filepath);
     let json = fs::read_to_string(filepath)?;
     Ok(serde_json::from_str(&json)?)
 }
 
+pub fn sample_scoring_rule() -> ScoringRule {
+    ScoringRule {
+        batter: BatterScoringRule {
+            at_bats: 0.0,
+            runs: 2.0,
+            hits: 0.5,
+            singles: 0.0,
+            doubles: 0.0,
+            triples: 0.0,
+            home_runs: 4.0,
+            runs_batted_in: 2.0,
+            sacrifice_hits: 0.0,
+            stolen_bases: 2.0,
+            caught_stealing: 0.0,
+            walks: 0.0,
+            intentional_walks: 0.0,
+            hit_by_pitch: 0.0,
+            strikeouts: 0.0,
+            ground_into_double_play: 0.0,
+            total_bases: 0.0,
+        },
+        pitcher: PitcherScoringRule {
+            innings_pitched: 1.0,
+            wins: 5.0,
+            losses: 0.0,
+            complete_games: 0.0,
+            shutouts: 0.0,
+            saves: 5.0,
+            outs: 0.0,
+            hits: 0.0,
+            earned_runs: -0.5,
+            home_runs: 0.0,
+            walks: 0.0,
+            intentional_walks: 0.0,
+            hit_batters: 0.0,
+            strikeouts: 2.0,
+            stolen_bases_allowed: 0.0,
+            batters_grounded_into_double_plays: 0.0,
+            total_bases_allowed: 0.0,
+        },
+    }
+}
+
 #[cfg(test)]
 pub mod test {
     use super::*;
 
-    pub fn mock_scoring_rule() -> ScoringRule {
-        ScoringRule {
-            batter: BatterScoringRule {
-                at_bats: 0.0,
-                runs: 2.0,
-                hits: 0.5,
-                singles: 0.0,
-                doubles: 0.0,
-                triples: 0.0,
-                home_runs: 4.0,
-                runs_batted_in: 2.0,
-                sacrifice_hits: 0.0,
-                stolen_bases: 2.0,
-                caught_stealing: 0.0,
-                walks: 0.0,
-                intentional_walks: 0.0,
-                hit_by_pitch: 0.0,
-                strikeouts: 0.0,
-                ground_into_double_play: 0.0,
-                total_bases: 0.0,
-            },
-            pitcher: PitcherScoringRule {
-                innings_pitched: 1.0,
-                wins: 5.0,
-                losses: 0.0,
-                complete_games: 0.0,
-                shutouts: 0.0,
-                saves: 5.0,
-                outs: 0.0,
-                hits: 0.0,
-                earned_runs: -0.5,
-                home_runs: 0.0,
-                walks: 0.0,
-                intentional_walks: 0.0,
-                hit_batters: 0.0,
-                strikeouts: 2.0,
-                stolen_bases_allowed: 0.0,
-                batters_grounded_into_double_plays: 0.0,
-                total_bases_allowed: 0.0,
-            },
-        }
-    }
-
     #[test]
-    fn load_should_return_scoring_rule_for_given_league() {
-        let scoring = mock_scoring_rule();
+    fn load_should_return_sample_scoring_rule_when_league_name_is_sample() {
+        let scoring = load(&"sample".to_owned()).unwrap();
 
         assert_eq!(0.5, scoring.batter.hits);
         assert_eq!(-0.5, scoring.pitcher.earned_runs);
@@ -311,7 +315,7 @@ pub mod test {
 
     #[test]
     fn header_items_should_return_header_items_to_display() {
-        let scoring = mock_scoring_rule();
+        let scoring = sample_scoring_rule();
         let items = scoring.header_items();
 
         assert_eq!(14, items.len());

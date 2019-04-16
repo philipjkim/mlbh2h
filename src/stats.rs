@@ -397,7 +397,6 @@ fn create_fantasy_players(
     r: &roster::Roster,
 ) -> Result<Vec<FantasyPlayer>, Box<dyn Error>> {
     let names: Vec<String> = r.players.iter().map(|p| p.name.to_owned()).collect();
-    // println!("names: {:#?}", names);
 
     let players: Vec<FantasyPlayer> = players
         .into_iter()
@@ -682,8 +681,8 @@ mod test {
 
     #[test]
     fn get_fantasy_points_should_return_fantasy_points() {
-        use crate::league::scoring::test::mock_scoring_rule;
-        let sr = mock_scoring_rule();
+        use crate::league::scoring::sample_scoring_rule;
+        let sr = sample_scoring_rule();
 
         let batter = mock_batter();
         let pitcher = mock_pitcher();
@@ -694,15 +693,15 @@ mod test {
 
     #[test]
     fn fantasy_player_get_stats_string_should_return_string() {
-        use crate::league::scoring::test::mock_scoring_rule;
-        let s = mock_scoring_rule();
+        use crate::league::scoring::sample_scoring_rule;
+        let sr = sample_scoring_rule();
 
-        let header_items = s.header_items();
+        let header_items = sr.header_items();
 
         let batter = mock_batter();
         let fp = FantasyPlayer {
             team: "Avengers".to_owned(),
-            fantasy_points: get_fantasy_points(&batter, &s),
+            fantasy_points: get_fantasy_points(&batter, &sr),
             player: batter,
         };
 
@@ -714,7 +713,7 @@ mod test {
         let pitcher = mock_pitcher();
         let fp = FantasyPlayer {
             team: "Avengers".to_owned(),
-            fantasy_points: get_fantasy_points(&pitcher, &s),
+            fantasy_points: get_fantasy_points(&pitcher, &sr),
             player: pitcher,
         };
 
@@ -750,18 +749,18 @@ mod test {
 
     #[test]
     fn create_fantasy_players_should_apply_to_names_case_insensitive() {
-        use crate::league::scoring::test::mock_scoring_rule;
-        let sc = mock_scoring_rule();
+        use crate::league::scoring::sample_scoring_rule;
+        let sr = sample_scoring_rule();
 
-        use crate::league::roster::test::mock_roster;
-        let r = mock_roster();
+        use crate::league::roster::sample_roster;
+        let r = sample_roster();
 
         let mut batter = mock_batter();
         batter.name = batter.name.to_lowercase();
 
         let players = vec![batter];
 
-        let f_players = create_fantasy_players(players, &sc, &r).unwrap();
+        let f_players = create_fantasy_players(players, &sr, &r).unwrap();
 
         assert_eq!(1, f_players.len());
     }

@@ -1,6 +1,6 @@
 [package]
 name = "mlbh2h"
-version = "0.4.0"
+version = "0.4.1"
 authors = ["Soo Philip Jason Kim <philipjkim@gmail.com>"]
 edition = "2018"
 

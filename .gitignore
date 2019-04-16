@@ -2,4 +2,3 @@
 **/*.rs.bk
 /temp
 /data/*
-!/data/sample

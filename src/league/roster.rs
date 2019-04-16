@@ -128,107 +128,110 @@ fn get_string_stdin(label: &str) -> Result<String, Box<dyn Error>> {
 }
 
 pub fn load(league_name: &String) -> Result<Roster, Box<dyn Error>> {
+    if league_name == "sample" {
+        return Ok(sample_roster());
+    }
+
     let filepath = format!("data/{}/roster.json", league_name);
     println!("Loading the weekly roster from file {}", filepath);
     let json = fs::read_to_string(filepath)?;
     Ok(serde_json::from_str(&json)?)
 }
 
+pub fn sample_roster() -> Roster {
+    Roster {
+        players: vec![
+            Player {
+                name: "Cody Bellinger".to_owned(),
+                role: PlayerType::Batter,
+                team: "LA Bulls".to_owned(),
+            },
+            Player {
+                name: "Domingo Santana".to_owned(),
+                role: PlayerType::Batter,
+                team: "LA Bulls".to_owned(),
+            },
+            Player {
+                name: "Blake Snell".to_owned(),
+                role: PlayerType::Pitcher,
+                team: "LA Bulls".to_owned(),
+            },
+            Player {
+                name: "Max Scherzer".to_owned(),
+                role: PlayerType::Pitcher,
+                team: "LA Bulls".to_owned(),
+            },
+            Player {
+                name: "Christian Yelich".to_owned(),
+                role: PlayerType::Batter,
+                team: "Chicago Pizzas".to_owned(),
+            },
+            Player {
+                name: "Tim Beckham".to_owned(),
+                role: PlayerType::Batter,
+                team: "Chicago Pizzas".to_owned(),
+            },
+            Player {
+                name: "Jacob deGrom".to_owned(),
+                role: PlayerType::Pitcher,
+                team: "Chicago Pizzas".to_owned(),
+            },
+            Player {
+                name: "Carlos Rodón".to_owned(),
+                role: PlayerType::Pitcher,
+                team: "Chicago Pizzas".to_owned(),
+            },
+            Player {
+                name: "Trey Mancini".to_owned(),
+                role: PlayerType::Batter,
+                team: "NY Hotdogs".to_owned(),
+            },
+            Player {
+                name: "Anthony Rendon".to_owned(),
+                role: PlayerType::Batter,
+                team: "NY Hotdogs".to_owned(),
+            },
+            Player {
+                name: "José Berríos".to_owned(),
+                role: PlayerType::Pitcher,
+                team: "NY Hotdogs".to_owned(),
+            },
+            Player {
+                name: "Mike Clevinger".to_owned(),
+                role: PlayerType::Pitcher,
+                team: "NY Hotdogs".to_owned(),
+            },
+            Player {
+                name: "Jonathan Villar".to_owned(),
+                role: PlayerType::Batter,
+                team: "Seattle Coffees".to_owned(),
+            },
+            Player {
+                name: "Rhys Hoskins".to_owned(),
+                role: PlayerType::Batter,
+                team: "Seattle Coffees".to_owned(),
+            },
+            Player {
+                name: "Kirby Yates".to_owned(),
+                role: PlayerType::Pitcher,
+                team: "Seattle Coffees".to_owned(),
+            },
+            Player {
+                name: "Josh Hader".to_owned(),
+                role: PlayerType::Pitcher,
+                team: "Seattle Coffees".to_owned(),
+            },
+        ],
+    }
+}
+
 #[cfg(test)]
 pub mod test {
     use super::*;
 
-    pub fn mock_roster() -> Roster {
-        Roster {
-            players: vec![
-                Player {
-                    name: "Cody Bellinger".to_owned(),
-                    role: PlayerType::Batter,
-                    team: "LA Bulls".to_owned(),
-                },
-                Player {
-                    name: "Domingo Santana".to_owned(),
-                    role: PlayerType::Batter,
-                    team: "LA Bulls".to_owned(),
-                },
-                Player {
-                    name: "Blake Snell".to_owned(),
-                    role: PlayerType::Pitcher,
-                    team: "LA Bulls".to_owned(),
-                },
-                Player {
-                    name: "Max Scherzer".to_owned(),
-                    role: PlayerType::Pitcher,
-                    team: "LA Bulls".to_owned(),
-                },
-                Player {
-                    name: "Christian Yelich".to_owned(),
-                    role: PlayerType::Batter,
-                    team: "Chicago Pizzas".to_owned(),
-                },
-                Player {
-                    name: "Tim Beckham".to_owned(),
-                    role: PlayerType::Batter,
-                    team: "Chicago Pizzas".to_owned(),
-                },
-                Player {
-                    name: "Jacob deGrom".to_owned(),
-                    role: PlayerType::Pitcher,
-                    team: "Chicago Pizzas".to_owned(),
-                },
-                Player {
-                    name: "Carlos Rodón".to_owned(),
-                    role: PlayerType::Pitcher,
-                    team: "Chicago Pizzas".to_owned(),
-                },
-                Player {
-                    name: "Trey Mancini".to_owned(),
-                    role: PlayerType::Batter,
-                    team: "NY Hotdogs".to_owned(),
-                },
-                Player {
-                    name: "Anthony Rendon".to_owned(),
-                    role: PlayerType::Batter,
-                    team: "NY Hotdogs".to_owned(),
-                },
-                Player {
-                    name: "José Berríos".to_owned(),
-                    role: PlayerType::Pitcher,
-                    team: "NY Hotdogs".to_owned(),
-                },
-                Player {
-                    name: "Mike Clevinger".to_owned(),
-                    role: PlayerType::Pitcher,
-                    team: "NY Hotdogs".to_owned(),
-                },
-                Player {
-                    name: "Jonathan Villar".to_owned(),
-                    role: PlayerType::Batter,
-                    team: "Seattle Coffees".to_owned(),
-                },
-                Player {
-                    name: "Rhys Hoskins".to_owned(),
-                    role: PlayerType::Batter,
-                    team: "Seattle Coffees".to_owned(),
-                },
-                Player {
-                    name: "Kirby Yates".to_owned(),
-                    role: PlayerType::Pitcher,
-                    team: "Seattle Coffees".to_owned(),
-                },
-                Player {
-                    name: "Josh Hader".to_owned(),
-                    role: PlayerType::Pitcher,
-                    team: "Seattle Coffees".to_owned(),
-                },
-            ],
-        }
-    }
-
     #[test]
-    fn load_should_return_weekly_roster_for_given_league() {
+    fn load_should_return_sample_roster_when_league_name_is_sample() {
         let roster = load(&"sample".to_owned()).unwrap();
-        println!("roster: {:#?}", roster);
 
         assert_eq!(16, roster.players.len());
     }
