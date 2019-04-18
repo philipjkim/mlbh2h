@@ -18,6 +18,14 @@ fn main() -> Result<(), Box<dyn Error>> {
         return Ok(());
     }
 
+    if let Some(_) = matches.subcommand_matches("list-leagues") {
+        if let Err(e) = league::list_leagues() {
+            println!("{}", e);
+            return Err(e);
+        }
+        return Ok(());
+    }
+
     if let Err(e) = stats::show(&matches) {
         println!("{}", e);
         return Err(e);
@@ -84,4 +92,5 @@ The option value precedes env.",
                         .takes_value(false),
                 ),
         )
+        .subcommand(SubCommand::with_name("list-leagues").about("lists previously added leagues"))
 }

@@ -4,6 +4,7 @@ use std::error::Error;
 use std::fmt;
 use std::fs;
 use std::path::Path;
+use walkdir::WalkDir;
 
 pub mod roster;
 pub mod scoring;
@@ -60,5 +61,43 @@ pub fn add_new_league(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
             return Ok(());
         }
         Err(e) => return Err(e),
+    }
+}
+
+pub fn list_leagues() -> Result<(), Box<dyn Error>> {
+    let base_dir = format!("{}/.mlbh2h/leagues", utils::get_home_dir());
+
+    let subdirs = one_depth_subdirs(base_dir)?;
+
+    println!("Available leagues:");
+    subdirs.iter().for_each(|d| println!("\t{}", d));
+    Ok(())
+}
+
+fn one_depth_subdirs(base_dir: String) -> Result<Vec<String>, Box<dyn Error>> {
+    let mut subdirs: Vec<String> = Vec::new();
+
+    let base_dir_len = base_dir.len();
+
+    for entry in WalkDir::new(base_dir).min_depth(1).max_depth(1) {
+        let entry = entry?;
+        let path = entry.path();
+        if path.is_dir() {
+            subdirs.push(path.to_str().unwrap()[base_dir_len + 1..].to_owned());
+        }
+    }
+
+    Ok(subdirs)
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn one_depth_subdirs_should_return_list_of_1depth_subdirectories() {
+        let subdirs = one_depth_subdirs("src".to_owned()).unwrap();
+        println!("subdirs: {:?}", subdirs);
+        assert_eq!(vec!["league".to_owned(), "stats".to_owned()], subdirs);
     }
 }
