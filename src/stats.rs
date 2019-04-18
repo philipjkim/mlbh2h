@@ -1,4 +1,5 @@
 use crate::league::{roster, scoring};
+use crate::utils;
 use clap::ArgMatches;
 use serde::{Deserialize, Serialize};
 use std::env;
@@ -355,7 +356,11 @@ impl Error for StatFileExists {}
 pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
     let config = get_config(matches)?;
 
-    let filepath = &format!("data/_stats/{}.json", config.date);
+    let filepath = &format!(
+        "{}/.mlbh2h/stats/{}.json",
+        utils::get_home_dir(),
+        config.date
+    );
 
     let players = match Path::new(filepath).exists() {
         true => get_players_from_file(filepath)?,
@@ -551,7 +556,7 @@ fn save_players(filepath: &String, players: &Vec<Player>) -> Result<(), Box<dyn 
         return Err(Box::new(StatFileExists(filepath.to_owned())));
     }
 
-    fs::create_dir_all("data/_stats")?;
+    fs::create_dir_all(format!("{}/.mlbh2h/stats", utils::get_home_dir()))?;
     fs::write(filepath, serde_json::to_string(players)?)?;
     println!("Saved player stats to {} .", filepath);
 

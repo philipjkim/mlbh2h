@@ -1,3 +1,4 @@
+use crate::utils;
 use serde::{Deserialize, Serialize};
 use std::error::Error;
 use std::fs;
@@ -252,7 +253,11 @@ pub fn load(league_name: &String) -> Result<ScoringRule, Box<dyn Error>> {
         return Ok(sample_scoring_rule());
     }
 
-    let filepath = format!("data/{}/scoring.json", league_name);
+    let filepath = format!(
+        "{}/.mlbh2h/leagues/{}/scoring.json",
+        utils::get_home_dir(),
+        league_name
+    );
     println!("Loading the scoring rule from file {}", filepath);
     let json = fs::read_to_string(filepath)?;
     Ok(serde_json::from_str(&json)?)

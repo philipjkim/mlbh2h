@@ -1,3 +1,4 @@
+use crate::utils;
 use clap::ArgMatches;
 use std::error::Error;
 use std::fmt;
@@ -35,7 +36,7 @@ pub fn add_new_league(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
         return Err(Box::new(InvalidLeagueName));
     }
 
-    let league_dir = &format!("data/{}", league_name);
+    let league_dir = &format!("{}/.mlbh2h/leagues/{}", utils::get_home_dir(), league_name);
     if Path::new(league_dir).exists() {
         match matches.occurrences_of("force") {
             0 => return Err(Box::new(LeagueNameConflict(league_name.to_string()))),

@@ -1,3 +1,4 @@
+use crate::utils;
 use serde::{Deserialize, Serialize};
 use std::error::Error;
 use std::fs;
@@ -44,7 +45,7 @@ fn get_roster_from_stdin() -> Result<Roster, Box<dyn Error>> {
     let num_pitchers = get_usize_stdin("How many pitchers are in a team roster?", 1, 15)?;
     println!("batters: {}, pitchers: {}", num_batters, num_pitchers);
 
-    let num_teams = get_usize_stdin("How many teams are in your fantasy league?", 4, 12)?;
+    let num_teams = get_usize_stdin("How many teams are in your fantasy league?", 2, 12)?;
     let mut team_names: Vec<String> = Vec::new();
     while team_names.len() < num_teams as usize {
         if let Ok(name) =
@@ -132,7 +133,11 @@ pub fn load(league_name: &String) -> Result<Roster, Box<dyn Error>> {
         return Ok(sample_roster());
     }
 
-    let filepath = format!("data/{}/roster.json", league_name);
+    let filepath = format!(
+        "{}/.mlbh2h/leagues/{}/roster.json",
+        utils::get_home_dir(),
+        league_name
+    );
     println!("Loading the weekly roster from file {}", filepath);
     let json = fs::read_to_string(filepath)?;
     Ok(serde_json::from_str(&json)?)
