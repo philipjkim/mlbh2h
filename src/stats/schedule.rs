@@ -15,7 +15,6 @@ struct Game {
 
 pub fn get_game_ids(config: &Config) -> Result<Vec<String>, Box<dyn Error>> {
     let url = get_schedule_url(config);
-    println!("schedule api url: {}", url);
 
     let json = utils::get_json_res(&url)?;
     Ok(get_game_ids_from_string(json)?)

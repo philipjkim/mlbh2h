@@ -5,6 +5,9 @@ Daily MLB Fantasy Head-to-Head Point Viewer
 ## Usage
 
 ```
+# Build the binary and alias it
+cargo build && alias mlbh2h='./target/debug/mlbh2h'
+
 # Show help messages
 mlbh2h -h
 
@@ -16,6 +19,8 @@ mlbh2h new-league -l <LEAGUE_NAME>
 # ex> mlbh2h -k $SPORTRADAR_API_KEY -l my_league -d 2019-04-08
 mlbh2h -k <SPORTRADAR_API_KEY> -l <LEAGUE_NAME> -d <yyyy-mm-dd>
 ```
+
+Stats data from Sportradar and league settings (scoring & rosters) are stored under `$HOME/.mlbh2h/`.
 
 ## How to get a free Sportradar API key
 

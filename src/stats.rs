@@ -372,15 +372,12 @@ pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
         }
     };
 
-    println!("players.length: {}", players.len());
-
     let league_scoring = scoring::load(&config.league)?;
     let league_roster = roster::load(&config.league)?;
     let fan_players = create_fantasy_players(players, &league_scoring, &league_roster)?;
 
     println!();
     print_fantasy_players(fan_players, &config.date, &league_scoring);
-    // println!("fantasy players:\n{:#?}", fan_players);
 
     Ok(())
 }
