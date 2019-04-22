@@ -39,11 +39,7 @@ mod test {
 
     #[test]
     fn get_schedule_url_should_return_api_url() {
-        let config = Config {
-            date: "2019-04-01".to_owned(),
-            league: "some_league".to_owned(),
-            api_key: "key".to_owned(),
-        };
+        let config = Config::new("2019-04-01", "some_league", "key");
         assert_eq!(
             "https://api.sportradar.us/mlb-t6/games/2019/04/01/schedule.json?api_key=key",
             get_schedule_url(&config)

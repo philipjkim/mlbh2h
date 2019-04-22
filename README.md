@@ -20,7 +20,8 @@ mlbh2h new-league -l <LEAGUE_NAME>
 mlbh2h -k <SPORTRADAR_API_KEY> -l <LEAGUE_NAME> -d <yyyy-mm-dd>
 ```
 
-Stats data from Sportradar and league settings (scoring & rosters) are stored under `$HOME/.mlbh2h/`.
+- Output format is CSV, but available output formats will be added more (ex: JSON, tabular).
+- Stats data from Sportradar and league settings (scoring & rosters) are stored under `$HOME/.mlbh2h/`.
 
 ## How to get a free Sportradar API key
 

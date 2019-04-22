@@ -1,5 +1,3 @@
-extern crate clap;
-
 use clap::{crate_version, App, Arg, SubCommand};
 use std::error::Error;
 

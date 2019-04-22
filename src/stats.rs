@@ -7,6 +7,7 @@ use std::error::Error;
 use std::fmt;
 use std::fs;
 use std::path::Path;
+use std::rc::Rc;
 
 mod schedule;
 mod sportradar;
@@ -16,6 +17,18 @@ pub struct Config {
     league: String,
     api_key: String,
 }
+impl Config {
+    pub fn new<S>(date: S, league: S, api_key: S) -> Config
+    where
+        S: Into<String>,
+    {
+        Config {
+            date: date.into(),
+            league: league.into(),
+            api_key: api_key.into(),
+        }
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Default)]
 struct Player {
@@ -24,6 +37,35 @@ struct Player {
     primary_position: String,
     batter_stats: Option<BatterStats>,
     pitcher_stats: Option<PitcherStats>,
+}
+
+#[allow(dead_code)]
+impl Player {
+    fn new_batter<S>(name: S, position: S, primary_position: S, stats: BatterStats) -> Player
+    where
+        S: Into<String>,
+    {
+        Player {
+            name: name.into(),
+            position: position.into(),
+            primary_position: primary_position.into(),
+            batter_stats: Some(stats),
+            pitcher_stats: None,
+        }
+    }
+
+    fn new_pitcher<S>(name: S, position: S, primary_position: S, stats: PitcherStats) -> Player
+    where
+        S: Into<String>,
+    {
+        Player {
+            name: name.into(),
+            position: position.into(),
+            primary_position: primary_position.into(),
+            batter_stats: None,
+            pitcher_stats: Some(stats),
+        }
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Default)]
@@ -70,7 +112,7 @@ struct PitcherStats {
 
 #[derive(Debug, Default)]
 struct FantasyPlayer {
-    team: String,
+    team: Rc<String>,
     player: Player,
     fantasy_points: f32,
 }
@@ -83,248 +125,248 @@ impl FantasyPlayer {
             .iter()
             .map(|h| match h.as_str() {
                 "Player" => self.player.name.to_owned(),
-                "Team" => self.team.to_owned(),
+                "Team" => self.team.to_string(),
                 "FanPts" => format!("{:.2}", self.fantasy_points),
                 "Pos" => self.player.position.to_owned(),
                 "B.AB" => {
                     if let Some(s) = bstats {
                         s.at_bats.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "B.R" => {
                     if let Some(s) = bstats {
                         s.runs.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "B.H" => {
                     if let Some(s) = bstats {
                         s.hits.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "B.1B" => {
                     if let Some(s) = bstats {
                         s.singles.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "B.2B" => {
                     if let Some(s) = bstats {
                         s.doubles.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "B.3B" => {
                     if let Some(s) = bstats {
                         s.triples.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "B.HR" => {
                     if let Some(s) = bstats {
                         s.home_runs.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "B.RBI" => {
                     if let Some(s) = bstats {
                         s.runs_batted_in.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "B.SAC" => {
                     if let Some(s) = bstats {
                         s.sacrifice_hits.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "B.SB" => {
                     if let Some(s) = bstats {
                         s.stolen_bases.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "B.CS" => {
                     if let Some(s) = bstats {
                         s.caught_stealing.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "B.BB" => {
                     if let Some(s) = bstats {
                         s.walks.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "B.IBB" => {
                     if let Some(s) = bstats {
                         s.intentional_walks.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "B.HBP" => {
                     if let Some(s) = bstats {
                         s.hit_by_pitch.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "B.K" => {
                     if let Some(s) = bstats {
                         s.strikeouts.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "B.GIDP" => {
                     if let Some(s) = bstats {
                         s.ground_into_double_play.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "B.TB" => {
                     if let Some(s) = bstats {
                         s.total_bases.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "P.IP" => {
                     if let Some(s) = pstats {
                         s.innings_pitched.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "P.W" => {
                     if let Some(s) = pstats {
                         s.wins.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "P.L" => {
                     if let Some(s) = pstats {
                         s.losses.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "P.CG" => {
                     if let Some(s) = pstats {
                         s.complete_games.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "P.SHO" => {
                     if let Some(s) = pstats {
                         s.shutouts.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "P.SV" => {
                     if let Some(s) = pstats {
                         s.saves.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "P.OUT" => {
                     if let Some(s) = pstats {
                         s.outs.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "P.H" => {
                     if let Some(s) = pstats {
                         s.hits.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "P.ER" => {
                     if let Some(s) = pstats {
                         s.earned_runs.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "P.HR" => {
                     if let Some(s) = pstats {
                         s.home_runs.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "P.BB" => {
                     if let Some(s) = pstats {
                         s.walks.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "P.IBB" => {
                     if let Some(s) = pstats {
                         s.intentional_walks.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "P.HBP" => {
                     if let Some(s) = pstats {
                         s.hit_batters.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "P.K" => {
                     if let Some(s) = pstats {
                         s.strikeouts.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "P.SB" => {
                     if let Some(s) = pstats {
                         s.stolen_bases_allowed.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "P.GIDP" => {
                     if let Some(s) = pstats {
                         s.batters_grounded_into_double_plays.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
                 "P.TB" => {
                     if let Some(s) = pstats {
                         s.total_bases_allowed.to_string()
                     } else {
-                        "".to_owned()
+                        "".to_string()
                     }
                 }
-                _ => "".to_owned(),
+                _ => "".to_string(),
             })
             .collect();
 
@@ -413,8 +455,8 @@ fn create_fantasy_players(
                 .players
                 .iter()
                 .find(|rp| rp.name.to_lowercase() == p.name.to_lowercase())
-                .map(|rp| rp.team.to_owned())
-                .unwrap_or("unknown".to_owned());
+                .map(|rp| Rc::clone(&rp.team))
+                .unwrap_or(Rc::new("unknown".to_string()));
             FantasyPlayer {
                 team: team,
                 fantasy_points: get_fantasy_points(&p, s),
@@ -536,6 +578,7 @@ fn convert_players(sr_players: Vec<sportradar::Player>) -> Result<Vec<Player>, B
             }),
             None => None,
         };
+
         players.push(Player {
             name: format!("{} {}", srp.preferred_name, srp.last_name),
             position: srp.position.to_owned(),
@@ -550,7 +593,7 @@ fn convert_players(sr_players: Vec<sportradar::Player>) -> Result<Vec<Player>, B
 
 fn save_players(filepath: &String, players: &Vec<Player>) -> Result<(), Box<dyn Error>> {
     if Path::new(filepath).exists() {
-        return Err(Box::new(StatFileExists(filepath.to_owned())));
+        return Err(Box::new(StatFileExists(filepath.to_string())));
     }
 
     fs::create_dir_all(format!("{}/.mlbh2h/stats", utils::get_home_dir()))?;
@@ -567,17 +610,17 @@ fn get_players_from_file(filepath: &String) -> Result<Vec<Player>, Box<dyn Error
 }
 
 fn get_config(matches: &ArgMatches) -> Result<Config, Box<dyn Error>> {
-    let env_api_key = env::var("SPORTRADAR_API_KEY").unwrap_or("".to_owned());
+    let env_api_key = env::var("SPORTRADAR_API_KEY").unwrap_or("".to_string());
     let api_key = matches.value_of("api_key").unwrap_or(env_api_key.as_str());
     if api_key == "" {
         return Err(Box::new(ApiKeyNotFound));
     }
 
-    Ok(Config {
-        date: matches.value_of("date").unwrap().to_owned(),
-        league: matches.value_of("league").unwrap().to_owned(),
-        api_key: api_key.to_owned(),
-    })
+    Ok(Config::new(
+        matches.value_of("date").unwrap(),
+        matches.value_of("league").unwrap(),
+        api_key,
+    ))
 }
 
 #[cfg(test)]
@@ -585,11 +628,11 @@ mod test {
     use super::*;
 
     fn mock_batter() -> Player {
-        Player {
-            name: "Trey Mancini".to_owned(),
-            position: "OF".to_owned(),
-            primary_position: "RF".to_owned(),
-            batter_stats: Some(BatterStats {
+        Player::new_batter(
+            "Trey Mancini",
+            "OF",
+            "RF",
+            BatterStats {
                 at_bats: 3,
                 runs: 2,
                 hits: 3,
@@ -607,18 +650,16 @@ mod test {
                 strikeouts: 0,
                 ground_into_double_play: 0,
                 total_bases: 6,
-            }),
-            pitcher_stats: None,
-        }
+            },
+        )
     }
 
     fn mock_pitcher() -> Player {
-        Player {
-            name: "Blake Snell".to_owned(),
-            position: "P".to_owned(),
-            primary_position: "SP".to_owned(),
-            batter_stats: None,
-            pitcher_stats: Some(PitcherStats {
+        Player::new_pitcher(
+            "Blake Snell",
+            "P",
+            "SP",
+            PitcherStats {
                 innings_pitched: 6.0,
                 wins: 1,
                 losses: 0,
@@ -636,8 +677,8 @@ mod test {
                 stolen_bases_allowed: 1,
                 batters_grounded_into_double_plays: 1,
                 total_bases_allowed: 10,
-            }),
-        }
+            },
+        )
     }
 
     #[test]
@@ -667,7 +708,7 @@ mod test {
 
     #[test]
     fn get_players_from_file_should_load_players() {
-        let filepath = "testdata/players_converted.json".to_owned();
+        let filepath = "testdata/players_converted.json".to_string();
         let players = get_players_from_file(&filepath).unwrap();
 
         assert_eq!(3, players.len());
@@ -702,25 +743,25 @@ mod test {
 
         let batter = mock_batter();
         let fp = FantasyPlayer {
-            team: "Avengers".to_owned(),
+            team: Rc::new("Avengers".to_string()),
             fantasy_points: get_fantasy_points(&batter, &sr),
             player: batter,
         };
 
         assert_eq!(
-            "Trey Mancini,Avengers,13.50,OF,2,3,1,2,0,,,,,".to_owned(),
+            "Trey Mancini,Avengers,13.50,OF,2,3,1,2,0,,,,,",
             fp.get_stats_string(&header_items)
         );
 
         let pitcher = mock_pitcher();
         let fp = FantasyPlayer {
-            team: "Avengers".to_owned(),
+            team: Rc::new("Avengers".to_string()),
             fantasy_points: get_fantasy_points(&pitcher, &sr),
             player: pitcher,
         };
 
         assert_eq!(
-            "Blake Snell,Avengers,32.50,P,,,,,,6,1,0,1,11".to_owned(),
+            "Blake Snell,Avengers,32.50,P,,,,,,6,1,0,1,11",
             fp.get_stats_string(&header_items)
         );
     }

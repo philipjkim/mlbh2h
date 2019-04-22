@@ -54,118 +54,113 @@ pub struct ScoringRule {
 
 impl ScoringRule {
     pub fn header_items(&self) -> Vec<String> {
-        let mut items = vec![
-            "Player".to_owned(),
-            "Team".to_owned(),
-            "FanPts".to_owned(),
-            "Pos".to_owned(),
-        ];
+        let mut items = vec!["Player", "Team", "FanPts", "Pos"];
 
         if self.batter.at_bats != 0.0 {
-            items.push("B.AB".to_owned());
+            items.push("B.AB");
         }
         if self.batter.runs != 0.0 {
-            items.push("B.R".to_owned());
+            items.push("B.R");
         }
         if self.batter.hits != 0.0 {
-            items.push("B.H".to_owned());
+            items.push("B.H");
         }
         if self.batter.singles != 0.0 {
-            items.push("B.1B".to_owned());
+            items.push("B.1B");
         }
         if self.batter.doubles != 0.0 {
-            items.push("B.2B".to_owned());
+            items.push("B.2B");
         }
         if self.batter.triples != 0.0 {
-            items.push("B.3B".to_owned());
+            items.push("B.3B");
         }
         if self.batter.home_runs != 0.0 {
-            items.push("B.HR".to_owned());
+            items.push("B.HR");
         }
         if self.batter.runs_batted_in != 0.0 {
-            items.push("B.RBI".to_owned());
+            items.push("B.RBI");
         }
         if self.batter.sacrifice_hits != 0.0 {
-            items.push("B.SAC".to_owned());
+            items.push("B.SAC");
         }
         if self.batter.stolen_bases != 0.0 {
-            items.push("B.SB".to_owned());
+            items.push("B.SB");
         }
         if self.batter.caught_stealing != 0.0 {
-            items.push("B.CS".to_owned());
+            items.push("B.CS");
         }
         if self.batter.walks != 0.0 {
-            items.push("B.BB".to_owned());
+            items.push("B.BB");
         }
         if self.batter.intentional_walks != 0.0 {
-            items.push("B.IBB".to_owned());
+            items.push("B.IBB");
         }
         if self.batter.hit_by_pitch != 0.0 {
-            items.push("B.HBP".to_owned());
+            items.push("B.HBP");
         }
         if self.batter.strikeouts != 0.0 {
-            items.push("B.K".to_owned());
+            items.push("B.K");
         }
         if self.batter.ground_into_double_play != 0.0 {
-            items.push("B.GIDP".to_owned());
+            items.push("B.GIDP");
         }
         if self.batter.total_bases != 0.0 {
-            items.push("B.TB".to_owned());
+            items.push("B.TB");
         }
 
         if self.pitcher.innings_pitched != 0.0 {
-            items.push("P.IP".to_owned());
+            items.push("P.IP");
         }
         if self.pitcher.wins != 0.0 {
-            items.push("P.W".to_owned());
+            items.push("P.W");
         }
         if self.pitcher.losses != 0.0 {
-            items.push("P.L".to_owned());
+            items.push("P.L");
         }
         if self.pitcher.complete_games != 0.0 {
-            items.push("P.CG".to_owned());
+            items.push("P.CG");
         }
         if self.pitcher.shutouts != 0.0 {
-            items.push("P.SHO".to_owned());
+            items.push("P.SHO");
         }
         if self.pitcher.saves != 0.0 {
-            items.push("P.SV".to_owned());
+            items.push("P.SV");
         }
         if self.pitcher.outs != 0.0 {
-            items.push("P.OUT".to_owned());
+            items.push("P.OUT");
         }
         if self.pitcher.hits != 0.0 {
-            items.push("P.H".to_owned());
+            items.push("P.H");
         }
         if self.pitcher.earned_runs != 0.0 {
-            items.push("P.ER".to_owned());
+            items.push("P.ER");
         }
         if self.pitcher.home_runs != 0.0 {
-            items.push("P.HR".to_owned());
+            items.push("P.HR");
         }
         if self.pitcher.walks != 0.0 {
-            items.push("P.BB".to_owned());
+            items.push("P.BB");
         }
         if self.pitcher.intentional_walks != 0.0 {
-            items.push("P.IBB".to_owned());
+            items.push("P.IBB");
         }
         if self.pitcher.hit_batters != 0.0 {
-            items.push("P.HBP".to_owned());
+            items.push("P.HBP");
         }
         if self.pitcher.strikeouts != 0.0 {
-            items.push("P.K".to_owned());
+            items.push("P.K");
         }
         if self.pitcher.stolen_bases_allowed != 0.0 {
-            items.push("P.SB".to_owned());
+            items.push("P.SB");
         }
         if self.pitcher.batters_grounded_into_double_plays != 0.0 {
-            items.push("P.GIDP".to_owned());
+            items.push("P.GIDP");
         }
         if self.pitcher.total_bases_allowed != 0.0 {
-            items.push("P.TB".to_owned());
+            items.push("P.TB");
         }
 
-        items
+        items.into_iter().map(|i| i.to_string()).collect()
     }
 }
 
@@ -312,7 +307,7 @@ pub mod test {
 
     #[test]
     fn load_should_return_sample_scoring_rule_when_league_name_is_sample() {
-        let scoring = load(&"sample".to_owned()).unwrap();
+        let scoring = load(&"sample".to_string()).unwrap();
 
         assert_eq!(0.5, scoring.batter.hits);
         assert_eq!(-0.5, scoring.pitcher.earned_runs);
@@ -325,7 +320,7 @@ pub mod test {
 
         assert_eq!(14, items.len());
         assert_eq!(
-            "Player,Team,FanPts,Pos,B.R,B.H,B.HR,B.RBI,B.SB,P.IP,P.W,P.SV,P.ER,P.K".to_owned(),
+            "Player,Team,FanPts,Pos,B.R,B.H,B.HR,B.RBI,B.SB,P.IP,P.W,P.SV,P.ER,P.K",
             items.join(",")
         );
     }

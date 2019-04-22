@@ -3,8 +3,9 @@ use serde::{Deserialize, Serialize};
 use std::error::Error;
 use std::fs;
 use std::io::{self, prelude::*};
+use std::rc::Rc;
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+#[derive(Serialize, Deserialize, Debug, Clone, Copy)]
 pub enum PlayerType {
     Batter,
     Pitcher,
@@ -19,7 +20,30 @@ impl Default for PlayerType {
 pub struct Player {
     pub name: String,
     pub role: PlayerType,
-    pub team: String,
+    pub team: Rc<String>,
+}
+impl Player {
+    fn new_batter<S>(name: S, team: S) -> Player
+    where
+        S: Into<String>,
+    {
+        Player {
+            name: name.into(),
+            role: PlayerType::Batter,
+            team: Rc::new(team.into()),
+        }
+    }
+
+    fn new_pitcher<S>(name: S, team: S) -> Player
+    where
+        S: Into<String>,
+    {
+        Player {
+            name: name.into(),
+            role: PlayerType::Pitcher,
+            team: Rc::new(team.into()),
+        }
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Default)]
@@ -57,17 +81,18 @@ fn get_roster_from_stdin() -> Result<Roster, Box<dyn Error>> {
     println!("team_names: {:#?}", team_names);
 
     for team in team_names {
-        let mut batters = get_players_stdin(PlayerType::Batter, num_batters, team.clone());
+        let team = Rc::new(team);
+        let mut batters = get_players_stdin(PlayerType::Batter, num_batters, Rc::clone(&team));
         roster.players.append(&mut batters);
 
-        let mut pitchers = get_players_stdin(PlayerType::Pitcher, num_pitchers, team.clone());
+        let mut pitchers = get_players_stdin(PlayerType::Pitcher, num_pitchers, Rc::clone(&team));
         roster.players.append(&mut pitchers);
     }
 
     Ok(roster)
 }
 
-fn get_players_stdin(role: PlayerType, size: usize, team: String) -> Vec<Player> {
+fn get_players_stdin(role: PlayerType, size: usize, team: Rc<String>) -> Vec<Player> {
     let mut players: Vec<Player> = Vec::new();
     let mut players_saved = 0;
     while players_saved < size {
@@ -75,13 +100,13 @@ fn get_players_stdin(role: PlayerType, size: usize, team: String) -> Vec<Player>
             "Enter the name of {:?} {} for team {} (ex: John Doe) > ",
             role,
             players_saved + 1,
-            team
+            team,
         );
         if let Ok(name) = get_string_stdin(label.as_str()) {
             players.push(Player {
                 name: name,
-                team: team.clone(),
-                role: role.clone(),
+                team: Rc::clone(&team),
+                role: role,
             });
             players_saved += 1;
         }
@@ -121,7 +146,7 @@ fn get_string_stdin(label: &str) -> Result<String, Box<dyn Error>> {
 
         let s = input_str.trim();
         if s.len() >= 1 {
-            return Ok(s.to_owned());
+            return Ok(s.to_string());
         }
 
         println!("Please input a non-empty string.");
@@ -146,86 +171,22 @@ pub fn load(league_name: &String) -> Result<Roster, Box<dyn Error>> {
 pub fn sample_roster() -> Roster {
     Roster {
         players: vec![
-            Player {
-                name: "Cody Bellinger".to_owned(),
-                role: PlayerType::Batter,
-                team: "LA Bulls".to_owned(),
-            },
-            Player {
-                name: "Domingo Santana".to_owned(),
-                role: PlayerType::Batter,
-                team: "LA Bulls".to_owned(),
-            },
-            Player {
-                name: "Blake Snell".to_owned(),
-                role: PlayerType::Pitcher,
-                team: "LA Bulls".to_owned(),
-            },
-            Player {
-                name: "Max Scherzer".to_owned(),
-                role: PlayerType::Pitcher,
-                team: "LA Bulls".to_owned(),
-            },
-            Player {
-                name: "Christian Yelich".to_owned(),
-                role: PlayerType::Batter,
-                team: "Chicago Pizzas".to_owned(),
-            },
-            Player {
-                name: "Tim Beckham".to_owned(),
-                role: PlayerType::Batter,
-                team: "Chicago Pizzas".to_owned(),
-            },
-            Player {
-                name: "Jacob deGrom".to_owned(),
-                role: PlayerType::Pitcher,
-                team: "Chicago Pizzas".to_owned(),
-            },
-            Player {
-                name: "Carlos Rodón".to_owned(),
-                role: PlayerType::Pitcher,
-                team: "Chicago Pizzas".to_owned(),
-            },
-            Player {
-                name: "Trey Mancini".to_owned(),
-                role: PlayerType::Batter,
-                team: "NY Hotdogs".to_owned(),
-            },
-            Player {
-                name: "Anthony Rendon".to_owned(),
-                role: PlayerType::Batter,
-                team: "NY Hotdogs".to_owned(),
-            },
-            Player {
-                name: "José Berríos".to_owned(),
-                role: PlayerType::Pitcher,
-                team: "NY Hotdogs".to_owned(),
-            },
-            Player {
-                name: "Mike Clevinger".to_owned(),
-                role: PlayerType::Pitcher,
-                team: "NY Hotdogs".to_owned(),
-            },
-            Player {
-                name: "Jonathan Villar".to_owned(),
-                role: PlayerType::Batter,
-                team: "Seattle Coffees".to_owned(),
-            },
-            Player {
-                name: "Rhys Hoskins".to_owned(),
-                role: PlayerType::Batter,
-                team: "Seattle Coffees".to_owned(),
-            },
-            Player {
-                name: "Kirby Yates".to_owned(),
-                role: PlayerType::Pitcher,
-                team: "Seattle Coffees".to_owned(),
-            },
-            Player {
-                name: "Josh Hader".to_owned(),
-                role: PlayerType::Pitcher,
-                team: "Seattle Coffees".to_owned(),
-            },
+            Player::new_batter("Cody Bellinger", "LA Bulls"),
+            Player::new_batter("Domingo Santana", "LA Bulls"),
+            Player::new_pitcher("Blake Snell", "LA Bulls"),
+            Player::new_pitcher("Max Scherzer", "LA Bulls"),
+            Player::new_batter("Christian Yelich", "Chicago Pizzas"),
+            Player::new_batter("Tim Beckham", "Chicago Pizzas"),
+            Player::new_pitcher("Jacob deGrom", "Chicago Pizzas"),
+            Player::new_pitcher("Carlos Rodón", "Chicago Pizzas"),
+            Player::new_batter("Trey Mancini", "NY Hotdogs"),
+            Player::new_batter("Anthony Rendon", "NY Hotdogs"),
+            Player::new_pitcher("José Berríos", "NY Hotdogs"),
+            Player::new_pitcher("Mike Clevinger", "NY Hotdogs"),
+            Player::new_batter("Jonathan Villar", "Seattle Coffees"),
+            Player::new_batter("Rhys Hoskins", "Seattle Coffees"),
+            Player::new_pitcher("Kirby Yates", "Seattle Coffees"),
+            Player::new_pitcher("Josh Hader", "Seattle Coffees"),
         ],
     }
 }
@@ -236,7 +197,7 @@ pub mod test {
 
     #[test]
     fn load_should_return_sample_roster_when_league_name_is_sample() {
-        let roster = load(&"sample".to_owned()).unwrap();
+        let roster = load(&"sample".to_string()).unwrap();
 
         assert_eq!(16, roster.players.len());
     }

@@ -83,7 +83,7 @@ fn one_depth_subdirs(base_dir: String) -> Result<Vec<String>, Box<dyn Error>> {
         let entry = entry?;
         let path = entry.path();
         if path.is_dir() {
-            subdirs.push(path.to_str().unwrap()[base_dir_len + 1..].to_owned());
+            subdirs.push(path.to_str().unwrap()[base_dir_len + 1..].to_string());
         }
     }
 
@@ -96,8 +96,8 @@ mod test {
 
     #[test]
     fn one_depth_subdirs_should_return_list_of_1depth_subdirectories() {
-        let subdirs = one_depth_subdirs("src".to_owned()).unwrap();
+        let subdirs = one_depth_subdirs("src".to_string()).unwrap();
         println!("subdirs: {:?}", subdirs);
-        assert_eq!(vec!["league".to_owned(), "stats".to_owned()], subdirs);
+        assert_eq!(vec!["league".to_string(), "stats".to_string()], subdirs);
     }
 }

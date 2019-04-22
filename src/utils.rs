@@ -7,7 +7,7 @@ pub fn get_json_res(url: &String) -> Result<String, Box<dyn Error>> {
 }
 
 pub fn get_home_dir() -> String {
-    let home_dir = env::var("HOME").unwrap_or(".".to_owned());
+    let home_dir = env::var("HOME").unwrap_or(".".to_string());
     if home_dir.ends_with("/") {
         return home_dir
             .chars()
