@@ -1,5 +1,6 @@
 use crate::utils;
 use serde::{Deserialize, Serialize};
+use std::borrow::Cow;
 use std::error::Error;
 use std::fs;
 use std::io::{self, prelude::*};
@@ -17,15 +18,15 @@ impl Default for PlayerType {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default)]
-pub struct Player {
-    pub name: String,
+pub struct Player<'a> {
+    pub name: Cow<'a, str>,
     pub role: PlayerType,
-    pub team: Rc<String>,
+    pub team: Rc<Cow<'a, str>>,
 }
-impl Player {
-    fn new_batter<S>(name: S, team: S) -> Player
+impl<'a> Player<'a> {
+    fn new_batter<S>(name: S, team: S) -> Player<'a>
     where
-        S: Into<String>,
+        S: Into<Cow<'a, str>>,
     {
         Player {
             name: name.into(),
@@ -34,9 +35,9 @@ impl Player {
         }
     }
 
-    fn new_pitcher<S>(name: S, team: S) -> Player
+    fn new_pitcher<S>(name: S, team: S) -> Player<'a>
     where
-        S: Into<String>,
+        S: Into<Cow<'a, str>>,
     {
         Player {
             name: name.into(),
@@ -47,8 +48,8 @@ impl Player {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default)]
-pub struct Roster {
-    pub players: Vec<Player>,
+pub struct Roster<'a> {
+    pub players: Vec<Player<'a>>,
 }
 
 pub fn add(dir: &str) -> Result<Roster, Box<dyn Error>> {
@@ -62,7 +63,7 @@ pub fn add(dir: &str) -> Result<Roster, Box<dyn Error>> {
     Ok(roster)
 }
 
-fn get_roster_from_stdin() -> Result<Roster, Box<dyn Error>> {
+fn get_roster_from_stdin<'a>() -> Result<Roster<'a>, Box<dyn Error>> {
     let mut roster: Roster = Default::default();
 
     let num_batters = get_usize_stdin("How many batters are in a team roster?", 1, 15)?;
@@ -81,7 +82,7 @@ fn get_roster_from_stdin() -> Result<Roster, Box<dyn Error>> {
     println!("team_names: {:#?}", team_names);
 
     for team in team_names {
-        let team = Rc::new(team);
+        let team = Rc::new(Cow::Owned(team));
         let mut batters = get_players_stdin(PlayerType::Batter, num_batters, Rc::clone(&team));
         roster.players.append(&mut batters);
 
@@ -92,7 +93,7 @@ fn get_roster_from_stdin() -> Result<Roster, Box<dyn Error>> {
     Ok(roster)
 }
 
-fn get_players_stdin(role: PlayerType, size: usize, team: Rc<String>) -> Vec<Player> {
+fn get_players_stdin<'a>(role: PlayerType, size: usize, team: Rc<Cow<'a, str>>) -> Vec<Player<'a>> {
     let mut players: Vec<Player> = Vec::new();
     let mut players_saved = 0;
     while players_saved < size {
@@ -104,7 +105,7 @@ fn get_players_stdin(role: PlayerType, size: usize, team: Rc<String>) -> Vec<Pla
         );
         if let Ok(name) = get_string_stdin(label.as_str()) {
             players.push(Player {
-                name: name,
+                name: Cow::Owned(name),
                 team: Rc::clone(&team),
                 role: role,
             });
@@ -168,7 +169,7 @@ pub fn load(league_name: &String) -> Result<Roster, Box<dyn Error>> {
     Ok(serde_json::from_str(&json)?)
 }
 
-pub fn sample_roster() -> Roster {
+pub fn sample_roster<'a>() -> Roster<'a> {
     Roster {
         players: vec![
             Player::new_batter("Cody Bellinger", "LA Bulls"),
@@ -197,7 +198,8 @@ pub mod test {
 
     #[test]
     fn load_should_return_sample_roster_when_league_name_is_sample() {
-        let roster = load(&"sample".to_string()).unwrap();
+        let league_name = "sample".to_string();
+        let roster = load(&league_name).unwrap();
 
         assert_eq!(16, roster.players.len());
     }

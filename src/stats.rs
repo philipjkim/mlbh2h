@@ -2,6 +2,7 @@ use crate::league::{roster, scoring};
 use crate::utils;
 use clap::ArgMatches;
 use serde::{Deserialize, Serialize};
+use std::borrow::Cow;
 use std::env;
 use std::error::Error;
 use std::fmt;
@@ -30,20 +31,20 @@ impl Config {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default)]
-struct Player {
-    name: String,
-    position: String,
-    primary_position: String,
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
+struct Player<'a> {
+    name: Cow<'a, str>,
+    position: Cow<'a, str>,
+    primary_position: Cow<'a, str>,
     batter_stats: Option<BatterStats>,
     pitcher_stats: Option<PitcherStats>,
 }
 
 #[allow(dead_code)]
-impl Player {
-    fn new_batter<S>(name: S, position: S, primary_position: S, stats: BatterStats) -> Player
+impl<'a> Player<'a> {
+    fn new_batter<S>(name: S, position: S, primary_position: S, stats: BatterStats) -> Player<'a>
     where
-        S: Into<String>,
+        S: Into<Cow<'a, str>>,
     {
         Player {
             name: name.into(),
@@ -54,9 +55,9 @@ impl Player {
         }
     }
 
-    fn new_pitcher<S>(name: S, position: S, primary_position: S, stats: PitcherStats) -> Player
+    fn new_pitcher<S>(name: S, position: S, primary_position: S, stats: PitcherStats) -> Player<'a>
     where
-        S: Into<String>,
+        S: Into<Cow<'a, str>>,
     {
         Player {
             name: name.into(),
@@ -68,7 +69,7 @@ impl Player {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 struct BatterStats {
     at_bats: u32,
     runs: u32,
@@ -89,7 +90,7 @@ struct BatterStats {
     total_bases: u32,
 }
 
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 struct PitcherStats {
     innings_pitched: f32,
     wins: u32,
@@ -111,12 +112,12 @@ struct PitcherStats {
 }
 
 #[derive(Debug, Default)]
-struct FantasyPlayer {
-    team: Rc<String>,
-    player: Player,
+struct FantasyPlayer<'a> {
+    team: Rc<Cow<'a, str>>,
+    player: Player<'a>,
     fantasy_points: f32,
 }
-impl FantasyPlayer {
+impl<'a> FantasyPlayer<'a> {
     fn get_stats_string(&self, header_items: &Vec<String>) -> String {
         let bstats = &self.player.batter_stats;
         let pstats = &self.player.pitcher_stats;
@@ -124,10 +125,10 @@ impl FantasyPlayer {
         let items: Vec<String> = header_items
             .iter()
             .map(|h| match h.as_str() {
-                "Player" => self.player.name.to_owned(),
-                "Team" => self.team.to_string(),
+                "Player" => self.player.name.to_owned().into(),
+                "Team" => (*self.team).to_owned().into(),
                 "FanPts" => format!("{:.2}", self.fantasy_points),
-                "Pos" => self.player.position.to_owned(),
+                "Pos" => self.player.position.to_owned().into(),
                 "B.AB" => {
                     if let Some(s) = bstats {
                         s.at_bats.to_string()
@@ -416,7 +417,7 @@ pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
 
     let league_scoring = scoring::load(&config.league)?;
     let league_roster = roster::load(&config.league)?;
-    let fan_players = create_fantasy_players(players, &league_scoring, &league_roster)?;
+    let fan_players = create_fantasy_players(&players, &league_scoring, &league_roster)?;
 
     println!();
     print_fantasy_players(fan_players, &config.date, &league_scoring);
@@ -435,12 +436,12 @@ fn print_fantasy_players(players: Vec<FantasyPlayer>, date: &String, s: &scoring
     }
 }
 
-fn create_fantasy_players(
-    players: Vec<Player>,
+fn create_fantasy_players<'a>(
+    players: &'a Vec<Player>,
     s: &scoring::ScoringRule,
-    r: &roster::Roster,
-) -> Result<Vec<FantasyPlayer>, Box<dyn Error>> {
-    let names: Vec<String> = r.players.iter().map(|p| p.name.to_owned()).collect();
+    r: &roster::Roster<'a>,
+) -> Result<Vec<FantasyPlayer<'a>>, Box<dyn Error>> {
+    let names: Vec<Cow<'a, str>> = r.players.iter().map(|p| p.name.to_owned()).collect();
 
     let players: Vec<FantasyPlayer> = players
         .into_iter()
@@ -456,11 +457,11 @@ fn create_fantasy_players(
                 .iter()
                 .find(|rp| rp.name.to_lowercase() == p.name.to_lowercase())
                 .map(|rp| Rc::clone(&rp.team))
-                .unwrap_or(Rc::new("unknown".to_string()));
+                .unwrap_or(Rc::new(Cow::Borrowed("unknown")));
             FantasyPlayer {
                 team: team,
                 fantasy_points: get_fantasy_points(&p, s),
-                player: p,
+                player: p.clone(),
             }
         })
         .collect();
@@ -468,7 +469,7 @@ fn create_fantasy_players(
     Ok(sort_by_fantasy_points(players))
 }
 
-fn sort_by_fantasy_points(mut players: Vec<FantasyPlayer>) -> Vec<FantasyPlayer> {
+fn sort_by_fantasy_points<'a>(mut players: Vec<FantasyPlayer<'a>>) -> Vec<FantasyPlayer<'a>> {
     players.sort_by(|a, b| b.fantasy_points.partial_cmp(&a.fantasy_points).unwrap());
 
     players
@@ -530,7 +531,9 @@ fn inning_score(inning_pitched: f32, score: f32) -> f32 {
     }
 }
 
-fn convert_players(sr_players: Vec<sportradar::Player>) -> Result<Vec<Player>, Box<dyn Error>> {
+fn convert_players<'a>(
+    sr_players: Vec<sportradar::Player>,
+) -> Result<Vec<Player<'a>>, Box<dyn Error>> {
     let mut players: Vec<Player> = Vec::new();
 
     for srp in sr_players.iter() {
@@ -580,9 +583,9 @@ fn convert_players(sr_players: Vec<sportradar::Player>) -> Result<Vec<Player>, B
         };
 
         players.push(Player {
-            name: format!("{} {}", srp.preferred_name, srp.last_name),
-            position: srp.position.to_owned(),
-            primary_position: srp.primary_position.to_owned(),
+            name: Cow::Owned(format!("{} {}", srp.preferred_name, srp.last_name)),
+            position: Cow::Owned(srp.position.to_owned()),
+            primary_position: Cow::Owned(srp.primary_position.to_owned()),
             batter_stats: bs,
             pitcher_stats: ps,
         });
@@ -627,7 +630,7 @@ fn get_config(matches: &ArgMatches) -> Result<Config, Box<dyn Error>> {
 mod test {
     use super::*;
 
-    fn mock_batter() -> Player {
+    fn mock_batter<'a>() -> Player<'a> {
         Player::new_batter(
             "Trey Mancini",
             "OF",
@@ -654,7 +657,7 @@ mod test {
         )
     }
 
-    fn mock_pitcher() -> Player {
+    fn mock_pitcher<'a>() -> Player<'a> {
         Player::new_pitcher(
             "Blake Snell",
             "P",
@@ -743,7 +746,7 @@ mod test {
 
         let batter = mock_batter();
         let fp = FantasyPlayer {
-            team: Rc::new("Avengers".to_string()),
+            team: Rc::new(Cow::Borrowed("Avengers")),
             fantasy_points: get_fantasy_points(&batter, &sr),
             player: batter,
         };
@@ -755,7 +758,7 @@ mod test {
 
         let pitcher = mock_pitcher();
         let fp = FantasyPlayer {
-            team: Rc::new("Avengers".to_string()),
+            team: Rc::new(Cow::Borrowed("Avengers")),
             fantasy_points: get_fantasy_points(&pitcher, &sr),
             player: pitcher,
         };
@@ -799,11 +802,11 @@ mod test {
         let r = sample_roster();
 
         let mut batter = mock_batter();
-        batter.name = batter.name.to_lowercase();
+        batter.name = Cow::Owned(batter.name.to_lowercase());
 
         let players = vec![batter];
 
-        let f_players = create_fantasy_players(players, &sr, &r).unwrap();
+        let f_players = create_fantasy_players(&players, &sr, &r).unwrap();
 
         assert_eq!(1, f_players.len());
     }
