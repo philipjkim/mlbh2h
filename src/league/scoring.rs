@@ -53,7 +53,7 @@ pub struct ScoringRule {
 }
 
 impl ScoringRule {
-    pub fn header_items(&self) -> Vec<String> {
+    pub fn get_header_items(&self) -> Vec<String> {
         let mut items = vec!["Player", "Team", "FanPts", "Pos"];
 
         if self.batter.at_bats != 0.0 {
@@ -314,9 +314,9 @@ pub mod test {
     }
 
     #[test]
-    fn header_items_should_return_header_items_to_display() {
+    fn get_header_should_return_header_items_to_display() {
         let scoring = sample_scoring_rule();
-        let items = scoring.header_items();
+        let items = scoring.get_header_items();
 
         assert_eq!(14, items.len());
         assert_eq!(

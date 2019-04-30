@@ -70,6 +70,15 @@ The option value precedes env.",
                 )
                 .takes_value(true),
         )
+        .arg(
+            Arg::with_name("format")
+                .short("f")
+                .long("format")
+                .value_name("FORMAT")
+                .help("Sets the output format, available values: csv, pretty")
+                .takes_value(true)
+                .default_value("csv"),
+        )
         .subcommand(
             SubCommand::with_name("new-league")
                 .about("adds a new league settings (scoring rules + rosters)")

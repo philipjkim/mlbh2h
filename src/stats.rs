@@ -10,29 +10,32 @@ use std::fs;
 use std::path::Path;
 use std::rc::Rc;
 
+mod output;
 mod schedule;
 mod sportradar;
 
-pub struct Config {
-    date: String,
-    league: String,
-    api_key: String,
+pub struct Config<'a> {
+    date: Cow<'a, str>,
+    league: Cow<'a, str>,
+    api_key: Cow<'a, str>,
+    format: Cow<'a, str>,
 }
-impl Config {
-    pub fn new<S>(date: S, league: S, api_key: S) -> Config
+impl<'a> Config<'a> {
+    pub fn new<S>(date: S, league: S, api_key: S, format: S) -> Config<'a>
     where
-        S: Into<String>,
+        S: Into<Cow<'a, str>>,
     {
         Config {
             date: date.into(),
             league: league.into(),
             api_key: api_key.into(),
+            format: format.into(),
         }
     }
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-struct Player<'a> {
+pub struct Player<'a> {
     name: Cow<'a, str>,
     position: Cow<'a, str>,
     primary_position: Cow<'a, str>,
@@ -70,7 +73,7 @@ impl<'a> Player<'a> {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-struct BatterStats {
+pub struct BatterStats {
     at_bats: u32,
     runs: u32,
     hits: u32,
@@ -91,7 +94,7 @@ struct BatterStats {
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
-struct PitcherStats {
+pub struct PitcherStats {
     innings_pitched: f32,
     wins: u32,
     losses: u32,
@@ -112,267 +115,10 @@ struct PitcherStats {
 }
 
 #[derive(Debug, Default)]
-struct FantasyPlayer<'a> {
+pub struct FantasyPlayer<'a> {
     team: Rc<Cow<'a, str>>,
     player: Player<'a>,
     fantasy_points: f32,
-}
-impl<'a> FantasyPlayer<'a> {
-    fn get_stats_string(&self, header_items: &Vec<String>) -> String {
-        let bstats = &self.player.batter_stats;
-        let pstats = &self.player.pitcher_stats;
-
-        let items: Vec<String> = header_items
-            .iter()
-            .map(|h| match h.as_str() {
-                "Player" => self.player.name.to_owned().into(),
-                "Team" => (*self.team).to_owned().into(),
-                "FanPts" => format!("{:.2}", self.fantasy_points),
-                "Pos" => self.player.position.to_owned().into(),
-                "B.AB" => {
-                    if let Some(s) = bstats {
-                        s.at_bats.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "B.R" => {
-                    if let Some(s) = bstats {
-                        s.runs.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "B.H" => {
-                    if let Some(s) = bstats {
-                        s.hits.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "B.1B" => {
-                    if let Some(s) = bstats {
-                        s.singles.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "B.2B" => {
-                    if let Some(s) = bstats {
-                        s.doubles.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "B.3B" => {
-                    if let Some(s) = bstats {
-                        s.triples.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "B.HR" => {
-                    if let Some(s) = bstats {
-                        s.home_runs.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "B.RBI" => {
-                    if let Some(s) = bstats {
-                        s.runs_batted_in.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "B.SAC" => {
-                    if let Some(s) = bstats {
-                        s.sacrifice_hits.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "B.SB" => {
-                    if let Some(s) = bstats {
-                        s.stolen_bases.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "B.CS" => {
-                    if let Some(s) = bstats {
-                        s.caught_stealing.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "B.BB" => {
-                    if let Some(s) = bstats {
-                        s.walks.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "B.IBB" => {
-                    if let Some(s) = bstats {
-                        s.intentional_walks.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "B.HBP" => {
-                    if let Some(s) = bstats {
-                        s.hit_by_pitch.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "B.K" => {
-                    if let Some(s) = bstats {
-                        s.strikeouts.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "B.GIDP" => {
-                    if let Some(s) = bstats {
-                        s.ground_into_double_play.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "B.TB" => {
-                    if let Some(s) = bstats {
-                        s.total_bases.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "P.IP" => {
-                    if let Some(s) = pstats {
-                        s.innings_pitched.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "P.W" => {
-                    if let Some(s) = pstats {
-                        s.wins.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "P.L" => {
-                    if let Some(s) = pstats {
-                        s.losses.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "P.CG" => {
-                    if let Some(s) = pstats {
-                        s.complete_games.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "P.SHO" => {
-                    if let Some(s) = pstats {
-                        s.shutouts.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "P.SV" => {
-                    if let Some(s) = pstats {
-                        s.saves.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "P.OUT" => {
-                    if let Some(s) = pstats {
-                        s.outs.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "P.H" => {
-                    if let Some(s) = pstats {
-                        s.hits.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "P.ER" => {
-                    if let Some(s) = pstats {
-                        s.earned_runs.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "P.HR" => {
-                    if let Some(s) = pstats {
-                        s.home_runs.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "P.BB" => {
-                    if let Some(s) = pstats {
-                        s.walks.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "P.IBB" => {
-                    if let Some(s) = pstats {
-                        s.intentional_walks.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "P.HBP" => {
-                    if let Some(s) = pstats {
-                        s.hit_batters.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "P.K" => {
-                    if let Some(s) = pstats {
-                        s.strikeouts.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "P.SB" => {
-                    if let Some(s) = pstats {
-                        s.stolen_bases_allowed.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "P.GIDP" => {
-                    if let Some(s) = pstats {
-                        s.batters_grounded_into_double_plays.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                "P.TB" => {
-                    if let Some(s) = pstats {
-                        s.total_bases_allowed.to_string()
-                    } else {
-                        "".to_string()
-                    }
-                }
-                _ => "".to_string(),
-            })
-            .collect();
-
-        items.join(",")
-    }
 }
 
 #[derive(Debug, Clone)]
@@ -397,7 +143,8 @@ impl fmt::Display for StatFileExists {
 impl Error for StatFileExists {}
 
 pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
-    let config = get_config(matches)?;
+    let env_api_key = get_env_api_key();
+    let config = get_config(matches, &env_api_key)?;
 
     let filepath = &format!(
         "{}/.mlbh2h/stats/{}.json",
@@ -415,24 +162,30 @@ pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
         }
     };
 
-    let league_scoring = scoring::load(&config.league)?;
-    let league_roster = roster::load(&config.league)?;
+    let league = config.league.to_owned().into();
+    let league_scoring = scoring::load(&league)?;
+    let league_roster = roster::load(&league)?;
     let fan_players = create_fantasy_players(&players, &league_scoring, &league_roster)?;
 
     println!();
-    print_fantasy_players(fan_players, &config.date, &league_scoring);
+    print_fantasy_players(fan_players, &config, &league_scoring);
 
     Ok(())
 }
 
-fn print_fantasy_players(players: Vec<FantasyPlayer>, date: &String, s: &scoring::ScoringRule) {
+fn print_fantasy_players(players: Vec<FantasyPlayer>, config: &Config, s: &scoring::ScoringRule) {
+    let date = &config.date;
     println!("{}", date);
 
-    let header_items = s.header_items();
-    println!("{}", header_items.join(","));
+    let header_items = s.get_header_items();
 
+    let is_csv = config.format == Cow::Borrowed("csv");
+    println!("{}", output::get_header_string(&header_items, is_csv));
     for p in players.iter() {
-        println!("{}", p.get_stats_string(&header_items));
+        println!(
+            "{}",
+            output::get_player_stats_string(p, &header_items, is_csv)
+        );
     }
 }
 
@@ -475,7 +228,7 @@ fn sort_by_fantasy_points<'a>(mut players: Vec<FantasyPlayer<'a>>) -> Vec<Fantas
     players
 }
 
-fn get_fantasy_points(p: &Player, s: &scoring::ScoringRule) -> f32 {
+pub fn get_fantasy_points(p: &Player, s: &scoring::ScoringRule) -> f32 {
     if let Some(stats) = &p.batter_stats {
         return (stats.at_bats as f32 * s.batter.at_bats)
             + (stats.runs as f32 * s.batter.runs)
@@ -612,9 +365,15 @@ fn get_players_from_file(filepath: &String) -> Result<Vec<Player>, Box<dyn Error
     Ok(serde_json::from_str(&json)?)
 }
 
-fn get_config(matches: &ArgMatches) -> Result<Config, Box<dyn Error>> {
-    let env_api_key = env::var("SPORTRADAR_API_KEY").unwrap_or("".to_string());
-    let api_key = matches.value_of("api_key").unwrap_or(env_api_key.as_str());
+fn get_env_api_key() -> String {
+    env::var("SPORTRADAR_API_KEY").unwrap_or("".to_string())
+}
+
+fn get_config<'a>(
+    matches: &'a ArgMatches,
+    env_api_key: &'a String,
+) -> Result<Config<'a>, Box<dyn Error>> {
+    let api_key = matches.value_of("api_key").unwrap_or(env_api_key);
     if api_key == "" {
         return Err(Box::new(ApiKeyNotFound));
     }
@@ -623,6 +382,7 @@ fn get_config(matches: &ArgMatches) -> Result<Config, Box<dyn Error>> {
         matches.value_of("date").unwrap(),
         matches.value_of("league").unwrap(),
         api_key,
+        matches.value_of("format").unwrap(),
     ))
 }
 
@@ -735,38 +495,6 @@ mod test {
 
         assert_eq!(13.5, get_fantasy_points(&batter, &sr));
         assert_eq!(32.5, get_fantasy_points(&pitcher, &sr));
-    }
-
-    #[test]
-    fn fantasy_player_get_stats_string_should_return_string() {
-        use crate::league::scoring::sample_scoring_rule;
-        let sr = sample_scoring_rule();
-
-        let header_items = sr.header_items();
-
-        let batter = mock_batter();
-        let fp = FantasyPlayer {
-            team: Rc::new(Cow::Borrowed("Avengers")),
-            fantasy_points: get_fantasy_points(&batter, &sr),
-            player: batter,
-        };
-
-        assert_eq!(
-            "Trey Mancini,Avengers,13.50,OF,2,3,1,2,0,,,,,",
-            fp.get_stats_string(&header_items)
-        );
-
-        let pitcher = mock_pitcher();
-        let fp = FantasyPlayer {
-            team: Rc::new(Cow::Borrowed("Avengers")),
-            fantasy_points: get_fantasy_points(&pitcher, &sr),
-            player: pitcher,
-        };
-
-        assert_eq!(
-            "Blake Snell,Avengers,32.50,P,,,,,,6,1,0,1,11",
-            fp.get_stats_string(&header_items)
-        );
     }
 
     #[test]
