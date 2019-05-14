@@ -79,6 +79,13 @@ The option value precedes env.",
                 .takes_value(true)
                 .default_value("csv"),
         )
+        .arg(
+            Arg::with_name("all")
+                .short("a")
+                .long("all")
+                .help("If set, all FA players are also shown")
+                .takes_value(false),
+        )
         .subcommand(
             SubCommand::with_name("new-league")
                 .about("adds a new league settings (scoring rules + rosters)")

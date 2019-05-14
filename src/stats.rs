@@ -19,9 +19,10 @@ pub struct Config<'a> {
     league: Cow<'a, str>,
     api_key: Cow<'a, str>,
     format: Cow<'a, str>,
+    show_all: bool,
 }
 impl<'a> Config<'a> {
-    pub fn new<S>(date: S, league: S, api_key: S, format: S) -> Config<'a>
+    pub fn new<S>(date: S, league: S, api_key: S, format: S, show_all: bool) -> Config<'a>
     where
         S: Into<Cow<'a, str>>,
     {
@@ -30,6 +31,7 @@ impl<'a> Config<'a> {
             league: league.into(),
             api_key: api_key.into(),
             format: format.into(),
+            show_all: show_all,
         }
     }
 }
@@ -165,7 +167,8 @@ pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
     let league = config.league.to_owned().into();
     let league_scoring = scoring::load(&league)?;
     let league_roster = roster::load(&league)?;
-    let fan_players = create_fantasy_players(&players, &league_scoring, &league_roster)?;
+    let fan_players =
+        create_fantasy_players(&players, &league_scoring, &league_roster, config.show_all)?;
 
     println!();
     print_fantasy_players(fan_players, &config, &league_scoring);
@@ -193,16 +196,21 @@ fn create_fantasy_players<'a>(
     players: &'a Vec<Player>,
     s: &scoring::ScoringRule,
     r: &roster::Roster<'a>,
+    show_all: bool,
 ) -> Result<Vec<FantasyPlayer<'a>>, Box<dyn Error>> {
     let names: Vec<Cow<'a, str>> = r.players.iter().map(|p| p.name.to_owned()).collect();
 
     let players: Vec<FantasyPlayer> = players
         .into_iter()
         .filter(|p| {
-            names
-                .iter()
-                .find(|&n| *n.to_lowercase() == p.name.to_lowercase())
-                .is_some()
+            if show_all {
+                true
+            } else {
+                names
+                    .iter()
+                    .find(|&n| *n.to_lowercase() == p.name.to_lowercase())
+                    .is_some()
+            }
         })
         .map(|p| {
             let team = r
@@ -210,7 +218,7 @@ fn create_fantasy_players<'a>(
                 .iter()
                 .find(|rp| rp.name.to_lowercase() == p.name.to_lowercase())
                 .map(|rp| Rc::clone(&rp.team))
-                .unwrap_or(Rc::new(Cow::Borrowed("unknown")));
+                .unwrap_or(Rc::new(Cow::Borrowed("<FA>")));
             FantasyPlayer {
                 team: team,
                 fantasy_points: get_fantasy_points(&p, s),
@@ -383,6 +391,7 @@ fn get_config<'a>(
         matches.value_of("league").unwrap(),
         api_key,
         matches.value_of("format").unwrap(),
+        matches.occurrences_of("all") > 0,
     ))
 }
 
@@ -413,6 +422,33 @@ mod test {
                 strikeouts: 0,
                 ground_into_double_play: 0,
                 total_bases: 6,
+            },
+        )
+    }
+
+    fn mock_fa_batter<'a>() -> Player<'a> {
+        Player::new_batter(
+            "Andrew McCutchen",
+            "OF",
+            "LF",
+            BatterStats {
+                at_bats: 3,
+                runs: 0,
+                hits: 1,
+                singles: 1,
+                doubles: 0,
+                triples: 0,
+                home_runs: 0,
+                runs_batted_in: 0,
+                sacrifice_hits: 0,
+                stolen_bases: 0,
+                caught_stealing: 0,
+                walks: 1,
+                intentional_walks: 0,
+                hit_by_pitch: 0,
+                strikeouts: 0,
+                ground_into_double_play: 0,
+                total_bases: 1,
             },
         )
     }
@@ -534,8 +570,27 @@ mod test {
 
         let players = vec![batter];
 
-        let f_players = create_fantasy_players(&players, &sr, &r).unwrap();
+        let f_players = create_fantasy_players(&players, &sr, &r, false).unwrap();
 
         assert_eq!(1, f_players.len());
+    }
+
+    #[test]
+    fn create_fantasy_players_should_show_fa_players_when_show_all_is_true() {
+        use crate::league::scoring::sample_scoring_rule;
+        let sr = sample_scoring_rule();
+
+        use crate::league::roster::sample_roster;
+        let r = sample_roster();
+
+        let players = vec![mock_batter(), mock_fa_batter()];
+
+        let f_players = create_fantasy_players(&players, &sr, &r, false).unwrap();
+
+        assert_eq!(1, f_players.len());
+
+        let f_players = create_fantasy_players(&players, &sr, &r, true).unwrap();
+
+        assert_eq!(2, f_players.len());
     }
 }
