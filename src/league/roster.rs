@@ -107,7 +107,7 @@ fn get_players_stdin<'a>(role: PlayerType, size: usize, team: Rc<Cow<'a, str>>) 
             players.push(Player {
                 name: Cow::Owned(name),
                 team: Rc::clone(&team),
-                role: role,
+                role,
             });
             players_saved += 1;
         }
@@ -146,7 +146,7 @@ fn get_string_stdin(label: &str) -> Result<String, Box<dyn Error>> {
         }
 
         let s = input_str.trim();
-        if s.len() >= 1 {
+        if !s.is_empty() {
             return Ok(s.to_string());
         }
 
@@ -154,7 +154,7 @@ fn get_string_stdin(label: &str) -> Result<String, Box<dyn Error>> {
     }
 }
 
-pub fn load(league_name: &String) -> Result<Roster, Box<dyn Error>> {
+pub fn load(league_name: &str) -> Result<Roster, Box<dyn Error>> {
     if league_name == "sample" {
         return Ok(sample_roster());
     }

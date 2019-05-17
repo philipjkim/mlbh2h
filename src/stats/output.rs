@@ -1,6 +1,6 @@
 use crate::stats::FantasyPlayer;
 
-pub fn get_header_string(headers: &Vec<String>, is_csv: bool) -> String {
+pub fn get_header_string(headers: &[String], is_csv: bool) -> String {
     if is_csv {
         return headers.join(",");
     }
@@ -20,12 +20,13 @@ pub fn get_header_string(headers: &Vec<String>, is_csv: bool) -> String {
     items.join("")
 }
 
-pub fn get_player_stats_string(fp: &FantasyPlayer, headers: &Vec<String>, is_csv: bool) -> String {
+#[allow(clippy::cyclomatic_complexity)]
+pub fn get_player_stats_string(fp: &FantasyPlayer, headers: &[String], is_csv: bool) -> String {
     let bstats = &fp.player.batter_stats;
     let pstats = &fp.player.pitcher_stats;
 
-    match is_csv {
-        true => headers
+    if is_csv {
+        headers
             .iter()
             .map(|h| match h.as_str() {
                 "Player" => fp.player.name.to_owned().into(),
@@ -273,8 +274,9 @@ pub fn get_player_stats_string(fp: &FantasyPlayer, headers: &Vec<String>, is_csv
                 _ => "".to_string(),
             })
             .collect::<Vec<_>>()
-            .join(","),
-        false => headers
+            .join(",")
+    } else {
+        headers
             .iter()
             .map(|h| match h.as_str() {
                 "Player" => {
@@ -530,7 +532,7 @@ pub fn get_player_stats_string(fp: &FantasyPlayer, headers: &Vec<String>, is_csv
                 _ => "".to_string(),
             })
             .collect::<Vec<_>>()
-            .join(""),
+            .join("")
     }
 }
 
@@ -597,7 +599,7 @@ mod test {
     fn get_header_string_should_return_csv_or_pretty_format_string() {
         let headers: Vec<_> = vec!["Player", "Team", "FanPts", "Pos", "B.HR", "P.K"]
             .into_iter()
-            .map(|s| s.to_string())
+            .map(std::string::ToString::to_string)
             .collect();
 
         let csv = get_header_string(&headers, true);

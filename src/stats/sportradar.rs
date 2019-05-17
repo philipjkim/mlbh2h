@@ -198,7 +198,7 @@ fn get_players_from_string(json: String) -> Result<Vec<Player>, Box<dyn Error>> 
     Ok(players)
 }
 
-fn get_game_summary_url(config: &Config, game_id: &String) -> String {
+fn get_game_summary_url(config: &Config, game_id: &str) -> String {
     format!(
         "https://api.sportradar.us/mlb-t6/games/{}/summary.json?api_key={}",
         game_id, config.api_key

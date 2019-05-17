@@ -33,7 +33,7 @@ impl<'a> Config<'a> {
             league: league.into(),
             api_key: api_key.into(),
             format: format.into(),
-            show_all: show_all,
+            show_all,
         }
     }
 }
@@ -220,14 +220,13 @@ pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
         config.date
     );
 
-    let players = match Path::new(filepath).exists() {
-        true => get_players_from_file(filepath)?,
-        false => {
-            let sr_players = sportradar::get_players(&config)?;
-            let ps = convert_players(sr_players)?;
-            save_players(filepath, &ps)?;
-            ps
-        }
+    let players = if Path::new(filepath).exists() {
+        get_players_from_file(filepath)?
+    } else {
+        let sr_players = sportradar::get_players(&config)?;
+        let ps = convert_players(sr_players)?;
+        save_players(filepath, &ps)?;
+        ps
     };
 
     let league = config.league.to_owned().into();
@@ -259,23 +258,23 @@ fn print_fantasy_players(players: Vec<FantasyPlayer>, config: &Config, s: &scori
 }
 
 fn create_fantasy_players<'a>(
-    players: &'a Vec<Player>,
+    players: &'a [Player],
     s: &scoring::ScoringRule,
     r: &roster::Roster<'a>,
     show_all: bool,
 ) -> Result<Vec<FantasyPlayer<'a>>, Box<dyn Error>> {
     let names: Vec<Cow<'a, str>> = r.players.iter().map(|p| p.name.to_owned()).collect();
 
+    let team_fa = Rc::new(Cow::Borrowed("<FA>"));
     let players: Vec<FantasyPlayer> = players
-        .into_iter()
+        .iter()
         .filter(|p| {
             if show_all {
                 true
             } else {
                 names
                     .iter()
-                    .find(|&n| *n.to_lowercase() == p.name.to_lowercase())
-                    .is_some()
+                    .any(|n| n.to_lowercase() == p.name.to_lowercase())
             }
         })
         .map(|p| {
@@ -284,9 +283,9 @@ fn create_fantasy_players<'a>(
                 .iter()
                 .find(|rp| rp.name.to_lowercase() == p.name.to_lowercase())
                 .map(|rp| Rc::clone(&rp.team))
-                .unwrap_or(Rc::new(Cow::Borrowed("<FA>")));
+                .unwrap_or_else(|| Rc::clone(&team_fa));
             FantasyPlayer {
-                team: team,
+                team,
                 fantasy_points: get_fantasy_points(&p, s),
                 player: p.clone(),
             }
@@ -311,8 +310,8 @@ fn merge_double_header_data<'a>(players: Vec<FantasyPlayer<'a>>) -> Vec<FantasyP
         m
     });
 
-    // TODO: remove data cloning (fp.clone())
-    map.values().map(|fp| fp.clone()).collect::<Vec<_>>()
+    // TODO: remove data cloning
+    map.values().cloned().collect::<Vec<_>>()
 }
 
 fn sort_by_fantasy_points<'a>(mut players: Vec<FantasyPlayer<'a>>) -> Vec<FantasyPlayer<'a>> {
@@ -363,7 +362,7 @@ pub fn get_fantasy_points(p: &Player, s: &scoring::ScoringRule) -> f32 {
             + (stats.total_bases_allowed as f32 * s.pitcher.total_bases_allowed);
     }
 
-    return 0.0;
+    0.0
 }
 
 fn inning_score(inning_pitched: f32, score: f32) -> f32 {
@@ -440,7 +439,7 @@ fn convert_players<'a>(
     Ok(players)
 }
 
-fn save_players(filepath: &String, players: &Vec<Player>) -> Result<(), Box<dyn Error>> {
+fn save_players(filepath: &str, players: &[Player]) -> Result<(), Box<dyn Error>> {
     if Path::new(filepath).exists() {
         return Err(Box::new(StatFileExists(filepath.to_string())));
     }
@@ -452,19 +451,19 @@ fn save_players(filepath: &String, players: &Vec<Player>) -> Result<(), Box<dyn 
     Ok(())
 }
 
-fn get_players_from_file(filepath: &String) -> Result<Vec<Player>, Box<dyn Error>> {
+fn get_players_from_file(filepath: &str) -> Result<Vec<Player>, Box<dyn Error>> {
     println!("Loading players from file {}", filepath);
     let json = fs::read_to_string(filepath)?;
     Ok(serde_json::from_str(&json)?)
 }
 
 fn get_env_api_key() -> String {
-    env::var("SPORTRADAR_API_KEY").unwrap_or("".to_string())
+    env::var("SPORTRADAR_API_KEY").unwrap_or_default()
 }
 
 fn get_config<'a>(
     matches: &'a ArgMatches,
-    env_api_key: &'a String,
+    env_api_key: &'a str,
 ) -> Result<Config<'a>, Box<dyn Error>> {
     let api_key = matches.value_of("api_key").unwrap_or(env_api_key);
     if api_key == "" {
@@ -483,6 +482,7 @@ fn get_config<'a>(
 #[cfg(test)]
 mod test {
     use super::*;
+    use crate::utils::assert_eq_f32;
 
     fn mock_batter<'a>() -> Player<'a> {
         Player::new_batter(
@@ -614,8 +614,8 @@ mod test {
         let batter = mock_batter();
         let pitcher = mock_pitcher();
 
-        assert_eq!(13.5, get_fantasy_points(&batter, &sr));
-        assert_eq!(32.5, get_fantasy_points(&pitcher, &sr));
+        assert_eq_f32(13.5, get_fantasy_points(&batter, &sr));
+        assert_eq_f32(32.5, get_fantasy_points(&pitcher, &sr));
     }
 
     #[test]
@@ -637,9 +637,9 @@ mod test {
 
     #[test]
     fn inning_score_should_return_score() {
-        assert_eq!(9.0, inning_score(3.0, 3.0));
-        assert_eq!(10.0, inning_score(3.1, 3.0));
-        assert_eq!(11.0, inning_score(3.2, 3.0));
+        assert_eq_f32(9.0, inning_score(3.0, 3.0));
+        assert_eq_f32(10.0, inning_score(3.1, 3.0));
+        assert_eq_f32(11.0, inning_score(3.2, 3.0));
     }
 
     #[test]

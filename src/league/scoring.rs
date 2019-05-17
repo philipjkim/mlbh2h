@@ -53,6 +53,7 @@ pub struct ScoringRule {
 }
 
 impl ScoringRule {
+    #[allow(clippy::cyclomatic_complexity)]
     pub fn get_header_items(&self) -> Vec<String> {
         let mut items = vec!["Player", "Team", "FanPts", "Pos"];
 
@@ -160,7 +161,10 @@ impl ScoringRule {
             items.push("P.TB");
         }
 
-        items.into_iter().map(|i| i.to_string()).collect()
+        items
+            .into_iter()
+            .map(std::string::ToString::to_string)
+            .collect()
     }
 }
 
@@ -231,7 +235,7 @@ fn get_stdin(label: &str) -> Result<f32, Box<dyn Error>> {
         }
 
         let trimmed = input_str.trim();
-        if trimmed.len() == 0 {
+        if trimmed.is_empty() {
             return Ok(0.0);
         }
         match trimmed.parse::<f32>() {
@@ -243,6 +247,7 @@ fn get_stdin(label: &str) -> Result<f32, Box<dyn Error>> {
     }
 }
 
+#[allow(clippy::ptr_arg)]
 pub fn load(league_name: &String) -> Result<ScoringRule, Box<dyn Error>> {
     if league_name == "sample" {
         return Ok(sample_scoring_rule());
@@ -304,13 +309,14 @@ pub fn sample_scoring_rule() -> ScoringRule {
 #[cfg(test)]
 pub mod test {
     use super::*;
+    use crate::utils::assert_eq_f32;
 
     #[test]
     fn load_should_return_sample_scoring_rule_when_league_name_is_sample() {
         let scoring = load(&"sample".to_string()).unwrap();
 
-        assert_eq!(0.5, scoring.batter.hits);
-        assert_eq!(-0.5, scoring.pitcher.earned_runs);
+        assert_eq_f32(0.5, scoring.batter.hits);
+        assert_eq_f32(-0.5, scoring.pitcher.earned_runs);
     }
 
     #[test]

@@ -16,7 +16,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         return Ok(());
     }
 
-    if let Some(_) = matches.subcommand_matches("list-leagues") {
+    if matches.subcommand_matches("list-leagues").is_some() {
         if let Err(e) = league::list_leagues() {
             println!("{}", e);
             return Err(e);

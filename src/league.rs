@@ -33,7 +33,7 @@ impl Error for InvalidLeagueName {}
 
 pub fn add_new_league(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
     let league_name = matches.value_of("name").unwrap();
-    if league_name.starts_with("_") {
+    if league_name.starts_with('_') {
         return Err(Box::new(InvalidLeagueName));
     }
 
@@ -58,9 +58,9 @@ pub fn add_new_league(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
     match roster {
         Ok(r) => {
             println!("Saved the roster: {:#?}", r);
-            return Ok(());
+            Ok(())
         }
-        Err(e) => return Err(e),
+        Err(e) => Err(e),
     }
 }
 
