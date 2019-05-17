@@ -3,10 +3,12 @@ use crate::utils;
 use clap::ArgMatches;
 use serde::{Deserialize, Serialize};
 use std::borrow::Cow;
+use std::collections::HashMap;
 use std::env;
 use std::error::Error;
 use std::fmt;
 use std::fs;
+use std::ops::Add;
 use std::path::Path;
 use std::rc::Rc;
 
@@ -94,6 +96,31 @@ pub struct BatterStats {
     ground_into_double_play: u32,
     total_bases: u32,
 }
+impl Add for BatterStats {
+    type Output = BatterStats;
+
+    fn add(self, other: BatterStats) -> BatterStats {
+        BatterStats {
+            at_bats: self.at_bats + other.at_bats,
+            runs: self.runs + other.runs,
+            hits: self.hits + other.hits,
+            singles: self.singles + other.singles,
+            doubles: self.doubles + other.doubles,
+            triples: self.triples + other.triples,
+            home_runs: self.home_runs + other.home_runs,
+            runs_batted_in: self.runs_batted_in + other.runs_batted_in,
+            sacrifice_hits: self.sacrifice_hits + other.sacrifice_hits,
+            stolen_bases: self.stolen_bases + other.stolen_bases,
+            caught_stealing: self.caught_stealing + other.caught_stealing,
+            walks: self.walks + other.walks,
+            intentional_walks: self.intentional_walks + other.intentional_walks,
+            hit_by_pitch: self.hit_by_pitch + other.hit_by_pitch,
+            strikeouts: self.strikeouts + other.strikeouts,
+            ground_into_double_play: self.ground_into_double_play + other.ground_into_double_play,
+            total_bases: self.total_bases + other.total_bases,
+        }
+    }
+}
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct PitcherStats {
@@ -115,12 +142,51 @@ pub struct PitcherStats {
     batters_grounded_into_double_plays: u32,
     total_bases_allowed: u32,
 }
+impl Add for PitcherStats {
+    type Output = PitcherStats;
 
-#[derive(Debug, Default)]
+    fn add(self, other: PitcherStats) -> PitcherStats {
+        PitcherStats {
+            innings_pitched: self.innings_pitched + other.innings_pitched,
+            wins: self.wins + other.wins,
+            losses: self.losses + other.losses,
+            complete_games: self.complete_games + other.complete_games,
+            shutouts: self.shutouts + other.shutouts,
+            saves: self.saves + other.saves,
+            outs: self.outs + other.outs,
+            hits: self.hits + other.hits,
+            earned_runs: self.earned_runs + other.earned_runs,
+            home_runs: self.home_runs + other.home_runs,
+            walks: self.walks + other.walks,
+            intentional_walks: self.intentional_walks + other.intentional_walks,
+            hit_batters: self.hit_batters + other.hit_batters,
+            strikeouts: self.strikeouts + other.strikeouts,
+            stolen_bases_allowed: self.stolen_bases_allowed + other.stolen_bases_allowed,
+            batters_grounded_into_double_plays: self.batters_grounded_into_double_plays
+                + other.batters_grounded_into_double_plays,
+            total_bases_allowed: self.total_bases_allowed + other.total_bases_allowed,
+        }
+    }
+}
+
+#[derive(Debug, Default, Clone)]
 pub struct FantasyPlayer<'a> {
     team: Rc<Cow<'a, str>>,
     player: Player<'a>,
     fantasy_points: f32,
+}
+impl<'a> FantasyPlayer<'a> {
+    fn add_stats(&mut self, other: FantasyPlayer<'a>) {
+        if let Some(bs) = self.player.batter_stats.clone() {
+            self.player.batter_stats = Some(bs + other.player.batter_stats.unwrap())
+        }
+
+        if let Some(ps) = self.player.pitcher_stats.clone() {
+            self.player.pitcher_stats = Some(ps + other.player.pitcher_stats.unwrap())
+        }
+
+        self.fantasy_points += other.fantasy_points;
+    }
 }
 
 #[derive(Debug, Clone)]
@@ -227,7 +293,26 @@ fn create_fantasy_players<'a>(
         })
         .collect();
 
+    let players = merge_double_header_data(players);
+
     Ok(sort_by_fantasy_points(players))
+}
+
+fn merge_double_header_data<'a>(players: Vec<FantasyPlayer<'a>>) -> Vec<FantasyPlayer<'a>> {
+    let mut map = HashMap::<String, FantasyPlayer<'a>>::new();
+    let map = players.into_iter().fold(&mut map, |m, p| {
+        let name = p.player.name.to_string();
+        m.entry(name)
+            .and_modify(|x| {
+                // TODO: remove data cloning (p.clone())
+                x.add_stats(p.clone());
+            })
+            .or_insert(p);
+        m
+    });
+
+    // TODO: remove data cloning (fp.clone())
+    map.values().map(|fp| fp.clone()).collect::<Vec<_>>()
 }
 
 fn sort_by_fantasy_points<'a>(mut players: Vec<FantasyPlayer<'a>>) -> Vec<FantasyPlayer<'a>> {
@@ -592,5 +677,63 @@ mod test {
         let f_players = create_fantasy_players(&players, &sr, &r, true).unwrap();
 
         assert_eq!(2, f_players.len());
+    }
+
+    #[test]
+    fn add_stats_for_fantasy_player_should_sum_stats() {
+        let team = Rc::new(Cow::Borrowed("A-Team"));
+        let p = mock_batter();
+
+        let mut fp1 = FantasyPlayer {
+            team: team.clone(),
+            player: mock_batter(),
+            ..Default::default()
+        };
+        let fp2 = FantasyPlayer {
+            team: team.clone(),
+            player: mock_batter(),
+            ..Default::default()
+        };
+        fp1.add_stats(fp2);
+
+        assert_eq!(
+            p.batter_stats.unwrap().at_bats * 2,
+            fp1.player.batter_stats.unwrap().at_bats
+        );
+
+        assert_eq!(true, fp1.player.pitcher_stats.is_none());
+    }
+
+    #[test]
+    fn merge_double_header_data_should_remove_dups() {
+        let fantasy_players = vec![
+            FantasyPlayer {
+                player: mock_batter(),
+                ..Default::default()
+            },
+            FantasyPlayer {
+                player: mock_pitcher(),
+                ..Default::default()
+            },
+            FantasyPlayer {
+                player: mock_batter(),
+                ..Default::default()
+            },
+        ];
+
+        let merged = merge_double_header_data(fantasy_players);
+
+        assert_eq!(2, merged.len());
+        assert_eq!(
+            mock_batter().batter_stats.unwrap().at_bats * 2,
+            merged
+                .into_iter()
+                .find(|fp| fp.player.batter_stats.is_some())
+                .unwrap()
+                .player
+                .batter_stats
+                .unwrap()
+                .at_bats
+        );
     }
 }
