@@ -281,7 +281,11 @@ pub fn get_player_stats_string(fp: &FantasyPlayer, headers: &[String], is_csv: b
             .map(|h| match h.as_str() {
                 "Player" => {
                     let mut name = fp.player.name.to_owned().to_string();
-                    name.truncate(17);
+                    let mut new_len = 17;
+                    while !name.is_char_boundary(new_len) {
+                        new_len -= 1;
+                    }
+                    name.truncate(new_len);
                     format!("{:18}", name)
                 }
                 "Team" => {
