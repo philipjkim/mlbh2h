@@ -20,7 +20,7 @@ pub fn get_header_string(headers: &[String], is_csv: bool) -> String {
     items.join("")
 }
 
-#[allow(clippy::cyclomatic_complexity)]
+#[allow(clippy::cognitive_complexity)]
 pub fn get_player_stats_string(fp: &FantasyPlayer, headers: &[String], is_csv: bool) -> String {
     let bstats = &fp.player.batter_stats;
     let pstats = &fp.player.pitcher_stats;

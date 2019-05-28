@@ -53,7 +53,7 @@ pub struct ScoringRule {
 }
 
 impl ScoringRule {
-    #[allow(clippy::cyclomatic_complexity)]
+    #[allow(clippy::cognitive_complexity)]
     pub fn get_header_items(&self) -> Vec<String> {
         let mut items = vec!["Player", "Team", "FanPts", "Pos"];
 
@@ -165,6 +165,20 @@ impl ScoringRule {
             .into_iter()
             .map(std::string::ToString::to_string)
             .collect()
+    }
+
+    pub fn get_header_items_for_batter(&self) -> Vec<String> {
+        self.get_header_items()
+            .into_iter()
+            .filter(|x| !x.starts_with("P."))
+            .collect::<Vec<_>>()
+    }
+
+    pub fn get_header_items_for_pitcher(&self) -> Vec<String> {
+        self.get_header_items()
+            .into_iter()
+            .filter(|x| !x.starts_with("B."))
+            .collect::<Vec<_>>()
     }
 }
 
@@ -320,13 +334,37 @@ pub mod test {
     }
 
     #[test]
-    fn get_header_should_return_header_items_to_display() {
+    fn get_header_items_should_return_header_items_to_display() {
         let scoring = sample_scoring_rule();
         let items = scoring.get_header_items();
 
         assert_eq!(14, items.len());
         assert_eq!(
             "Player,Team,FanPts,Pos,B.R,B.H,B.HR,B.RBI,B.SB,P.IP,P.W,P.SV,P.ER,P.K",
+            items.join(",")
+        );
+    }
+
+    #[test]
+    fn get_header_items_for_batter_should_return_header_items_for_batter() {
+        let scoring = sample_scoring_rule();
+        let items = scoring.get_header_items_for_batter();
+
+        assert_eq!(9, items.len());
+        assert_eq!(
+            "Player,Team,FanPts,Pos,B.R,B.H,B.HR,B.RBI,B.SB",
+            items.join(",")
+        );
+    }
+
+    #[test]
+    fn get_header_items_for_pitcher_should_return_header_items_for_pitcher() {
+        let scoring = sample_scoring_rule();
+        let items = scoring.get_header_items_for_pitcher();
+
+        assert_eq!(9, items.len());
+        assert_eq!(
+            "Player,Team,FanPts,Pos,P.IP,P.W,P.SV,P.ER,P.K",
             items.join(",")
         );
     }

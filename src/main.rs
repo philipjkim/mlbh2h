@@ -86,6 +86,13 @@ The option value precedes env.",
                 .help("If set, all FA players are also shown")
                 .takes_value(false),
         )
+        .arg(
+            Arg::with_name("top10")
+                .short("t")
+                .long("top10")
+                .help("If set, top 10 batters/pitchers are shown separately")
+                .takes_value(false),
+        )
         .subcommand(
             SubCommand::with_name("new-league")
                 .about("adds a new league settings (scoring rules + rosters)")

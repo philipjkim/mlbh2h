@@ -22,9 +22,17 @@ pub struct Config<'a> {
     api_key: Cow<'a, str>,
     format: Cow<'a, str>,
     show_all: bool,
+    top_ten: bool,
 }
 impl<'a> Config<'a> {
-    pub fn new<S>(date: S, league: S, api_key: S, format: S, show_all: bool) -> Config<'a>
+    pub fn new<S>(
+        date: S,
+        league: S,
+        api_key: S,
+        format: S,
+        show_all: bool,
+        top_ten: bool,
+    ) -> Config<'a>
     where
         S: Into<Cow<'a, str>>,
     {
@@ -34,6 +42,7 @@ impl<'a> Config<'a> {
             api_key: api_key.into(),
             format: format.into(),
             show_all,
+            top_ten,
         }
     }
 }
@@ -248,12 +257,52 @@ fn print_fantasy_players(players: Vec<FantasyPlayer>, config: &Config, s: &scori
     let header_items = s.get_header_items();
 
     let is_csv = config.format == Cow::Borrowed("csv");
-    println!("{}", output::get_header_string(&header_items, is_csv));
-    for p in players.iter() {
+
+    if config.top_ten {
+        let mut batters: Vec<FantasyPlayer> = vec![];
+        let mut pitchers: Vec<FantasyPlayer> = vec![];
+        for p in players.into_iter() {
+            if p.player.batter_stats.is_some() && batters.len() < 10 {
+                batters.push(p);
+            } else if p.player.pitcher_stats.is_some() && pitchers.len() < 10 {
+                pitchers.push(p);
+            }
+        }
+
+        let batter_header_items = s.get_header_items_for_batter();
+        let pitcher_header_items = s.get_header_items_for_pitcher();
+
+        println!("\n## Top 10 Batters ##");
         println!(
             "{}",
-            output::get_player_stats_string(p, &header_items, is_csv)
+            output::get_header_string(&batter_header_items, is_csv)
         );
+        for p in batters.iter() {
+            println!(
+                "{}",
+                output::get_player_stats_string(p, &batter_header_items, is_csv)
+            );
+        }
+
+        println!("\n## Top 10 Pitchers ##");
+        println!(
+            "{}",
+            output::get_header_string(&pitcher_header_items, is_csv)
+        );
+        for p in pitchers.iter() {
+            println!(
+                "{}",
+                output::get_player_stats_string(p, &pitcher_header_items, is_csv)
+            );
+        }
+    } else {
+        println!("{}", output::get_header_string(&header_items, is_csv));
+        for p in players.iter() {
+            println!(
+                "{}",
+                output::get_player_stats_string(p, &header_items, is_csv)
+            );
+        }
     }
 }
 
@@ -476,6 +525,7 @@ fn get_config<'a>(
         api_key,
         matches.value_of("format").unwrap(),
         matches.occurrences_of("all") > 0,
+        matches.occurrences_of("top10") > 0,
     ))
 }
 

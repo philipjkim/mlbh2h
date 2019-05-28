@@ -15,12 +15,16 @@ mlbh2h -h
 # ex> mlbh2h new-league -l my_league
 mlbh2h new-league -l <LEAGUE_NAME>
 
-# Prints fantasy points for given league and date
+# Prints fantasy points for given league and date (CSV)
 # ex> mlbh2h -k $SPORTRADAR_API_KEY -l my_league -d 2019-04-08
 mlbh2h -k <SPORTRADAR_API_KEY> -l <LEAGUE_NAME> -d <yyyy-mm-dd>
+
+# Prints top 10 batters/pitchers (by fantasy points) 
+# for given league and date, including FA players (pretty format)
+# ex> mlbh2h -k $SPORTRADAR_API_KEY -l my_league -d 2019-04-08 -a -t
+mlbh2h -k <SPORTRADAR_API_KEY> -l <LEAGUE_NAME> -d <yyyy-mm-dd> -f pretty -a -t
 ```
 
-- Output format is CSV, but available output formats will be added more (ex: JSON, tabular).
 - Stats data from Sportradar and league settings (scoring & rosters) are stored under `$HOME/.mlbh2h/`.
 
 ## How to get a free Sportradar API key
