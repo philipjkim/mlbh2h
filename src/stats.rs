@@ -267,6 +267,10 @@ fn print_fantasy_players(players: Vec<FantasyPlayer>, config: &Config, s: &scori
             } else if p.player.pitcher_stats.is_some() && pitchers.len() < 10 {
                 pitchers.push(p);
             }
+
+            if batters.len() >= 10 && pitchers.len() >= 10 {
+                break;
+            }
         }
 
         let batter_header_items = s.get_header_items_for_batter();
