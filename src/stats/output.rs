@@ -32,7 +32,7 @@ pub fn get_player_stats_string(fp: &FantasyPlayer, headers: &[String], is_csv: b
                 "Player" => fp.player.name.to_owned().into(),
                 "Team" => (*fp.team).to_owned().into(),
                 "FanPts" => format!("{:.2}", fp.fantasy_points),
-                "Pos" => fp.player.position.to_owned().into(),
+                "Pos" => fp.player.primary_position.to_owned().into(),
                 "B.AB" => {
                     if let Some(s) = bstats {
                         s.at_bats.to_string()
@@ -294,7 +294,7 @@ pub fn get_player_stats_string(fp: &FantasyPlayer, headers: &[String], is_csv: b
                     format!("{:10}", team)
                 }
                 "FanPts" => format!("{:6.2} ", fp.fantasy_points),
-                "Pos" => format!("{:4}", fp.player.position.to_owned().to_string()),
+                "Pos" => format!("{:4}", fp.player.primary_position.to_owned().to_string()),
                 "B.AB" => {
                     if let Some(s) = bstats {
                         format!("{:5}", s.at_bats.to_string())
