@@ -75,9 +75,9 @@ The option value precedes env.",
                 .short("f")
                 .long("format")
                 .value_name("FORMAT")
-                .help("Sets the output format, available values: csv, pretty")
+                .help("Sets the output format, available values: pretty, csv")
                 .takes_value(true)
-                .default_value("csv"),
+                .default_value("pretty"),
         )
         .arg(
             Arg::with_name("all")

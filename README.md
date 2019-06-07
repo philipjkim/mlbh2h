@@ -15,14 +15,14 @@ mlbh2h -h
 # ex> mlbh2h new-league -l my_league
 mlbh2h new-league -l <LEAGUE_NAME>
 
-# Prints fantasy points for given league and date (CSV)
+# Prints fantasy points for given league and date
 # ex> mlbh2h -k $SPORTRADAR_API_KEY -l my_league -d 2019-04-08
 mlbh2h -k <SPORTRADAR_API_KEY> -l <LEAGUE_NAME> -d <yyyy-mm-dd>
 
 # Prints top 10 batters/pitchers (by fantasy points) 
-# for given league and date, including FA players (pretty format)
-# ex> mlbh2h -k $SPORTRADAR_API_KEY -l my_league -d 2019-04-08 -a -t
-mlbh2h -k <SPORTRADAR_API_KEY> -l <LEAGUE_NAME> -d <yyyy-mm-dd> -f pretty -a -t
+# for given league and date, including FA players (csv format)
+# ex> mlbh2h -k $SPORTRADAR_API_KEY -l my_league -d 2019-04-08 -f csv -a -t
+mlbh2h -k <SPORTRADAR_API_KEY> -l <LEAGUE_NAME> -d <yyyy-mm-dd> -f csv -a -t
 ```
 
 - Stats data from Sportradar and league settings (scoring & rosters) are stored under `$HOME/.mlbh2h/`.
