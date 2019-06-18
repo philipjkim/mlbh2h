@@ -1,4 +1,6 @@
 use crate::utils;
+
+use log::info;
 use serde::{Deserialize, Serialize};
 use std::error::Error;
 use std::fs;
@@ -188,7 +190,7 @@ pub fn add(dir: &str) -> Result<ScoringRule, Box<dyn Error>> {
     let rule = get_scorings_from_stdin()?;
 
     fs::write(filepath, serde_json::to_string(&rule)?)?;
-    println!("Saved scoring rule to {}.", filepath);
+    info!("Saved scoring rule to {}.", filepath);
 
     Ok(rule)
 }
@@ -272,7 +274,7 @@ pub fn load(league_name: &String) -> Result<ScoringRule, Box<dyn Error>> {
         utils::get_home_dir(),
         league_name
     );
-    println!("Loading the scoring rule from file {}", filepath);
+    info!("Loading the scoring rule from file {}", filepath);
     let json = fs::read_to_string(filepath)?;
     Ok(serde_json::from_str(&json)?)
 }

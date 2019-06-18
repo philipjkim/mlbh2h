@@ -1,4 +1,6 @@
 use clap::{crate_version, App, Arg, SubCommand};
+use env_logger;
+use log::error;
 use std::error::Error;
 
 mod league;
@@ -6,11 +8,13 @@ mod stats;
 mod utils;
 
 fn main() -> Result<(), Box<dyn Error>> {
+    env_logger::init();
+
     let matches = get_app().get_matches();
 
     if let Some(m) = matches.subcommand_matches("new-league") {
         if let Err(e) = league::add_new_league(m) {
-            println!("{}", e);
+            error!("{}", e);
             return Err(e);
         }
         return Ok(());
@@ -18,14 +22,14 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     if matches.subcommand_matches("list-leagues").is_some() {
         if let Err(e) = league::list_leagues() {
-            println!("{}", e);
+            error!("{}", e);
             return Err(e);
         }
         return Ok(());
     }
 
     if let Err(e) = stats::show(&matches) {
-        println!("{}", e);
+        error!("{}", e);
         return Err(e);
     }
 
@@ -47,6 +51,15 @@ fn get_app<'a, 'b>() -> App<'a, 'b> {
                 .default_value("2019-04-01"),
         )
         .arg(
+            Arg::with_name("range")
+                .short("r")
+                .long("range")
+                .value_name("RANGE")
+                .help("Sets the range for stats (1d, 1w, 2w, 1m, all)")
+                .takes_value(true)
+                .default_value("1d"),
+        )
+        .arg(
             Arg::with_name("league")
                 .short("l")
                 .long("league")
@@ -59,7 +72,7 @@ fn get_app<'a, 'b>() -> App<'a, 'b> {
             Arg::with_name("api_key")
                 .short("k")
                 .long("apikey")
-                .value_name("SPORTSRADAR_API_KEY")
+                .value_name("SPORTRADAR_API_KEY")
                 .help(
                     "Sets sportsradar API key.
 Get a free api key at https://developer.sportradar.com/

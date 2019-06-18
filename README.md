@@ -5,24 +5,54 @@ Daily MLB Fantasy Head-to-Head Point Viewer
 ## Usage
 
 ```
+USAGE:
+    mlbh2h [FLAGS] [OPTIONS] [SUBCOMMAND]
+
+FLAGS:
+    -a, --all        If set, all FA players are also shown
+    -h, --help       Prints help information
+    -t, --top10      If set, top 10 batters/pitchers are shown separately
+    -V, --version    Prints version information
+
+OPTIONS:
+    -k, --apikey <SPORTRADAR_API_KEY>    Sets sportsradar API key.
+                                         Get a free api key at https://developer.sportradar.com/
+                                         if you don't have one yet.
+                                         Environment variable `SPORTRADAR_API_KEY` should be set
+                                         if you don't want to set this option.
+                                         The option value precedes env.
+    -d, --date <YYYY-MM-DD>              Sets the date for stats [default: 2019-04-01]
+    -f, --format <FORMAT>                Sets the output format, available values: pretty, csv [default: pretty]
+    -l, --league <LEAGUE_NAME>           Sets the league name for scoring and roster [default: sample]
+    -r, --range <RANGE>                  Sets the range for stats (1d, 1w, 2w, 1m, all) [default: 1d]
+
+SUBCOMMANDS:
+    help            Prints this message or the help of the given subcommand(s)
+    list-leagues    lists previously added leagues
+    new-league      adds a new league settings (scoring rules + rosters)
+```
+
+Line-by-line examples:
+
+```
+# for debugging
+RUST_BACKTRACE=1 RUST_LOG=mlbh2h=info cargo run -- -l my_league -d 2019-06-17
+
 # Build the binary and alias it
-cargo build && alias mlbh2h='./target/debug/mlbh2h'
+cargo build --release && alias mlbh2h='./target/release/mlbh2h'
 
 # Show help messages
 mlbh2h -h
 
 # Create a new league for setting up rosters and scoring rules
-# ex> mlbh2h new-league -l my_league
-mlbh2h new-league -l <LEAGUE_NAME>
+mlbh2h new-league -l my_league
 
 # Prints fantasy points for given league and date
-# ex> mlbh2h -k $SPORTRADAR_API_KEY -l my_league -d 2019-04-08
-mlbh2h -k <SPORTRADAR_API_KEY> -l <LEAGUE_NAME> -d <yyyy-mm-dd>
+mlbh2h -k $SPORTRADAR_API_KEY -l my_league -d 2019-04-08
 
-# Prints top 10 batters/pitchers (by fantasy points) 
-# for given league and date, including FA players (csv format)
-# ex> mlbh2h -k $SPORTRADAR_API_KEY -l my_league -d 2019-04-08 -f csv -a -t
-mlbh2h -k <SPORTRADAR_API_KEY> -l <LEAGUE_NAME> -d <yyyy-mm-dd> -f csv -a -t
+# Prints top 10 batters/pitchers (by fantasy points during a month) 
+# for given league and date, including FA players
+mlbh2h -k $SPORTRADAR_API_KEY -l my_league -d 2019-06-08 -r 1m -a -t
 ```
 
 - Stats data from Sportradar and league settings (scoring & rosters) are stored under `$HOME/.mlbh2h/`.

@@ -1,6 +1,7 @@
 use crate::league::{roster, scoring};
 use crate::utils;
 use clap::ArgMatches;
+use log::{info, warn};
 use serde::{Deserialize, Serialize};
 use std::borrow::Cow;
 use std::collections::HashMap;
@@ -18,6 +19,7 @@ mod sportradar;
 
 pub struct Config<'a> {
     date: Cow<'a, str>,
+    range: Cow<'a, str>,
     league: Cow<'a, str>,
     api_key: Cow<'a, str>,
     format: Cow<'a, str>,
@@ -27,6 +29,7 @@ pub struct Config<'a> {
 impl<'a> Config<'a> {
     pub fn new<S>(
         date: S,
+        range: S,
         league: S,
         api_key: S,
         format: S,
@@ -38,6 +41,7 @@ impl<'a> Config<'a> {
     {
         Config {
             date: date.into(),
+            range: range.into(),
             league: league.into(),
             api_key: api_key.into(),
             format: format.into(),
@@ -155,8 +159,14 @@ impl Add for PitcherStats {
     type Output = PitcherStats;
 
     fn add(self, other: PitcherStats) -> PitcherStats {
+        let mut ip = self.innings_pitched + other.innings_pitched;
+        let dp = ip % 1.0;
+        if dp >= 0.3 {
+            ip = ((ip + 1.0 - 0.3) * 10.0).round() / 10.0;
+        }
+
         PitcherStats {
-            innings_pitched: self.innings_pitched + other.innings_pitched,
+            innings_pitched: ip,
             wins: self.wins + other.wins,
             losses: self.losses + other.losses,
             complete_games: self.complete_games + other.complete_games,
@@ -186,12 +196,32 @@ pub struct FantasyPlayer<'a> {
 }
 impl<'a> FantasyPlayer<'a> {
     fn add_stats(&mut self, other: FantasyPlayer<'a>) {
-        if let Some(bs) = self.player.batter_stats.clone() {
-            self.player.batter_stats = Some(bs + other.player.batter_stats.unwrap())
-        }
+        let player = other.player;
 
         if let Some(ps) = self.player.pitcher_stats.clone() {
-            self.player.pitcher_stats = Some(ps + other.player.pitcher_stats.unwrap())
+            let other_pitcher = player.clone();
+            match other_pitcher.pitcher_stats {
+                Some(stats) => {
+                    self.player.pitcher_stats = Some(ps + stats)
+                }
+                None => warn!(
+                    "{}: self - position: {}, pither_stats: {}, other - position: {}, pither_stats: {}", self.player.name,
+                    self.player.primary_position, self.player.pitcher_stats.is_some(),
+                    other_pitcher.primary_position,
+                    other_pitcher.pitcher_stats.is_some(),
+                ),
+            }
+        } else if let Some(bs) = self.player.batter_stats.clone() {
+            let other_batter = player.clone();
+            match other_batter.batter_stats {
+                Some(stats) => self.player.batter_stats = Some(bs + stats),
+                None => warn!(
+                    "{}: self - position: {}, batter_stats: {}, other - position: {}, batter_stats: {}", self.player.name,
+                    self.player.primary_position, self.player.batter_stats.is_some(),
+                    other_batter.primary_position,
+                    other_batter.batter_stats.is_some(),
+                ),
+            }
         }
 
         self.fantasy_points += other.fantasy_points;
@@ -223,20 +253,26 @@ pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
     let env_api_key = get_env_api_key();
     let config = get_config(matches, &env_api_key)?;
 
-    let filepath = &format!(
-        "{}/.mlbh2h/stats/{}.json",
-        utils::get_home_dir(),
-        config.date
-    );
+    let dates = utils::date_strs(&config.date, &config.range);
 
-    let players = if Path::new(filepath).exists() {
-        get_players_from_file(filepath)?
-    } else {
-        let sr_players = sportradar::get_players(&config)?;
-        let ps = convert_players(sr_players)?;
-        save_players(filepath, &ps)?;
-        ps
-    };
+    let players: Vec<_> = dates
+        .into_iter()
+        .flat_map(|d| {
+            let f = Box::leak(
+                format!("{}/.mlbh2h/stats/{}.json", utils::get_home_dir(), d).into_boxed_str(),
+            );
+            let players = if Path::new(f).exists() {
+                get_players_from_file(f).expect("error getting players from file")
+            } else {
+                let sr_players = sportradar::get_players(&config, &d[..])
+                    .expect("error getting players via sportradar API");
+                let ps = convert_players(sr_players).expect("error converting players");
+                save_players(f, &ps).expect("error saving players");
+                ps
+            };
+            players
+        })
+        .collect();
 
     let league = config.league.to_owned().into();
     let league_scoring = scoring::load(&league)?;
@@ -345,12 +381,12 @@ fn create_fantasy_players<'a>(
         })
         .collect();
 
-    let players = merge_double_header_data(players);
+    let players = merge_same_players_stats(players);
 
     Ok(sort_by_fantasy_points(players))
 }
 
-fn merge_double_header_data<'a>(players: Vec<FantasyPlayer<'a>>) -> Vec<FantasyPlayer<'a>> {
+fn merge_same_players_stats<'a>(players: Vec<FantasyPlayer<'a>>) -> Vec<FantasyPlayer<'a>> {
     let mut map = HashMap::<String, FantasyPlayer<'a>>::new();
     let map = players.into_iter().fold(&mut map, |m, p| {
         let name = p.player.name.to_string();
@@ -499,13 +535,13 @@ fn save_players(filepath: &str, players: &[Player]) -> Result<(), Box<dyn Error>
 
     fs::create_dir_all(format!("{}/.mlbh2h/stats", utils::get_home_dir()))?;
     fs::write(filepath, serde_json::to_string(players)?)?;
-    println!("Saved player stats to {} .", filepath);
+    info!("Saved player stats to {} .", filepath);
 
     Ok(())
 }
 
 fn get_players_from_file(filepath: &str) -> Result<Vec<Player>, Box<dyn Error>> {
-    println!("Loading players from file {}", filepath);
+    info!("Loading players from file {}", filepath);
     let json = fs::read_to_string(filepath)?;
     Ok(serde_json::from_str(&json)?)
 }
@@ -525,6 +561,7 @@ fn get_config<'a>(
 
     Ok(Config::new(
         matches.value_of("date").unwrap(),
+        matches.value_of("range").unwrap(),
         matches.value_of("league").unwrap(),
         api_key,
         matches.value_of("format").unwrap(),
@@ -759,7 +796,7 @@ mod test {
     }
 
     #[test]
-    fn merge_double_header_data_should_remove_dups() {
+    fn merge_same_players_stats_should_remove_dups() {
         let fantasy_players = vec![
             FantasyPlayer {
                 player: mock_batter(),
@@ -775,7 +812,7 @@ mod test {
             },
         ];
 
-        let merged = merge_double_header_data(fantasy_players);
+        let merged = merge_same_players_stats(fantasy_players);
 
         assert_eq!(2, merged.len());
         assert_eq!(

@@ -1,5 +1,6 @@
 use crate::utils;
 use clap::ArgMatches;
+use log::info;
 use std::error::Error;
 use std::fmt;
 use std::fs;
@@ -49,7 +50,7 @@ pub fn add_new_league(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
     let rule = scoring::add(league_dir);
     match rule {
         Ok(r) => {
-            println!("Saved the scoring: {:#?}", r);
+            info!("Saved the scoring: {:#?}", r);
         }
         Err(e) => return Err(e),
     }
@@ -57,7 +58,7 @@ pub fn add_new_league(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
     let roster = roster::add(league_dir);
     match roster {
         Ok(r) => {
-            println!("Saved the roster: {:#?}", r);
+            info!("Saved the roster: {:#?}", r);
             Ok(())
         }
         Err(e) => Err(e),

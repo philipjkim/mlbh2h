@@ -12,6 +12,8 @@ pub fn get_header_string(headers: &[String], is_csv: bool) -> String {
             items.push(format!("{:18}", "Player")); // 18bytes
         } else if i.contains("Team") {
             items.push(format!("{:10}", "Team")); // 10bytes
+        } else if i.contains("P.IP") {
+            items.push(format!("{}   ", i));
         } else {
             items.push(format!("{} ", i));
         }
@@ -416,9 +418,10 @@ pub fn get_player_stats_string(fp: &FantasyPlayer, headers: &[String], is_csv: b
                 }
                 "P.IP" => {
                     if let Some(s) = pstats {
-                        format!("{:5}", s.innings_pitched.to_string())
+                        let ip = (s.innings_pitched * 10.0).round() / 10.0;
+                        format!("{:7}", ip.to_string())
                     } else {
-                        format!("{:5}", "")
+                        format!("{:7}", "")
                     }
                 }
                 "P.W" => {
@@ -631,11 +634,11 @@ mod test {
         };
 
         assert_eq!(
-            "Trey Mancini,Avengers,13.50,OF,2,3,1,2,0,,,,,",
+            "Trey Mancini,Avengers,13.50,RF,2,3,1,2,0,,,,,",
             get_player_stats_string(&fp, &header_items, true)
         );
         assert_eq!(
-            "Trey Mancini      Avengers   13.50 OF  2   3   1    2     0                           ",
+            "Trey Mancini      Avengers   13.50 RF  2   3   1    2     0                             ",
             get_player_stats_string(&fp, &header_items, false)
         );
 
@@ -647,11 +650,11 @@ mod test {
         };
 
         assert_eq!(
-            "Blake Snell,Avengers,32.50,P,,,,,,6,1,0,1,11",
+            "Blake Snell,Avengers,32.50,SP,,,,,,6,1,0,1,11",
             get_player_stats_string(&fp, &header_items, true)
         );
         assert_eq!(
-            "Blake Snell       Avengers   32.50 P                           6    1   0    1    11  ",
+            "Blake Snell       Avengers   32.50 SP                          6      1   0    1    11  ",
             get_player_stats_string(&fp, &header_items, false)
         );
     }

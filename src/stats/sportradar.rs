@@ -1,6 +1,8 @@
 use crate::stats::schedule;
 use crate::stats::Config;
 use crate::utils;
+
+use log::{error, info};
 use serde::Deserialize;
 use std::error::Error;
 use std::thread;
@@ -160,16 +162,16 @@ pub struct PitcherGameStats {
     pub team_loss: u32,
 }
 
-pub fn get_players(config: &Config) -> Result<Vec<Player>, Box<dyn Error>> {
-    let game_ids = schedule::get_game_ids(config)?;
-    // println!("game_ids: {:#?}", game_ids);
+pub fn get_players(config: &Config, date: &str) -> Result<Vec<Player>, Box<dyn Error>> {
+    let game_ids = schedule::get_game_ids(config, date)?;
+    info!("game_ids: {:#?}", game_ids);
 
     let mut result: Vec<Player> = Vec::new();
 
     for (i, id) in game_ids.iter().enumerate() {
         thread::sleep(Duration::from_millis(1050));
         let url = get_game_summary_url(config, id);
-        // println!("game summary api url: {}", url);
+        info!("game summary api url: {}", url);
 
         let json = utils::get_json_res(&url)?;
         match get_players_from_string(json) {
@@ -178,7 +180,7 @@ pub fn get_players(config: &Config) -> Result<Vec<Player>, Box<dyn Error>> {
                 result.append(&mut players);
             }
             Err(e) => {
-                println!("Fetch failed: {}", e);
+                error!("Fetch failed: {}", e);
             }
         }
 

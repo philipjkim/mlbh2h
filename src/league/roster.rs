@@ -1,4 +1,5 @@
 use crate::utils;
+use log::info;
 use serde::{Deserialize, Serialize};
 use std::borrow::Cow;
 use std::error::Error;
@@ -58,7 +59,7 @@ pub fn add(dir: &str) -> Result<Roster, Box<dyn Error>> {
     let roster = get_roster_from_stdin()?;
 
     fs::write(filepath, serde_json::to_string(&roster)?)?;
-    println!("Saved weekly roster to {}.", filepath);
+    info!("Saved weekly roster to {}.", filepath);
 
     Ok(roster)
 }
@@ -164,7 +165,7 @@ pub fn load(league_name: &str) -> Result<Roster, Box<dyn Error>> {
         utils::get_home_dir(),
         league_name
     );
-    println!("Loading the weekly roster from file {}", filepath);
+    info!("Loading the weekly roster from file {}", filepath);
     let json = fs::read_to_string(filepath)?;
     Ok(serde_json::from_str(&json)?)
 }

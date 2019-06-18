@@ -13,15 +13,15 @@ struct Game {
     id: String,
 }
 
-pub fn get_game_ids(config: &Config) -> Result<Vec<String>, Box<dyn Error>> {
-    let url = get_schedule_url(config);
+pub fn get_game_ids(config: &Config, date: &str) -> Result<Vec<String>, Box<dyn Error>> {
+    let url = get_schedule_url(config, date);
 
     let json = utils::get_json_res(&url)?;
     Ok(get_game_ids_from_string(json)?)
 }
 
-fn get_schedule_url(config: &Config) -> String {
-    let date = config.date.replace("-", "/");
+fn get_schedule_url(config: &Config, date: &str) -> String {
+    let date = date.replace("-", "/");
     format!(
         "https://api.sportradar.us/mlb-t6/games/{}/schedule.json?api_key={}",
         date, config.api_key
@@ -39,10 +39,18 @@ mod test {
 
     #[test]
     fn get_schedule_url_should_return_api_url() {
-        let config = Config::new("2019-04-01", "some_league", "key", "csv", false, false);
+        let config = Config::new(
+            "2019-04-01",
+            "1d",
+            "some_league",
+            "key",
+            "csv",
+            false,
+            false,
+        );
         assert_eq!(
             "https://api.sportradar.us/mlb-t6/games/2019/04/01/schedule.json?api_key=key",
-            get_schedule_url(&config)
+            get_schedule_url(&config, "2019-04-01")
         );
     }
 
