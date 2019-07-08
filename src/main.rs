@@ -48,7 +48,7 @@ fn get_app<'a, 'b>() -> App<'a, 'b> {
                 .value_name("YYYY-MM-DD")
                 .help("Sets the date for stats")
                 .takes_value(true)
-                .default_value("2019-04-01"),
+                .default_value(utils::yesterday_str()),
         )
         .arg(
             Arg::with_name("range")
@@ -100,11 +100,12 @@ The option value precedes env.",
                 .takes_value(false),
         )
         .arg(
-            Arg::with_name("top10")
+            Arg::with_name("topn")
                 .short("t")
-                .long("top10")
-                .help("If set, top 10 batters/pitchers are shown separately")
-                .takes_value(false),
+                .long("topn")
+                .help("If set, top 10 * (number of t's) batters/pitchers are shown separately (-ttt for top 30 batters/pitchers)")
+                .takes_value(false)
+                .multiple(true),
         )
         .subcommand(
             SubCommand::with_name("new-league")

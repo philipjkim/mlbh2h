@@ -48,6 +48,15 @@ pub fn date_strs(date: &str, range: &str) -> Vec<String> {
     result
 }
 
+pub fn yesterday_str() -> &'static str {
+    Box::leak(
+        (Local::now() - Duration::days(1))
+            .format("%Y-%m-%d")
+            .to_string()
+            .into_boxed_str(),
+    )
+}
+
 #[allow(dead_code)]
 pub fn assert_eq_f32(a: f32, b: f32) {
     let a = (a * 100.0) as i32;

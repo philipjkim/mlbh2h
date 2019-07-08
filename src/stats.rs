@@ -24,7 +24,7 @@ pub struct Config<'a> {
     api_key: Cow<'a, str>,
     format: Cow<'a, str>,
     show_all: bool,
-    top_ten: bool,
+    top_n: usize,
 }
 impl<'a> Config<'a> {
     pub fn new<S>(
@@ -34,7 +34,7 @@ impl<'a> Config<'a> {
         api_key: S,
         format: S,
         show_all: bool,
-        top_ten: bool,
+        top_n: usize,
     ) -> Config<'a>
     where
         S: Into<Cow<'a, str>>,
@@ -46,7 +46,7 @@ impl<'a> Config<'a> {
             api_key: api_key.into(),
             format: format.into(),
             show_all,
-            top_ten,
+            top_n,
         }
     }
 }
@@ -294,17 +294,17 @@ fn print_fantasy_players(players: Vec<FantasyPlayer>, config: &Config, s: &scori
 
     let is_csv = config.format == Cow::Borrowed("csv");
 
-    if config.top_ten {
+    if config.top_n > 0 {
         let mut batters: Vec<FantasyPlayer> = vec![];
         let mut pitchers: Vec<FantasyPlayer> = vec![];
         for p in players.into_iter() {
-            if p.player.batter_stats.is_some() && batters.len() < 10 {
+            if p.player.batter_stats.is_some() && batters.len() < config.top_n {
                 batters.push(p);
-            } else if p.player.pitcher_stats.is_some() && pitchers.len() < 10 {
+            } else if p.player.pitcher_stats.is_some() && pitchers.len() < config.top_n {
                 pitchers.push(p);
             }
 
-            if batters.len() >= 10 && pitchers.len() >= 10 {
+            if batters.len() >= config.top_n && pitchers.len() >= config.top_n {
                 break;
             }
         }
@@ -312,7 +312,7 @@ fn print_fantasy_players(players: Vec<FantasyPlayer>, config: &Config, s: &scori
         let batter_header_items = s.get_header_items_for_batter();
         let pitcher_header_items = s.get_header_items_for_pitcher();
 
-        println!("\n## Top 10 Batters ##");
+        println!("\n## Top {} Batters ##", config.top_n);
         println!(
             "{}",
             output::get_header_string(&batter_header_items, is_csv)
@@ -324,7 +324,7 @@ fn print_fantasy_players(players: Vec<FantasyPlayer>, config: &Config, s: &scori
             );
         }
 
-        println!("\n## Top 10 Pitchers ##");
+        println!("\n## Top {} Pitchers ##", config.top_n);
         println!(
             "{}",
             output::get_header_string(&pitcher_header_items, is_csv)
@@ -566,7 +566,7 @@ fn get_config<'a>(
         api_key,
         matches.value_of("format").unwrap(),
         matches.occurrences_of("all") > 0,
-        matches.occurrences_of("top10") > 0,
+        (matches.occurrences_of("topn") * 10) as usize,
     ))
 }
 

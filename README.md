@@ -11,7 +11,7 @@ USAGE:
 FLAGS:
     -a, --all        If set, all FA players are also shown
     -h, --help       Prints help information
-    -t, --top10      If set, top 10 batters/pitchers are shown separately
+    -t, --topn       If set, top 10 * (number of t's) batters/pitchers are shown separately
     -V, --version    Prints version information
 
 OPTIONS:
