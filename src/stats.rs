@@ -25,6 +25,7 @@ pub struct Config<'a> {
     format: Cow<'a, str>,
     show_all: bool,
     top_n: usize,
+    weekly_changes: bool,
 }
 impl<'a> Config<'a> {
     pub fn new<S>(
@@ -35,6 +36,7 @@ impl<'a> Config<'a> {
         format: S,
         show_all: bool,
         top_n: usize,
+        weekly_changes: bool,
     ) -> Config<'a>
     where
         S: Into<Cow<'a, str>>,
@@ -47,6 +49,7 @@ impl<'a> Config<'a> {
             format: format.into(),
             show_all,
             top_n,
+            weekly_changes,
         }
     }
 }
@@ -158,6 +161,7 @@ pub struct PitcherStats {
 impl Add for PitcherStats {
     type Output = PitcherStats;
 
+    #[allow(clippy::suspicious_arithmetic_impl)]
     fn add(self, other: PitcherStats) -> PitcherStats {
         let mut ip = self.innings_pitched + other.innings_pitched;
         let dp = ip % 1.0;
@@ -257,28 +261,25 @@ pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
 
     let dates = utils::date_strs(&config.date, &config.range);
 
-    let players: Vec<_> = dates
-        .into_iter()
-        .flat_map(|d| {
-            let f = Box::leak(
-                format!("{}/.mlbh2h/stats/{}.json", utils::get_home_dir(), d).into_boxed_str(),
-            );
-            let players = if Path::new(f).exists() {
-                get_players_from_file(f).expect("error getting players from file")
-            } else {
-                let sr_players = sportradar::get_players(&config, &d[..])
-                    .expect("error getting players via sportradar API");
-                let ps = convert_players(sr_players).expect("error converting players");
-                save_players(f, &ps).expect("error saving players");
-                ps
-            };
-            players
-        })
-        .collect();
-
     let league = config.league.to_owned().into();
     let league_scoring = scoring::load(&league)?;
     let league_roster = roster::load(&league)?;
+
+    if config.weekly_changes {
+        return Ok(show_weekly_changes(
+            utils::date_strs(&config.date, "1w"),
+            &config,
+            &league_scoring,
+            &league_roster,
+        )?);
+    }
+
+    let players: Vec<_> = dates
+        .clone()
+        .into_iter()
+        .flat_map(|d| players_for_date(d, &config))
+        .collect();
+
     let fan_players =
         create_fantasy_players(&players, &league_scoring, &league_roster, config.show_all)?;
 
@@ -287,6 +288,68 @@ pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
     println!();
     output::print_scores_per_team(fan_players, &config.format == "csv");
 
+    Ok(())
+}
+
+fn players_for_date<'a>(date: String, config: &Config) -> Vec<Player<'a>> {
+    let f = Box::leak(
+        format!("{}/.mlbh2h/stats/{}.json", utils::get_home_dir(), date).into_boxed_str(),
+    );
+    if Path::new(f).exists() {
+        get_players_from_file(f).expect("error getting players from file")
+    } else {
+        let sr_players = sportradar::get_players(&config, &date[..])
+            .expect("error getting players via sportradar API");
+        let ps = convert_players(sr_players).expect("error converting players");
+        save_players(f, &ps).expect("error saving players");
+        ps
+    }
+}
+
+fn show_weekly_changes<'a>(
+    dates: Vec<String>,
+    config: &Config,
+    s: &scoring::ScoringRule,
+    r: &roster::Roster<'a>,
+) -> Result<(), Box<dyn Error>> {
+    let mut dates = dates;
+    dates.reverse();
+
+    let mut teams: Vec<_> = r
+        .players
+        .clone()
+        .into_iter()
+        .map(|x| x.team.clone())
+        .collect();
+    teams.dedup();
+    teams.sort();
+    let header = teams
+        .clone()
+        .into_iter()
+        .fold(format!("{:12}", "Date"), |acc, x| {
+            format!("{}{:>10}", acc, x)
+        });
+    println!("{}", header);
+
+    dates.clone().into_iter().for_each(|d| {
+        let players = players_for_date(d.clone(), config);
+        let fplayers = create_fantasy_players(&players, s, r, false).unwrap();
+        let mut fpts: Vec<_> = fplayers
+            .into_iter()
+            .fold(HashMap::new(), |mut acc, x| {
+                let fpts = acc.entry(x.team.clone()).or_insert(0.0);
+                *fpts += x.fantasy_points;
+                acc
+            })
+            .into_iter()
+            .map(|(k, v)| (k, v))
+            .collect();
+        fpts.sort_by(|a, b| a.0.cmp(&b.0));
+        let body = fpts
+            .into_iter()
+            .fold(format!("{:12}", d), |acc, x| format!("{}{:10.1}", acc, x.1));
+        println!("{}", body);
+    });
     Ok(())
 }
 
@@ -511,6 +574,7 @@ fn get_config<'a>(
         matches.value_of("format").unwrap(),
         matches.occurrences_of("all") > 0,
         (matches.occurrences_of("topn") * 10) as usize,
+        matches.occurrences_of("weekly-changes") > 0,
     ))
 }
 

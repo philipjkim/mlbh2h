@@ -107,6 +107,13 @@ The option value precedes env.",
                 .takes_value(false)
                 .multiple(true),
         )
+        .arg(
+            Arg::with_name("weekly-changes")
+            .short("w")
+            .long("weekly-changes")
+            .help("If set, fantasy points per team for 7 days are shown")
+            .takes_value(false)
+        )
         .subcommand(
             SubCommand::with_name("new-league")
                 .about("adds a new league settings (scoring rules + rosters)")

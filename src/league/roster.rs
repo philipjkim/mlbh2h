@@ -18,7 +18,7 @@ impl Default for PlayerType {
     }
 }
 
-#[derive(Serialize, Deserialize, Debug, Default)]
+#[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct Player<'a> {
     pub name: Cow<'a, str>,
     pub role: PlayerType,
