@@ -1,4 +1,5 @@
 use crate::stats::FantasyPlayer;
+use std::collections::HashMap;
 
 pub fn get_header_string(headers: &[String], is_csv: bool) -> String {
     if is_csv {
@@ -540,6 +541,32 @@ pub fn get_player_stats_string(fp: &FantasyPlayer, headers: &[String], is_csv: b
             })
             .collect::<Vec<_>>()
             .join("")
+    }
+}
+
+pub fn print_scores_per_team(players: Vec<FantasyPlayer>, is_csv: bool) {
+    let mut scores = players
+        .iter()
+        .fold(HashMap::new(), |mut acc, x| {
+            let fp = acc.entry(x.team.clone()).or_insert(0.0);
+            *fp += x.fantasy_points;
+            acc
+        })
+        .into_iter()
+        .map(|(k, v)| (k, v))
+        .collect::<Vec<_>>();
+    scores.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap());
+    println!("# Team Rankings");
+    if is_csv {
+        println!("Team,FanPts");
+        scores.into_iter().for_each(|(team, pts)| {
+            println!("{},{}", team, pts);
+        });
+    } else {
+        println!("{:20}{:>8}", "Team", "FanPts");
+        scores.into_iter().for_each(|(team, pts)| {
+            println!("{:20}{:8.1}", team, pts);
+        });
     }
 }
 

@@ -283,7 +283,9 @@ pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
         create_fantasy_players(&players, &league_scoring, &league_roster, config.show_all)?;
 
     println!();
-    print_fantasy_players(fan_players, &config, &league_scoring);
+    print_fantasy_players(fan_players.clone(), &config, &league_scoring);
+    println!();
+    output::print_scores_per_team(fan_players, &config.format == "csv");
 
     Ok(())
 }
