@@ -161,8 +161,10 @@ impl Add for PitcherStats {
     fn add(self, other: PitcherStats) -> PitcherStats {
         let mut ip = self.innings_pitched + other.innings_pitched;
         let dp = ip % 1.0;
-        if dp >= 0.3 {
+        if dp > 0.2 {
             ip = ((ip + 1.0 - 0.3) * 10.0).round() / 10.0;
+        } else {
+            ip = (ip * 10.0).round() / 10.0;
         }
 
         PitcherStats {
@@ -288,7 +290,7 @@ pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
 
 fn print_fantasy_players(players: Vec<FantasyPlayer>, config: &Config, s: &scoring::ScoringRule) {
     let date = &config.date;
-    println!("{}", date);
+    println!("{} ({})", date, &config.range);
 
     let header_items = s.get_header_items();
 
