@@ -283,71 +283,11 @@ pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
         create_fantasy_players(&players, &league_scoring, &league_roster, config.show_all)?;
 
     println!();
-    print_fantasy_players(fan_players.clone(), &config, &league_scoring);
+    output::print_fantasy_players(fan_players.clone(), &config, &league_scoring);
     println!();
     output::print_scores_per_team(fan_players, &config.format == "csv");
 
     Ok(())
-}
-
-fn print_fantasy_players(players: Vec<FantasyPlayer>, config: &Config, s: &scoring::ScoringRule) {
-    let date = &config.date;
-    println!("{} ({})", date, &config.range);
-
-    let header_items = s.get_header_items();
-
-    let is_csv = config.format == Cow::Borrowed("csv");
-
-    if config.top_n > 0 {
-        let mut batters: Vec<FantasyPlayer> = vec![];
-        let mut pitchers: Vec<FantasyPlayer> = vec![];
-        for p in players.into_iter() {
-            if p.player.batter_stats.is_some() && batters.len() < config.top_n {
-                batters.push(p);
-            } else if p.player.pitcher_stats.is_some() && pitchers.len() < config.top_n {
-                pitchers.push(p);
-            }
-
-            if batters.len() >= config.top_n && pitchers.len() >= config.top_n {
-                break;
-            }
-        }
-
-        let batter_header_items = s.get_header_items_for_batter();
-        let pitcher_header_items = s.get_header_items_for_pitcher();
-
-        println!("\n## Top {} Batters ##", config.top_n);
-        println!(
-            "{}",
-            output::get_header_string(&batter_header_items, is_csv)
-        );
-        for p in batters.iter() {
-            println!(
-                "{}",
-                output::get_player_stats_string(p, &batter_header_items, is_csv)
-            );
-        }
-
-        println!("\n## Top {} Pitchers ##", config.top_n);
-        println!(
-            "{}",
-            output::get_header_string(&pitcher_header_items, is_csv)
-        );
-        for p in pitchers.iter() {
-            println!(
-                "{}",
-                output::get_player_stats_string(p, &pitcher_header_items, is_csv)
-            );
-        }
-    } else {
-        println!("{}", output::get_header_string(&header_items, is_csv));
-        for p in players.iter() {
-            println!(
-                "{}",
-                output::get_player_stats_string(p, &header_items, is_csv)
-            );
-        }
-    }
 }
 
 fn create_fantasy_players<'a>(
