@@ -312,6 +312,7 @@ fn show_weekly_changes<'a>(
     s: &scoring::ScoringRule,
     r: &roster::Roster<'a>,
 ) -> Result<(), Box<dyn Error>> {
+    let is_csv = config.format == "csv";
     let mut dates = dates;
     dates.reverse();
 
@@ -323,15 +324,20 @@ fn show_weekly_changes<'a>(
         .collect();
     teams.dedup();
     teams.sort();
-    let header = teams
-        .clone()
-        .into_iter()
-        .fold(format!("{:12}", "Date"), |acc, x| {
+    let header = if is_csv {
+        teams
+            .iter()
+            .fold(format!("{}", "Date"), |acc, x| format!("{},{}", acc, x))
+    } else {
+        teams.iter().fold(format!("{:12}", "Date"), |acc, x| {
             format!("{}{:>10}", acc, x)
-        });
+        })
+    };
     println!("{}", header);
 
-    dates.clone().into_iter().for_each(|d| {
+    let mut total_pts = vec![0.0; teams.len()];
+
+    dates.into_iter().for_each(|d| {
         let players = players_for_date(d.clone(), config);
         let fplayers = create_fantasy_players(&players, s, r, false).unwrap();
         let mut fpts: Vec<_> = fplayers
@@ -347,9 +353,40 @@ fn show_weekly_changes<'a>(
         fpts.sort_by(|a, b| a.0.cmp(&b.0));
         let body = fpts
             .into_iter()
-            .fold(format!("{:12}", d), |acc, x| format!("{}{:10.1}", acc, x.1));
+            .inspect(|x| {
+                let idx = teams.iter().position(|t| *t == x.0).unwrap();
+                total_pts[idx] += x.1;
+            })
+            .fold(
+                if is_csv {
+                    format!("{}", d)
+                } else {
+                    format!("{:12}", d)
+                },
+                |acc, x| {
+                    if is_csv {
+                        format!("{},{}", acc, x.1)
+                    } else {
+                        format!("{}{:10.1}", acc, x.1)
+                    }
+                },
+            );
         println!("{}", body);
     });
+
+    if is_csv {
+        print!("{}", "Total");
+        total_pts.into_iter().for_each(|p| {
+            print!(",{}", p);
+        });
+    } else {
+        print!("{:12}", "Total");
+        total_pts.into_iter().for_each(|p| {
+            print!("{:10.1}", p);
+        });
+    }
+    println!();
+
     Ok(())
 }
 
