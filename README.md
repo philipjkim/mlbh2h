@@ -9,10 +9,12 @@ USAGE:
     mlbh2h [FLAGS] [OPTIONS] [SUBCOMMAND]
 
 FLAGS:
-    -a, --all        If set, all FA players are also shown
-    -h, --help       Prints help information
-    -t, --topn       If set, top 10 * (number of t's) batters/pitchers are shown separately
-    -V, --version    Prints version information
+    -a, --all               If set, all FA players are also shown
+    -h, --help              Prints help information
+    -t, --topn              If set, top 10 * (number of t's) batters/pitchers are shown separately (-ttt for top 30
+                            batters/pitchers)
+    -V, --version           Prints version information
+    -w, --weekly-changes    If set, fantasy points per team for 7 days are shown
 
 OPTIONS:
     -k, --apikey <SPORTRADAR_API_KEY>    Sets sportsradar API key.
@@ -21,7 +23,7 @@ OPTIONS:
                                          Environment variable `SPORTRADAR_API_KEY` should be set
                                          if you don't want to set this option.
                                          The option value precedes env.
-    -d, --date <YYYY-MM-DD>              Sets the date for stats [default: 2019-04-01]
+    -d, --date <YYYY-MM-DD>              Sets the date for stats [default: 2019-07-09]
     -f, --format <FORMAT>                Sets the output format, available values: pretty, csv [default: pretty]
     -l, --league <LEAGUE_NAME>           Sets the league name for scoring and roster [default: sample]
     -r, --range <RANGE>                  Sets the range for stats (1d, 1w, 2w, 1m, all) [default: 1d]
