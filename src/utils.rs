@@ -21,6 +21,8 @@ pub fn date_strs(date: &str, range: &str) -> Vec<String> {
         .expect("error parsing date string");
     let mut result = vec![last_dt.format("%Y-%m-%d").to_string()];
 
+    let asg_dates = vec!["2019-07-08", "2019-07-09", "2019-07-10"];
+
     if range == "1d" {
         return result;
     }
@@ -28,7 +30,10 @@ pub fn date_strs(date: &str, range: &str) -> Vec<String> {
     if range == "all" {
         let mut dt = Utc.ymd(2019, 3, 28).and_hms(0, 0, 0);
         while dt < last_dt {
-            result.push(dt.format("%Y-%m-%d").to_string());
+            let date_str = dt.format("%Y-%m-%d").to_string();
+            if !asg_dates.iter().any(|&d| d == &date_str[..]) {
+                result.push(date_str);
+            }
             dt = dt + Duration::days(1);
         }
         return result;
@@ -40,9 +45,13 @@ pub fn date_strs(date: &str, range: &str) -> Vec<String> {
         "1m" => 30,
         _ => 1,
     };
-    for i in 1..days {
-        let dt = last_dt - Duration::days(i);
-        result.push(dt.format("%Y-%m-%d").to_string());
+    let mut dt = last_dt - Duration::days(1);
+    while result.len() < days {
+        let date_str = dt.format("%Y-%m-%d").to_string();
+        if !asg_dates.iter().any(|&d| d == &date_str[..]) {
+            result.push(date_str);
+        }
+        dt = dt - Duration::days(1);
     }
 
     result

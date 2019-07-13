@@ -298,8 +298,11 @@ fn players_for_date<'a>(date: String, config: &Config) -> Vec<Player<'a>> {
     if Path::new(f).exists() {
         get_players_from_file(f).expect("error getting players from file")
     } else {
-        let sr_players = sportradar::get_players(&config, &date[..])
-            .expect("error getting players via sportradar API");
+        let sr_players = sportradar::get_players(&config, &date[..]);
+        if sr_players.is_err() {
+            return vec![];
+        }
+        let sr_players = sr_players.unwrap();
         let ps = convert_players(sr_players).expect("error converting players");
         save_players(f, &ps).expect("error saving players");
         ps
