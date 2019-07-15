@@ -1,8 +1,9 @@
-use crate::stats::{Config,FantasyPlayer};
 use crate::league::scoring::ScoringRule;
+use crate::stats::{Config, FantasyPlayer};
 
 use std::borrow::Cow;
 use std::collections::HashMap;
+use std::rc::Rc;
 
 pub fn print_fantasy_players(players: Vec<FantasyPlayer>, config: &Config, s: &ScoringRule) {
     let date = &config.date;
@@ -31,10 +32,7 @@ pub fn print_fantasy_players(players: Vec<FantasyPlayer>, config: &Config, s: &S
         let pitcher_header_items = s.get_header_items_for_pitcher();
 
         println!("\n## Top {} Batters ##", config.top_n);
-        println!(
-            "{}",
-            get_header_string(&batter_header_items, is_csv)
-        );
+        println!("{}", get_header_string(&batter_header_items, is_csv));
         for p in batters.iter() {
             println!(
                 "{}",
@@ -43,10 +41,7 @@ pub fn print_fantasy_players(players: Vec<FantasyPlayer>, config: &Config, s: &S
         }
 
         println!("\n## Top {} Pitchers ##", config.top_n);
-        println!(
-            "{}",
-            get_header_string(&pitcher_header_items, is_csv)
-        );
+        println!("{}", get_header_string(&pitcher_header_items, is_csv));
         for p in pitchers.iter() {
             println!(
                 "{}",
@@ -56,10 +51,7 @@ pub fn print_fantasy_players(players: Vec<FantasyPlayer>, config: &Config, s: &S
     } else {
         println!("{}", get_header_string(&header_items, is_csv));
         for p in players.iter() {
-            println!(
-                "{}",
-                get_player_stats_string(p, &header_items, is_csv)
-            );
+            println!("{}", get_player_stats_string(p, &header_items, is_csv));
         }
     }
 }
@@ -610,6 +602,7 @@ fn get_player_stats_string(fp: &FantasyPlayer, headers: &[String], is_csv: bool)
 pub fn print_scores_per_team(players: Vec<FantasyPlayer>, is_csv: bool) {
     let mut scores = players
         .iter()
+        .filter(|x| x.team != Rc::new(Cow::Borrowed("<FA>")))
         .fold(HashMap::new(), |mut acc, x| {
             let fp = acc.entry(x.team.clone()).or_insert(0.0);
             *fp += x.fantasy_points;

@@ -353,6 +353,11 @@ fn show_weekly_changes<'a>(
             .into_iter()
             .map(|(k, v)| (k, v))
             .collect();
+        teams.iter().for_each(|t| {
+            if !fpts.iter().any(|(team, _)| t == team) {
+                fpts.push((t.clone(), 0.0));
+            }
+        });
         fpts.sort_by(|a, b| a.0.cmp(&b.0));
         let body = fpts
             .into_iter()
