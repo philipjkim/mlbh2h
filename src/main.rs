@@ -111,7 +111,7 @@ The option value precedes env.",
             Arg::with_name("weekly-changes")
             .short("w")
             .long("weekly-changes")
-            .help("If set, fantasy points per team for 7 days are shown")
+            .help("If set, fantasy points per team for the week are shown")
             .takes_value(false)
         )
         .subcommand(

@@ -16,7 +16,10 @@ teams.each((i, elem) => {
     } else {
       role = ['SP', 'RP', 'P'].includes(position) ? 'Pitcher' : 'Batter'
     }
-    const name = $(el).find('td.player div.Grid-bind-end div.ysf-player-name a.name').first().text()
+    let name = $(el).find('td.player div.Grid-bind-end div.ysf-player-name a.name').first().text()
+    if (name === 'Eduardo Rodriguez') {
+      name = 'Eduardo Rodríguez'
+    }
 
     return { name, role, team }
   }).get()

@@ -517,7 +517,7 @@ dependencies = [
 
 [[package]]
 name = "mlbh2h"
-version = "0.14.1"
+version = "0.15.0"
 dependencies = [
  "chrono 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)",
  "clap 2.33.0 (registry+https://github.com/rust-lang/crates.io-index)",

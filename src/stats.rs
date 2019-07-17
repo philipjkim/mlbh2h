@@ -267,7 +267,7 @@ pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
 
     if config.weekly_changes {
         return Ok(show_weekly_changes(
-            utils::date_strs(&config.date, "1w"),
+            utils::weekly_date_strs(&config.date),
             &config,
             &league_scoring,
             &league_roster,
@@ -316,9 +316,6 @@ fn show_weekly_changes<'a>(
     r: &roster::Roster<'a>,
 ) -> Result<(), Box<dyn Error>> {
     let is_csv = config.format == "csv";
-    let mut dates = dates;
-    dates.reverse();
-
     let mut teams: Vec<_> = r
         .players
         .clone()
