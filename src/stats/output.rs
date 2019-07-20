@@ -5,6 +5,24 @@ use std::borrow::Cow;
 use std::collections::HashMap;
 use std::rc::Rc;
 
+pub fn print_outstanding_player(date: String, fplayer: FantasyPlayer, s: &ScoringRule) {
+    let header_items = if fplayer.player.batter_stats.is_some() {
+        s.get_header_items_for_batter()
+    } else {
+        s.get_header_items_for_pitcher()
+    };
+
+    println!("# {}", date);
+    println!(
+        "{}",
+        get_header_string(&header_items, false).replace("Team      ", "")
+    );
+    println!(
+        "{}",
+        get_player_stats_string(&fplayer, &header_items, false).replace("<FA>      ", "")
+    );
+}
+
 pub fn print_fantasy_players(players: Vec<FantasyPlayer>, config: &Config, s: &ScoringRule) {
     let date = &config.date;
     println!("{} ({})", date, &config.range);

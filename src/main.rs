@@ -114,6 +114,13 @@ The option value precedes env.",
             .help("If set, fantasy points per team for the week are shown")
             .takes_value(false)
         )
+        .arg(
+            Arg::with_name("outstanding")
+            .short("o")
+            .long("outstanding")
+            .help("If set, outstanding (daily score: batter >= 30, pitcher >= 60) players are shown")
+            .takes_value(false)
+        )
         .subcommand(
             SubCommand::with_name("new-league")
                 .about("adds a new league settings (scoring rules + rosters)")

@@ -26,6 +26,7 @@ pub struct Config<'a> {
     show_all: bool,
     top_n: usize,
     weekly_changes: bool,
+    outstanding: bool,
 }
 impl<'a> Config<'a> {
     pub fn new<S>(
@@ -37,6 +38,7 @@ impl<'a> Config<'a> {
         show_all: bool,
         top_n: usize,
         weekly_changes: bool,
+        outstanding: bool,
     ) -> Config<'a>
     where
         S: Into<Cow<'a, str>>,
@@ -50,6 +52,7 @@ impl<'a> Config<'a> {
             show_all,
             top_n,
             weekly_changes,
+            outstanding,
         }
     }
 }
@@ -265,6 +268,10 @@ pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
     let league_scoring = scoring::load(&league)?;
     let league_roster = roster::load(&league)?;
 
+    if config.outstanding {
+        return Ok(show_outstanding_players(&config, &league_scoring)?);
+    }
+
     if config.weekly_changes {
         return Ok(show_weekly_changes(
             utils::weekly_date_strs(&config.date),
@@ -307,6 +314,27 @@ fn players_for_date<'a>(date: String, config: &Config) -> Vec<Player<'a>> {
         save_players(f, &ps).expect("error saving players");
         ps
     }
+}
+
+fn show_outstanding_players(
+    config: &Config,
+    s: &scoring::ScoringRule,
+) -> Result<(), Box<dyn Error>> {
+    let dates = utils::date_strs(&config.date, "all");
+    dates.into_iter().for_each(|d| {
+        let players = players_for_date(d.clone(), config);
+        let fplayers =
+            create_fantasy_players(&players, s, &roster::Roster { players: vec![] }, true).unwrap();
+
+        fplayers.into_iter().for_each(|fp| {
+            if (fp.player.batter_stats.is_some() && fp.fantasy_points >= 35.0)
+                || (fp.player.pitcher_stats.is_some() && fp.fantasy_points >= 60.0)
+            {
+                output::print_outstanding_player(d.clone(), fp, s);
+            }
+        });
+    });
+    Ok(())
 }
 
 fn show_weekly_changes<'a>(
@@ -617,6 +645,7 @@ fn get_config<'a>(
         matches.occurrences_of("all") > 0,
         (matches.occurrences_of("topn") * 10) as usize,
         matches.occurrences_of("weekly-changes") > 0,
+        matches.occurrences_of("outstanding") > 0,
     ))
 }
 

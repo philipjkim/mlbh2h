@@ -36,6 +36,7 @@ pub fn date_strs(date: &str, range: &str) -> Vec<String> {
             }
             dt = dt + Duration::days(1);
         }
+        result.sort();
         return result;
     }
 
