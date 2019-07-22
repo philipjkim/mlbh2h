@@ -137,12 +137,12 @@ mod test {
         let result_all = date_strs("2019-04-02", "all");
         assert_eq!(
             vec![
-                "2019-04-02".to_string(),
                 "2019-03-28".to_string(),
                 "2019-03-29".to_string(),
                 "2019-03-30".to_string(),
                 "2019-03-31".to_string(),
                 "2019-04-01".to_string(),
+                "2019-04-02".to_string(),
             ],
             result_all
         );
