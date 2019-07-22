@@ -26,7 +26,7 @@ pub struct Config<'a> {
     show_all: bool,
     top_n: usize,
     weekly_changes: bool,
-    outstanding: bool,
+    outstanding: Option<(f32, f32)>,
 }
 impl<'a> Config<'a> {
     pub fn new<S>(
@@ -38,11 +38,24 @@ impl<'a> Config<'a> {
         show_all: bool,
         top_n: usize,
         weekly_changes: bool,
-        outstanding: bool,
+        outstanding_str: S,
     ) -> Config<'a>
     where
         S: Into<Cow<'a, str>>,
     {
+        let mut outstanding: Option<(f32, f32)> = None;
+
+        let copied = outstanding_str.into();
+        let arr = copied.split(":").collect::<Vec<_>>();
+        if arr.len() == 2 {
+            let batter_fpts = arr[0].parse::<f32>();
+            let pitcher_fpts = arr[1].parse::<f32>();
+            if !batter_fpts.is_err() && !pitcher_fpts.is_err() {
+                outstanding = Some((batter_fpts.unwrap(), pitcher_fpts.unwrap()));
+            }
+        }
+        info!("outstanding: {:?}", outstanding);
+
         Config {
             date: date.into(),
             range: range.into(),
@@ -268,7 +281,7 @@ pub fn show(matches: &ArgMatches) -> Result<(), Box<dyn Error>> {
     let league_scoring = scoring::load(&league)?;
     let league_roster = roster::load(&league)?;
 
-    if config.outstanding {
+    if config.outstanding.is_some() {
         return Ok(show_outstanding_players(&config, &league_scoring)?);
     }
 
@@ -321,14 +334,17 @@ fn show_outstanding_players(
     s: &scoring::ScoringRule,
 ) -> Result<(), Box<dyn Error>> {
     let dates = utils::date_strs(&config.date, "all");
+    let batter_threshold = config.outstanding.unwrap().0;
+    let pitcher_threshold = config.outstanding.unwrap().1;
+
     dates.into_iter().for_each(|d| {
         let players = players_for_date(d.clone(), config);
         let fplayers =
             create_fantasy_players(&players, s, &roster::Roster { players: vec![] }, true).unwrap();
 
         fplayers.into_iter().for_each(|fp| {
-            if (fp.player.batter_stats.is_some() && fp.fantasy_points >= 35.0)
-                || (fp.player.pitcher_stats.is_some() && fp.fantasy_points >= 60.0)
+            if (fp.player.batter_stats.is_some() && fp.fantasy_points >= batter_threshold)
+                || (fp.player.pitcher_stats.is_some() && fp.fantasy_points >= pitcher_threshold)
             {
                 output::print_outstanding_player(d.clone(), fp, s);
             }
@@ -645,7 +661,7 @@ fn get_config<'a>(
         matches.occurrences_of("all") > 0,
         (matches.occurrences_of("topn") * 10) as usize,
         matches.occurrences_of("weekly-changes") > 0,
-        matches.occurrences_of("outstanding") > 0,
+        matches.value_of("outstanding").unwrap(),
     ))
 }
 

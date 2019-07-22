@@ -14,19 +14,25 @@ FLAGS:
     -t, --topn              If set, top 10 * (number of t's) batters/pitchers are shown separately (-ttt for top 30
                             batters/pitchers)
     -V, --version           Prints version information
-    -w, --weekly-changes    If set, fantasy points per team for 7 days are shown
+    -w, --weekly-changes    If set, fantasy points per team for the week are shown
 
 OPTIONS:
-    -k, --apikey <SPORTRADAR_API_KEY>    Sets sportsradar API key.
-                                         Get a free api key at https://developer.sportradar.com/
-                                         if you don't have one yet.
-                                         Environment variable `SPORTRADAR_API_KEY` should be set
-                                         if you don't want to set this option.
-                                         The option value precedes env.
-    -d, --date <YYYY-MM-DD>              Sets the date for stats [default: 2019-07-09]
-    -f, --format <FORMAT>                Sets the output format, available values: pretty, csv [default: pretty]
-    -l, --league <LEAGUE_NAME>           Sets the league name for scoring and roster [default: sample]
-    -r, --range <RANGE>                  Sets the range for stats (1d, 1w, 2w, 1m, all) [default: 1d]
+    -k, --apikey <SPORTRADAR_API_KEY>
+            Sets sportsradar API key.
+            Get a free api key at https://developer.sportradar.com/
+            if you don't have one yet.
+            Environment variable `SPORTRADAR_API_KEY` should be set
+            if you don't want to set this option.
+            The option value precedes env.
+    -d, --date <YYYY-MM-DD>                       Sets the date for stats [default: 2019-07-21]
+    -f, --format <FORMAT>
+            Sets the output format, available values: pretty, csv [default: pretty]
+
+    -l, --league <LEAGUE_NAME>                    Sets the league name for scoring and roster [default: sample]
+    -o, --outstanding <BATTER_PTS:PITCHER_PTS>
+            If the daily fantasy points for outstanding performance set, shows stats for players who exceeds given
+            points [default: ]
+    -r, --range <RANGE>                           Sets the range for stats (1d, 1w, 2w, 1m, all) [default: 1d]
 
 SUBCOMMANDS:
     help            Prints this message or the help of the given subcommand(s)
@@ -55,6 +61,10 @@ mlbh2h -k $SPORTRADAR_API_KEY -l my_league -d 2019-04-08
 # Prints top 10 batters/pitchers (by fantasy points during a month) 
 # for given league and date, including FA players
 mlbh2h -k $SPORTRADAR_API_KEY -l my_league -d 2019-06-08 -r 1m -a -t
+
+# Prints players who exceeded 30 (as a batter) or 40 (as a pitcher)
+# fantasy points until yesterday
+mlbh2h -k $SPORTRADAR_API_KEY -l my_league -o 30:40
 ```
 
 - Stats data from Sportradar and league settings (scoring & rosters) are stored under `$HOME/.mlbh2h/`.

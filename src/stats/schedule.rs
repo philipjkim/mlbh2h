@@ -48,7 +48,7 @@ mod test {
             false,
             0,
             false,
-            false,
+            "",
         );
         assert_eq!(
             "https://api.sportradar.us/mlb-t6/games/2019/04/01/schedule.json?api_key=key",

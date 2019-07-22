@@ -118,8 +118,10 @@ The option value precedes env.",
             Arg::with_name("outstanding")
             .short("o")
             .long("outstanding")
-            .help("If set, outstanding (daily score: batter >= 30, pitcher >= 60) players are shown")
-            .takes_value(false)
+            .value_name("BATTER_PTS:PITCHER_PTS")
+            .help("If the daily fantasy points for outstanding performance set, shows stats for players who exceeds given points")
+            .takes_value(true)
+            .default_value("")
         )
         .subcommand(
             SubCommand::with_name("new-league")
