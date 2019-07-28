@@ -106,6 +106,17 @@ impl<'a> Player<'a> {
             pitcher_stats: Some(stats),
         }
     }
+
+    fn is_position_of(&self, player_type: roster::PlayerType) -> bool {
+        match player_type {
+            roster::PlayerType::Pitcher => {
+                self.primary_position == "SP" || self.primary_position == "RP"
+            }
+            roster::PlayerType::Batter => {
+                self.primary_position != "SP" && self.primary_position != "RP"
+            }
+        }
+    }
 }
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
@@ -445,7 +456,11 @@ fn create_fantasy_players<'a>(
     r: &roster::Roster<'a>,
     show_all: bool,
 ) -> Result<Vec<FantasyPlayer<'a>>, Box<dyn Error>> {
-    let names: Vec<Cow<'a, str>> = r.players.iter().map(|p| p.name.to_owned()).collect();
+    let names_roles: Vec<(Cow<'a, str>, roster::PlayerType)> = r
+        .players
+        .iter()
+        .map(|p| (p.name.to_owned(), p.role))
+        .collect();
 
     let team_fa = Rc::new(Cow::Borrowed("<FA>"));
     let players: Vec<FantasyPlayer> = players
@@ -454,16 +469,18 @@ fn create_fantasy_players<'a>(
             if show_all {
                 true
             } else {
-                names
-                    .iter()
-                    .any(|n| n.to_lowercase() == p.name.to_lowercase())
+                names_roles.iter().any(|(n, r)| {
+                    (n.to_lowercase() == p.name.to_lowercase()) && p.is_position_of(*r)
+                })
             }
         })
         .map(|p| {
             let team = r
                 .players
                 .iter()
-                .find(|rp| rp.name.to_lowercase() == p.name.to_lowercase())
+                .find(|rp| {
+                    (rp.name.to_lowercase() == p.name.to_lowercase()) && p.is_position_of(rp.role)
+                })
                 .map(|rp| Rc::clone(&rp.team))
                 .unwrap_or_else(|| Rc::clone(&team_fa));
             FantasyPlayer {
