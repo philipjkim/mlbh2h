@@ -499,8 +499,8 @@ fn create_fantasy_players<'a>(
 fn merge_same_players_stats<'a>(players: Vec<FantasyPlayer<'a>>) -> Vec<FantasyPlayer<'a>> {
     let mut map = HashMap::<String, FantasyPlayer<'a>>::new();
     let map = players.into_iter().fold(&mut map, |m, p| {
-        let name = p.player.name.to_string();
-        m.entry(name)
+        let key = p.player.name.to_string() + ":" + &p.player.primary_position.to_string();
+        m.entry(key)
             .and_modify(|x| {
                 // TODO: remove data cloning (p.clone())
                 x.add_stats(p.clone());
