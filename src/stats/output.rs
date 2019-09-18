@@ -86,6 +86,8 @@ fn get_header_string(headers: &[String], is_csv: bool) -> String {
             items.push(format!("{:18}", "Player")); // 18bytes
         } else if i.contains("Team") {
             items.push(format!("{:10}", "Team")); // 10bytes
+        } else if i.contains("FanPts") {
+            items.push(format!("{:8}", "FanPts")); // 8bytes
         } else if i.contains("P.IP") {
             items.push(format!("{}   ", i));
         } else {
@@ -369,7 +371,7 @@ fn get_player_stats_string(fp: &FantasyPlayer, headers: &[String], is_csv: bool)
                     team.truncate(9);
                     format!("{:10}", team)
                 }
-                "FanPts" => format!("{:6.2} ", fp.fantasy_points),
+                "FanPts" => format!("{:7.2} ", fp.fantasy_points),
                 "Pos" => format!("{:4}", fp.player.primary_position.to_owned().to_string()),
                 "B.AB" => {
                     if let Some(s) = bstats {

@@ -192,7 +192,7 @@ impl Add for PitcherStats {
     fn add(self, other: PitcherStats) -> PitcherStats {
         let mut ip = self.innings_pitched + other.innings_pitched;
         let dp = ip % 1.0;
-        if dp > 0.2 {
+        if dp > 0.21 {
             ip = ((ip + 1.0 - 0.3) * 10.0).round() / 10.0;
         } else {
             ip = (ip * 10.0).round() / 10.0;
